@@ -7,295 +7,505 @@
 <title>Massage Rub & Therapist | Luxury Wellness</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --navy:#1B2B5E;
-  --navy-dark:#0F1A3E;
-  --navy-mid:#243070;
-  --blue:#2C4EAA;
-  --blue-light:#4A6FD4;
-  --accent:#3B5EC6;
-  --white:#FFFFFF;
-  --offwhite:#F4F6FB;
-  --light:#E8EDF8;
-  --border:#DDE3F0;
-  --text:#1a1a2e;
-  --muted:#6B7A9F;
-  --pill-bg:#EBF0FA;
-}
+/* ===== RESET ===== */
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--offwhite);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
+body{background:#F4F6FB;color:#1a1a2e;font-family:'Inter',sans-serif;overflow-x:hidden;}
 
-/* ===== PAGES ===== */
+/* ===== PAGE SYSTEM ===== */
 .page{display:none;min-height:100vh;}
 .page.active{display:block;}
 
 /* ===== NAV ===== */
-nav{position:fixed;top:0;width:100%;z-index:200;background:var(–white);border-bottom:1px solid var(–border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(27,43,94,0.08);}
+nav{
+position:fixed;top:0;width:100%;z-index:200;
+background:#FFFFFF;
+border-bottom:1px solid #DDE3F0;
+padding:12px 20px;
+display:flex;align-items:center;justify-content:space-between;
+box-shadow:0 2px 16px rgba(27,43,94,0.1);
+}
 .nav-brand{display:flex;align-items:center;gap:12px;}
-.nav-logo-circle{width:46px;height:46px;border-radius:50%;background:var(–navy);color:#fff;font-weight:800;font-size:0.75rem;display:flex;align-items:center;justify-content:center;letter-spacing:0.5px;flex-shrink:0;}
-.nav-brand-text .name{font-weight:700;font-size:1rem;color:var(–navy);line-height:1.2;}
-.nav-brand-text .sub{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(–muted);}
-.nav-right{display:flex;align-items:center;gap:10px;}
-.nav-book-btn{background:var(–navy);color:#fff;border:none;padding:12px 22px;border-radius:8px;font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background 0.2s,transform 0.2s;}
-.nav-book-btn:hover{background:var(–blue);transform:translateY(-1px);}
+.nav-circle{
+width:46px;height:46px;border-radius:50%;
+background:#1B2B5E;
+color:#FFFFFF;font-weight:800;font-size:0.72rem;
+display:flex;align-items:center;justify-content:center;
+letter-spacing:0.5px;flex-shrink:0;
+}
+.nav-name{font-weight:700;font-size:1rem;color:#1B2B5E;line-height:1.2;font-family:‘Inter’,sans-serif;}
+.nav-sub{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#6B7A9F;}
+.nav-book{
+background:#1B2B5E;
+color:#FFFFFF;
+border:none;padding:12px 22px;border-radius:8px;
+font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;
+cursor:pointer;transition:background 0.2s,transform 0.2s;
+font-family:‘Inter’,sans-serif;
+}
+.nav-book:hover{background:#2C4EAA;transform:translateY(-1px);}
 
 /* ===== HERO ===== */
-.hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(–navy-dark);}
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.3;}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,19,50,0.65) 0%,rgba(15,26,62,0.8) 60%,rgba(11,19,50,0.95) 100%);}
-.hero-content{position:relative;z-index:2;text-align:center;padding:0 20px;max-width:700px;}
-.hero-badge{display:inline-block;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:6px 18px;border-radius:20px;font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:24px;backdrop-filter:blur(10px);}
-.hero-title{font-family:‘Playfair Display’,serif;font-size:clamp(2.8rem,8vw,6rem);font-weight:900;color:#fff;line-height:1;margin-bottom:12px;opacity:0;animation:fadeUp 0.9s ease 0.3s forwards;}
-.hero-sub{font-size:clamp(1rem,2vw,1.3rem);color:rgba(255,255,255,0.75);margin-bottom:16px;opacity:0;animation:fadeUp 0.9s ease 0.5s forwards;}
-.hero-desc{color:rgba(255,255,255,0.55);font-size:0.95rem;line-height:1.8;max-width:480px;margin:0 auto 36px;opacity:0;animation:fadeUp 0.9s ease 0.7s forwards;}
-.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp 0.9s ease 0.9s forwards;}
-.btn-white{background:#fff;color:var(–navy);border:none;padding:15px 36px;border-radius:8px;font-weight:700;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
-.btn-white:hover{background:var(–light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,255,255,0.2);}
-.btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.5);padding:15px 36px;border-radius:8px;font-weight:600;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
-.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,0.08);}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.hero{
+min-height:100vh;position:relative;overflow:hidden;
+display:flex;align-items:center;justify-content:center;
+background:#0F1A3E;
+}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.3;z-index:0;}
+.hero-overlay{
+position:absolute;inset:0;z-index:1;
+background:linear-gradient(180deg,rgba(11,19,50,0.6) 0%,rgba(15,26,62,0.75) 50%,rgba(11,19,50,0.92) 100%);
+}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 20px;max-width:680px;}
+.hero-badge{
+display:inline-block;
+background:rgba(255,255,255,0.15);
+border:1px solid rgba(255,255,255,0.25);
+color:#FFFFFF;
+padding:7px 20px;border-radius:24px;
+font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;
+margin-bottom:24px;font-family:‘Inter’,sans-serif;
+}
+.hero-title{
+font-family:‘Playfair Display’,serif;
+font-size:clamp(3rem,9vw,6.5rem);
+font-weight:900;color:#FFFFFF;line-height:0.95;
+margin-bottom:14px;
+opacity:0;animation:fadeUp 0.9s ease 0.3s forwards;
+}
+.hero-sub{
+font-size:clamp(1rem,2.5vw,1.4rem);
+color:rgba(255,255,255,0.78);
+margin-bottom:14px;font-style:italic;
+font-family:‘Playfair Display’,serif;
+opacity:0;animation:fadeUp 0.9s ease 0.5s forwards;
+}
+.hero-desc{
+color:rgba(255,255,255,0.55);
+font-size:0.94rem;line-height:1.85;
+max-width:460px;margin:0 auto 36px;
+opacity:0;animation:fadeUp 0.9s ease 0.7s forwards;
+}
+.hero-btns{
+display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+opacity:0;animation:fadeUp 0.9s ease 0.9s forwards;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+
+.btn-white{
+background:#FFFFFF;color:#1B2B5E;
+border:none;padding:15px 36px;border-radius:8px;
+font-weight:700;font-size:0.84rem;letter-spacing:1px;text-transform:uppercase;
+cursor:pointer;transition:all 0.2s;font-family:‘Inter’,sans-serif;
+}
+.btn-white:hover{background:#E8EDF8;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,255,255,0.18);}
+.btn-ghost{
+background:transparent;color:#FFFFFF;
+border:2px solid rgba(255,255,255,0.5);
+padding:15px 36px;border-radius:8px;
+font-weight:600;font-size:0.84rem;letter-spacing:1px;text-transform:uppercase;
+cursor:pointer;transition:all 0.2s;font-family:‘Inter’,sans-serif;
+}
+.btn-ghost:hover{border-color:#FFFFFF;background:rgba(255,255,255,0.1);}
 
 /* ===== STATS ===== */
-#stats{background:var(–white);padding:60px 24px;border-bottom:1px solid var(–border);}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:900px;margin:0 auto;}
-.stat-item{text-align:center;padding:20px;border-right:1px solid var(–border);}
+#stats{background:#FFFFFF;padding:56px 20px;border-bottom:1px solid #DDE3F0;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);max-width:860px;margin:0 auto;}
+.stat-item{text-align:center;padding:20px 10px;border-right:1px solid #DDE3F0;}
 .stat-item:last-child{border-right:none;}
-.stat-num{font-family:‘Playfair Display’,serif;font-size:2.4rem;font-weight:900;color:var(–navy);line-height:1;}
-.stat-label{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(–muted);margin-top:6px;}
+.stat-num{font-family:‘Playfair Display’,serif;font-size:2.5rem;font-weight:900;color:#1B2B5E;line-height:1;}
+.stat-label{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:#6B7A9F;margin-top:6px;}
 
 /* ===== SECTION HEADER ===== */
 .section-header{text-align:center;margin-bottom:52px;}
-.eyebrow{font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:var(–blue);margin-bottom:10px;font-weight:600;}
-.section-title{font-family:‘Playfair Display’,serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(–navy);line-height:1.15;}
-.blue-line{width:48px;height:3px;background:var(–navy);margin:16px auto 0;border-radius:2px;}
+.eyebrow{font-size:0.68rem;letter-spacing:4px;text-transform:uppercase;color:#2C4EAA;margin-bottom:10px;font-weight:600;display:block;}
+.section-title{font-family:‘Playfair Display’,serif;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;color:#1B2B5E;line-height:1.15;}
+.blue-line{width:48px;height:3px;background:#1B2B5E;margin:14px auto 0;border-radius:2px;}
 
-/* ===== COMPARISON TABLE ===== */
-#comparison{padding:90px 24px;background:var(–offwhite);}
-.comp-table{max-width:740px;margin:0 auto;border:1px solid var(–border);border-radius:14px;overflow:hidden;background:var(–white);box-shadow:0 4px 24px rgba(27,43,94,0.07);}
-.comp-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(–border);}
-.comp-row:last-child{border-bottom:none;}
-.comp-row.hdr{background:var(–navy);}
-.comp-row.hdr .comp-cell{color:#fff;font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;}
-.comp-cell{padding:16px 22px;font-size:0.9rem;color:var(–text);}
-.comp-cell:not(:last-child){border-right:1px solid var(–border);}
-.comp-row:not(.hdr):hover{background:var(–offwhite);}
-.comp-row.hdr .comp-cell{border-color:rgba(255,255,255,0.15);}
-.intensity-gentle{color:#27ae60;font-weight:600;}
-.intensity-moderate{color:#e67e22;font-weight:600;}
-.intensity-intense{color:#e74c3c;font-weight:600;}
+/* ===== SERVICE GUIDE CARDS ===== */
+#comparison{padding:88px 20px;background:#F4F6FB;}
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;max-width:1080px;margin:0 auto;}
+.guide-card{
+background:#FFFFFF;
+border:1.5px solid #DDE3F0;
+border-radius:16px;padding:24px;
+box-shadow:0 4px 20px rgba(27,43,94,0.07);
+transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
+cursor:default;
+transform-style:preserve-3d;
+will-change:transform;
+}
+.guide-card:hover{
+transform:translateY(-6px) perspective(800px) rotateX(2deg);
+box-shadow:0 18px 48px rgba(27,43,94,0.15);
+border-color:#2C4EAA;
+}
+.guide-emoji{font-size:2.2rem;margin-bottom:12px;display:block;}
+.guide-name{font-family:‘Playfair Display’,serif;font-size:1.15rem;font-weight:700;color:#1B2B5E;margin-bottom:6px;}
+.guide-best{font-size:0.83rem;color:#6B7A9F;margin-bottom:12px;line-height:1.5;}
+.guide-intensity{
+display:inline-block;padding:4px 14px;border-radius:20px;
+font-size:0.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+}
+.intensity-gentle{background:#E8F5E9;color:#2e7d32;}
+.intensity-moderate{background:#FFF3E0;color:#e65100;}
+.intensity-intense{background:#FFEBEE;color:#c62828;}
 
 /* ===== BEFORE/AFTER ===== */
-#before-after{padding:90px 24px;background:var(–white);}
-.ba-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;max-width:1000px;margin:0 auto;}
-.ba-card{border-radius:14px;overflow:hidden;border:1px solid var(–border);box-shadow:0 4px 20px rgba(27,43,94,0.08);}
-.ba-card-title{text-align:center;padding:14px;background:var(–navy);font-family:‘Playfair Display’,serif;font-size:1rem;color:#fff;}
-.slider-container{position:relative;height:200px;overflow:hidden;cursor:col-resize;user-select:none;}
+#before-after{padding:88px 20px;background:#FFFFFF;}
+.ba-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px;max-width:960px;margin:0 auto;}
+.ba-card{border-radius:14px;overflow:hidden;border:1.5px solid #DDE3F0;box-shadow:0 4px 18px rgba(27,43,94,0.08);}
+.ba-card-title{text-align:center;padding:14px;background:#1B2B5E;font-family:‘Playfair Display’,serif;font-size:1rem;color:#FFFFFF;}
+.slider-container{position:relative;height:190px;overflow:hidden;cursor:col-resize;user-select:none;}
 .slider-before,.slider-after{position:absolute;inset:0;background-size:cover;background-position:center;}
 .slider-after{clip-path:inset(0 50% 0 0);}
-.slider-handle{position:absolute;top:0;bottom:0;width:3px;background:#fff;left:50%;transform:translateX(-50%);z-index:3;pointer-events:none;}
-.slider-handle::before{content:’’;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:var(–navy);border:3px solid #fff;}
-.slider-handle::after{content:‘◀ ▶’;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:0.52rem;color:#fff;font-weight:900;z-index:4;}
-.slider-labels{display:flex;justify-content:space-between;padding:8px 14px;background:var(–offwhite);}
-.slider-label{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(–muted);}
+.slider-handle{position:absolute;top:0;bottom:0;width:3px;background:#FFFFFF;left:50%;transform:translateX(-50%);z-index:3;pointer-events:none;}
+.slider-handle::before{content:’’;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:#1B2B5E;border:3px solid #FFFFFF;}
+.slider-handle::after{content:‘◀ ▶’;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:0.5rem;color:#FFFFFF;font-weight:900;z-index:4;}
+.slider-labels{display:flex;justify-content:space-between;padding:8px 14px;background:#F4F6FB;}
+.slider-label{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:#6B7A9F;}
 
-/* ===== REVIEWS ===== */
-#reviews{padding:90px 24px;background:var(–offwhite);}
-.reviews-track{overflow:hidden;max-width:1100px;margin:0 auto;}
-.reviews-inner{display:flex;gap:20px;transition:transform 0.6s cubic-bezier(.22,.68,0,1.2);}
-.review-card{min-width:320px;background:var(–white);border:1px solid var(–border);border-radius:14px;padding:28px;flex-shrink:0;box-shadow:0 4px 16px rgba(27,43,94,0.07);transition:transform 0.3s,box-shadow 0.3s;}
-.review-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(27,43,94,0.13);}
-.stars{color:#F4B942;font-size:1rem;margin-bottom:14px;}
-.review-text{color:var(–text);font-size:0.9rem;line-height:1.8;margin-bottom:18px;font-style:italic;}
-.reviewer{display:flex;align-items:center;gap:12px;}
-.reviewer-avatar{width:42px;height:42px;border-radius:50%;background:var(–navy);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:1rem;flex-shrink:0;}
-.reviewer-name{font-weight:600;font-size:0.9rem;color:var(–navy);}
-.reviewer-loc{font-size:0.75rem;color:var(–muted);}
-.reviews-nav{display:flex;gap:10px;justify-content:center;margin-top:28px;}
-.rev-btn{background:var(–white);border:1px solid var(–border);color:var(–navy);width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:1rem;transition:all 0.2s;font-weight:700;}
-.rev-btn:hover{background:var(–navy);color:#fff;border-color:var(–navy);}
+/* ===== TESTIMONIALS ===== */
+#reviews{padding:88px 20px;background:#F4F6FB;}
+.reviews-wrap{max-width:680px;margin:0 auto;position:relative;}
+.reviews-slider{overflow:hidden;}
+.reviews-inner{display:flex;transition:transform 0.5s cubic-bezier(.22,.68,0,1.2);}
+.review-card{
+min-width:100%;
+background:#FFFFFF;
+border:1.5px solid #DDE3F0;
+border-radius:16px;padding:28px 28px 24px;
+box-shadow:0 4px 18px rgba(27,43,94,0.08);
+}
+.review-stars{color:#F4B942;font-size:1.1rem;margin-bottom:12px;letter-spacing:2px;}
+.review-text{
+color:#1a1a2e;font-size:1rem;line-height:1.7;
+font-style:italic;margin-bottom:18px;
+font-family:‘Playfair Display’,serif;
+}
+.reviewer-row{display:flex;align-items:center;gap:12px;}
+.reviewer-av{
+width:42px;height:42px;border-radius:50%;
+background:#1B2B5E;
+color:#FFFFFF;font-weight:700;font-size:1rem;
+display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.reviewer-name{font-weight:700;font-size:0.92rem;color:#1B2B5E;}
+.reviewer-loc{font-size:0.75rem;color:#6B7A9F;margin-top:1px;}
+.reviews-nav{display:flex;gap:12px;justify-content:center;margin-top:24px;}
+.rev-btn{
+width:44px;height:44px;border-radius:50%;
+background:#FFFFFF;
+border:1.5px solid #DDE3F0;
+color:#1B2B5E;
+font-size:1.1rem;font-weight:700;
+cursor:pointer;transition:all 0.2s;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 2px 8px rgba(27,43,94,0.1);
+}
+.rev-btn:hover{background:#1B2B5E;color:#FFFFFF;border-color:#1B2B5E;box-shadow:0 4px 16px rgba(27,43,94,0.25);}
+.rev-btn.active-btn{background:#1B2B5E;color:#FFFFFF;border-color:#1B2B5E;}
+.rev-dots{display:flex;gap:8px;justify-content:center;margin-top:16px;}
+.rev-dot{width:8px;height:8px;border-radius:50%;background:#DDE3F0;transition:all 0.3s;cursor:pointer;}
+.rev-dot.active{background:#1B2B5E;width:24px;border-radius:4px;}
 
 /* ===== FOOTER ===== */
-footer{background:var(–navy-dark);color:rgba(255,255,255,0.7);padding:60px 24px 32px;}
-.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:50px;}
-.footer-logo{font-family:‘Playfair Display’,serif;font-size:1.3rem;color:#fff;margin-bottom:12px;}
-.footer-tagline{font-size:0.88rem;line-height:1.8;color:rgba(255,255,255,0.5);}
-.footer-heading{font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:16px;}
+footer{background:#0F1A3E;padding:60px 20px 32px;}
+.footer-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;}
+.footer-logo{font-family:‘Playfair Display’,serif;font-size:1.3rem;color:#FFFFFF;margin-bottom:12px;}
+.footer-tagline{font-size:0.87rem;line-height:1.8;color:rgba(255,255,255,0.5);}
+.footer-heading{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px;display:block;}
 .footer-links{list-style:none;}
 .footer-links li{margin-bottom:9px;}
-.footer-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.88rem;transition:color 0.2s;}
-.footer-links a:hover{color:#fff;}
-.footer-bottom{text-align:center;margin-top:40px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.78rem;color:rgba(255,255,255,0.35);}
+.footer-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.87rem;transition:color 0.2s;}
+.footer-links a:hover{color:#FFFFFF;}
+.footer-bottom{text-align:center;margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.76rem;color:rgba(255,255,255,0.3);}
 
 /* ===== SERVICES PAGE ===== */
-#services-page{background:var(–offwhite);}
-.services-nav{position:fixed;top:0;width:100%;z-index:200;background:var(–white);border-bottom:1px solid var(–border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(27,43,94,0.08);}
-.services-nav-brand{display:flex;align-items:center;gap:10px;}
-.back-btn{background:transparent;border:1px solid var(–border);color:var(–navy);padding:9px 18px;border-radius:8px;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px;}
-.back-btn:hover{background:var(–offwhite);}
-.services-content{padding:100px 24px 60px;max-width:800px;margin:0 auto;}
-.services-page-title{font-family:‘Playfair Display’,serif;font-size:2rem;color:var(–navy);margin-bottom:6px;}
-.services-page-sub{color:var(–muted);font-size:0.9rem;margin-bottom:36px;}
+#services-page{background:#F4F6FB;}
+.inner-nav{
+position:fixed;top:0;width:100%;z-index:200;
+background:#FFFFFF;border-bottom:1px solid #DDE3F0;
+padding:12px 20px;
+display:flex;align-items:center;justify-content:space-between;
+box-shadow:0 2px 16px rgba(27,43,94,0.1);
+}
+.back-btn{
+background:transparent;border:1.5px solid #DDE3F0;
+color:#1B2B5E;padding:9px 16px;border-radius:8px;
+font-size:0.82rem;font-weight:600;cursor:pointer;
+transition:all 0.2s;font-family:‘Inter’,sans-serif;
+display:flex;align-items:center;gap:5px;
+}
+.back-btn:hover{background:#F4F6FB;border-color:#1B2B5E;}
+.services-content{padding:96px 20px 60px;max-width:760px;margin:0 auto;}
+.svc-page-title{font-family:‘Playfair Display’,serif;font-size:1.9rem;color:#1B2B5E;margin-bottom:6px;}
+.svc-page-sub{color:#6B7A9F;font-size:0.9rem;margin-bottom:32px;}
 
-/* ===== SERVICE CARD (KMT style) ===== */
-.svc-card{background:var(–white);border:1px solid var(–border);border-radius:16px;overflow:hidden;margin-bottom:24px;box-shadow:0 4px 20px rgba(27,43,94,0.07);transition:transform 0.25s,box-shadow 0.25s;}
-.svc-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(27,43,94,0.14);}
+/* ===== SERVICE CARD ===== */
+.svc-card{
+background:#FFFFFF;border:1.5px solid #DDE3F0;
+border-radius:16px;overflow:hidden;margin-bottom:22px;
+box-shadow:0 4px 20px rgba(27,43,94,0.07);
+transition:transform 0.25s,box-shadow 0.25s;
+}
+.svc-card:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(27,43,94,0.14);}
 .svc-img-wrap{position:relative;height:220px;overflow:hidden;}
 .svc-img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
 .svc-card:hover .svc-img{transform:scale(1.04);}
-.svc-badge{position:absolute;top:14px;left:14px;background:var(–navy);color:#fff;padding:5px 14px;border-radius:20px;font-size:0.75rem;font-weight:600;}
-.svc-body{padding:24px;}
-.svc-name{font-family:‘Playfair Display’,serif;font-size:1.5rem;color:var(–navy);margin-bottom:10px;}
-.svc-desc{color:var(–muted);font-size:0.9rem;line-height:1.7;margin-bottom:20px;}
-.svc-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;}
-.svc-pill{background:var(–pill-bg);border:1.5px solid var(–border);border-radius:20px;padding:7px 16px;font-size:0.83rem;font-weight:600;color:var(–navy);cursor:pointer;transition:all 0.2s;display:flex;gap:6px;align-items:center;}
-.svc-pill:hover,.svc-pill.selected{background:var(–navy);color:#fff;border-color:var(–navy);}
-.svc-pill .pill-price{color:var(–blue-light);}
+.svc-badge{
+position:absolute;top:14px;left:14px;
+background:#1B2B5E;color:#FFFFFF;
+padding:5px 14px;border-radius:20px;font-size:0.74rem;font-weight:600;
+}
+.svc-body{padding:22px;}
+.svc-name{font-family:‘Playfair Display’,serif;font-size:1.45rem;color:#1B2B5E;margin-bottom:8px;}
+.svc-desc{color:#6B7A9F;font-size:0.88rem;line-height:1.7;margin-bottom:18px;}
+.svc-pills{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:18px;}
+.svc-pill{
+background:#EBF0FA;border:1.5px solid #DDE3F0;
+border-radius:20px;padding:7px 15px;
+font-size:0.82rem;font-weight:600;
+color:#1B2B5E;
+cursor:pointer;transition:all 0.2s;
+display:flex;gap:5px;align-items:center;
+font-family:‘Inter’,sans-serif;
+}
+.svc-pill:hover{background:#1B2B5E;color:#FFFFFF;border-color:#1B2B5E;}
+.svc-pill.selected{background:#1B2B5E;color:#FFFFFF;border-color:#1B2B5E;}
+.svc-pill .pill-price{color:#4A6FD4;font-weight:700;}
 .svc-pill.selected .pill-price{color:rgba(255,255,255,0.8);}
-.svc-footer{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(–border);}
-.svc-from{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(–muted);}
-.svc-price-big{font-family:‘Playfair Display’,serif;font-size:2rem;font-weight:900;color:var(–navy);}
-.svc-book-btn{background:var(–navy);color:#fff;border:none;padding:13px 28px;border-radius:8px;font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
-.svc-book-btn:hover{background:var(–blue);}
+.svc-footer{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid #DDE3F0;}
+.svc-from-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#6B7A9F;margin-bottom:2px;}
+.svc-price-big{font-family:‘Playfair Display’,serif;font-size:2rem;font-weight:900;color:#1B2B5E;}
+.svc-book-btn{
+background:#1B2B5E;color:#FFFFFF;border:none;
+padding:13px 26px;border-radius:8px;
+font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;
+cursor:pointer;transition:all 0.2s;font-family:‘Inter’,sans-serif;
+}
+.svc-book-btn:hover{background:#2C4EAA;transform:translateY(-1px);}
 
-/* ===== BOOKING FORM PAGE ===== */
-#booking-page{background:var(–offwhite);}
-.booking-nav{position:fixed;top:0;width:100%;z-index:200;background:var(–white);border-bottom:1px solid var(–border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(27,43,94,0.08);}
-.booking-content{padding:100px 24px 60px;max-width:660px;margin:0 auto;}
-.booking-title{font-family:‘Playfair Display’,serif;font-size:2rem;color:var(–navy);margin-bottom:6px;}
-.booking-sub{color:var(–muted);font-size:0.9rem;margin-bottom:32px;}
-.form-group{margin-bottom:18px;}
-.form-group label{display:block;font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(–navy);font-weight:600;margin-bottom:7px;}
-.form-group input,.form-group select{width:100%;background:var(–white);border:1.5px solid var(–border);color:var(–text);padding:13px 16px;border-radius:10px;font-size:0.92rem;font-family:‘Inter’,sans-serif;outline:none;transition:border-color 0.2s;appearance:none;-webkit-appearance:none;}
-.form-group input:focus,.form-group select:focus{border-color:var(–navy);}
-.form-group input[readonly]{color:var(–blue);background:var(–light);cursor:default;}
-.form-group input::placeholder{color:var(–muted);}
-.form-group select option{background:#fff;color:var(–text);}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.booking-selected-card{background:var(–navy);color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:center;}
-.bsc-label{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:4px;}
-.bsc-val{font-family:‘Playfair Display’,serif;font-size:1.1rem;font-weight:700;}
-.bsc-price{font-family:‘Playfair Display’,serif;font-size:2rem;font-weight:900;}
-.submit-btn{width:100%;background:var(–navy);color:#fff;border:none;padding:16px;border-radius:10px;font-weight:700;font-size:0.9rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;margin-top:8px;}
-.submit-btn:hover{background:var(–blue);transform:translateY(-1px);}
+/* ===== BOOKING PAGE ===== */
+#booking-page{background:#F4F6FB;}
+.booking-content{padding:96px 20px 60px;max-width:640px;margin:0 auto;}
+.booking-title{font-family:‘Playfair Display’,serif;font-size:1.9rem;color:#1B2B5E;margin-bottom:6px;}
+.booking-sub{color:#6B7A9F;font-size:0.9rem;margin-bottom:28px;}
+.selected-summary{
+background:#1B2B5E;
+color:#FFFFFF;border-radius:14px;
+padding:18px 22px;margin-bottom:28px;
+display:flex;justify-content:space-between;align-items:center;
+}
+.ss-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:4px;}
+.ss-val{font-family:‘Playfair Display’,serif;font-size:1.05rem;font-weight:700;color:#FFFFFF;}
+.ss-sub{font-size:0.8rem;color:rgba(255,255,255,0.6);margin-top:2px;}
+.ss-price{font-family:‘Playfair Display’,serif;font-size:2.2rem;font-weight:900;color:#FFFFFF;}
+.form-group{margin-bottom:16px;}
+.form-label{display:block;font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:#1B2B5E;font-weight:600;margin-bottom:7px;}
+.form-input,.form-select{
+width:100%;
+background:#FFFFFF;
+border:1.5px solid #DDE3F0;
+color:#1a1a2e;
+padding:13px 16px;border-radius:10px;
+font-size:0.92rem;font-family:‘Inter’,sans-serif;
+outline:none;transition:border-color 0.2s;
+appearance:none;-webkit-appearance:none;
+}
+.form-input:focus,.form-select:focus{border-color:#1B2B5E;}
+.form-input[readonly]{color:#2C4EAA;background:#EBF0FA;cursor:default;}
+.form-input::placeholder{color:#9BA8C0;}
+.form-select option{background:#FFFFFF;color:#1a1a2e;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.submit-btn{
+width:100%;background:#1B2B5E;color:#FFFFFF;
+border:none;padding:16px;border-radius:10px;
+font-weight:700;font-size:0.9rem;letter-spacing:1px;text-transform:uppercase;
+cursor:pointer;transition:all 0.2s;margin-top:10px;
+font-family:‘Inter’,sans-serif;
+}
+.submit-btn:hover{background:#2C4EAA;transform:translateY(-1px);}
 
 /* ===== PAYMENT PAGE ===== */
-#payment-page{background:var(–offwhite);}
-.payment-content{padding:100px 24px 60px;max-width:560px;margin:0 auto;}
-.payment-title{font-family:‘Playfair Display’,serif;font-size:2rem;color:var(–navy);margin-bottom:6px;}
-.payment-sub{color:var(–muted);margin-bottom:28px;font-size:0.9rem;}
-.payment-amount-card{background:var(–navy);color:#fff;border-radius:14px;padding:24px 28px;margin-bottom:32px;text-align:center;}
-.pac-label{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:6px;}
-.pac-amount{font-family:‘Playfair Display’,serif;font-size:3.5rem;font-weight:900;}
+#payment-page{background:#F4F6FB;}
+.payment-content{padding:96px 20px 60px;max-width:520px;margin:0 auto;}
+.payment-title{font-family:‘Playfair Display’,serif;font-size:1.9rem;color:#1B2B5E;margin-bottom:6px;}
+.payment-sub{color:#6B7A9F;margin-bottom:28px;font-size:0.9rem;}
+.amount-card{
+background:#1B2B5E;color:#FFFFFF;
+border-radius:16px;padding:24px;margin-bottom:28px;text-align:center;
+}
+.amount-label{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;}
+.amount-val{font-family:‘Playfair Display’,serif;font-size:3.8rem;font-weight:900;color:#FFFFFF;}
 .pay-methods{display:flex;flex-direction:column;gap:14px;}
-.pay-method{background:var(–white);border:1.5px solid var(–border);border-radius:12px;padding:18px 22px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all 0.2s;}
-.pay-method:hover{border-color:var(–navy);box-shadow:0 4px 16px rgba(27,43,94,0.1);transform:translateX(4px);}
-.pay-method-icon{width:52px;height:52px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
-.pay-method-icon.paypal{background:#003087;color:#fff;}
-.pay-method-icon.btc{background:#F7931A;color:#fff;}
-.pay-method-name{font-weight:700;font-size:1rem;color:var(–navy);}
-.pay-method-sub{font-size:0.78rem;color:var(–muted);}
+.pay-method{
+background:#FFFFFF;border:1.5px solid #DDE3F0;
+border-radius:14px;padding:18px 22px;
+display:flex;align-items:center;gap:16px;
+cursor:pointer;transition:all 0.2s;
+}
+.pay-method:hover{border-color:#1B2B5E;box-shadow:0 6px 20px rgba(27,43,94,0.12);transform:translateX(4px);}
+.pay-icon{width:52px;height:52px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.pay-icon-paypal{background:#003087;color:#FFFFFF;}
+.pay-icon-btc{background:#F7931A;color:#FFFFFF;font-size:1.8rem;font-weight:700;}
+.pay-name{font-weight:700;font-size:1rem;color:#1B2B5E;}
+.pay-sub{font-size:0.78rem;color:#6B7A9F;margin-top:2px;}
 
 /* ===== MODALS ===== */
-.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(11,19,50,0.7);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(11,19,50,0.72);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.show{display:flex;}
-.modal{background:var(–white);border-radius:20px;padding:40px;max-width:480px;width:100%;text-align:center;box-shadow:0 24px 80px rgba(11,19,50,0.25);}
-.modal-icon{font-size:3rem;margin-bottom:16px;}
-.modal-title{font-family:‘Playfair Display’,serif;font-size:1.6rem;color:var(–navy);margin-bottom:12px;}
-.modal-text{color:var(–muted);font-size:0.9rem;line-height:1.8;margin-bottom:28px;}
-.modal-close{background:var(–navy);color:#fff;border:none;padding:13px 36px;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.85rem;}
-.modal-close:hover{background:var(–blue);}
-.btc-address{background:var(–offwhite);border:1.5px solid var(–border);border-radius:10px;padding:13px;font-size:0.7rem;word-break:break-all;color:var(–navy);margin:14px 0;font-family:monospace;letter-spacing:0.5px;font-weight:600;}
-.qr-wrap{width:160px;height:160px;margin:0 auto 16px;border-radius:12px;overflow:hidden;border:2px solid var(–border);}
+.modal{background:#FFFFFF;border-radius:20px;padding:38px;max-width:460px;width:100%;text-align:center;box-shadow:0 24px 80px rgba(11,19,50,0.3);}
+.modal-icon{font-size:2.8rem;margin-bottom:14px;}
+.modal-title{font-family:‘Playfair Display’,serif;font-size:1.5rem;color:#1B2B5E;margin-bottom:12px;}
+.modal-text{color:#6B7A9F;font-size:0.9rem;line-height:1.8;margin-bottom:26px;}
+.modal-close-btn{background:#1B2B5E;color:#FFFFFF;border:none;padding:13px 36px;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.85rem;font-family:‘Inter’,sans-serif;}
+.modal-close-btn:hover{background:#2C4EAA;}
+.btc-address{background:#F4F6FB;border:1.5px solid #DDE3F0;border-radius:10px;padding:13px;font-size:0.68rem;word-break:break-all;color:#1B2B5E;margin:14px 0;font-family:monospace;font-weight:700;}
+.qr-wrap{width:156px;height:156px;margin:0 auto 14px;border-radius:12px;overflow:hidden;border:2px solid #DDE3F0;}
 .qr-wrap img{width:100%;height:100%;object-fit:contain;}
-.modal-amount{font-family:‘Playfair Display’,serif;font-size:2.4rem;color:var(–navy);margin-bottom:4px;font-weight:900;}
-.modal-amount-sub{font-size:0.75rem;color:var(–muted);margin-bottom:20px;}
-.paid-btn{width:100%;background:#27ae60;color:#fff;border:none;padding:15px;border-radius:10px;font-weight:700;font-size:0.9rem;cursor:pointer;margin-top:12px;transition:background 0.2s;}
+.modal-amount-big{font-family:‘Playfair Display’,serif;font-size:2.4rem;color:#1B2B5E;font-weight:900;margin-bottom:4px;}
+.modal-amount-sub{font-size:0.74rem;color:#6B7A9F;margin-bottom:18px;}
+.copy-btn{background:transparent;border:1.5px solid #DDE3F0;color:#1B2B5E;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:0.8rem;margin-bottom:14px;transition:all 0.2s;font-weight:600;font-family:‘Inter’,sans-serif;}
+.copy-btn:hover{background:#F4F6FB;}
+.paid-btn{width:100%;background:#27ae60;color:#FFFFFF;border:none;padding:14px;border-radius:10px;font-weight:700;font-size:0.9rem;cursor:pointer;transition:background 0.2s;font-family:‘Inter’,sans-serif;}
 .paid-btn:hover{background:#219a52;}
-.copy-btn{background:transparent;border:1.5px solid var(–border);color:var(–navy);padding:8px 20px;border-radius:8px;cursor:pointer;font-size:0.8rem;margin-bottom:16px;transition:all 0.2s;font-weight:600;}
-.copy-btn:hover{background:var(–offwhite);}
+.cancel-link{background:transparent;border:none;color:#9BA8C0;cursor:pointer;font-size:0.84rem;margin-top:12px;font-family:‘Inter’,sans-serif;}
 
 /* ===== SPINNER ===== */
-#spinner-page{background:var(–offwhite);}
-.spinner-page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;}
-.spinner{width:64px;height:64px;border:4px solid var(–border);border-top-color:var(–navy);border-radius:50%;animation:spin 1s linear infinite;}
+#spinner-page{background:#F4F6FB;}
+.spinner-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;}
+.spinner{width:62px;height:62px;border:4px solid #DDE3F0;border-top-color:#1B2B5E;border-radius:50%;animation:spin 1s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.spinner-text{color:var(–muted);font-size:0.88rem;letter-spacing:3px;text-transform:uppercase;}
+.spinner-text{color:#6B7A9F;font-size:0.85rem;letter-spacing:3px;text-transform:uppercase;}
 
 /* ===== THANK YOU ===== */
-#thankyou-page{background:var(–offwhite);}
-.thankyou-page{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 24px;}
-.thankyou-content{max-width:540px;}
-.ty-icon{font-size:5rem;margin-bottom:20px;animation:popIn 0.6s cubic-bezier(.22,.68,0,1.5);}
+#thankyou-page{background:#F4F6FB;}
+.ty-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 20px;}
+.ty-box{max-width:520px;}
+.ty-icon{font-size:5rem;margin-bottom:18px;animation:popIn 0.6s cubic-bezier(.22,.68,0,1.5);}
 @keyframes popIn{from{transform:scale(0);}to{transform:scale(1);}}
-.ty-title{font-family:‘Playfair Display’,serif;font-size:2.4rem;color:var(–navy);margin-bottom:14px;}
-.ty-line{width:60px;height:3px;background:var(–navy);margin:18px auto;border-radius:2px;}
-.ty-text{color:var(–muted);line-height:1.9;font-size:0.95rem;margin-bottom:28px;}
+.ty-title{font-family:‘Playfair Display’,serif;font-size:2.4rem;color:#1B2B5E;margin-bottom:12px;}
+.ty-line{width:56px;height:3px;background:#1B2B5E;margin:16px auto;border-radius:2px;}
+.ty-text{color:#6B7A9F;line-height:1.9;font-size:0.95rem;margin-bottom:24px;}
+.ty-phone{color:#2C4EAA;font-size:0.92rem;margin-bottom:28px;font-weight:600;}
+.ty-btn{background:#1B2B5E;color:#FFFFFF;border:none;padding:14px 32px;border-radius:10px;font-weight:700;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:‘Inter’,sans-serif;}
+.ty-btn:hover{background:#2C4EAA;}
 
-/* ===== LIVE NOTIF ===== */
-.live-notif{position:fixed;bottom:100px;left:20px;z-index:300;background:var(–white);border:1.5px solid var(–border);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px;max-width:290px;transform:translateX(-120%);transition:transform 0.5s cubic-bezier(.22,.68,0,1.2);box-shadow:0 8px 28px rgba(27,43,94,0.15);}
+/* ===== LIVE NOTIFICATION ===== */
+.live-notif{
+position:fixed;bottom:110px;left:18px;z-index:400;
+background:#FFFFFF;border:1.5px solid #DDE3F0;
+border-radius:14px;padding:12px 16px;
+display:flex;align-items:center;gap:10px;max-width:285px;
+transform:translateX(-120%);transition:transform 0.5s cubic-bezier(.22,.68,0,1.2);
+box-shadow:0 8px 28px rgba(27,43,94,0.15);
+}
 .live-notif.show{transform:translateX(0);}
-.notif-dot{width:8px;height:8px;border-radius:50%;background:#27ae60;animation:ndot 2s infinite;flex-shrink:0;}
-@keyframes ndot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(39,174,96,0.4);}50%{opacity:0.7;box-shadow:0 0 0 5px rgba(39,174,96,0);}}
-.notif-text{font-size:0.78rem;color:var(–text);line-height:1.4;}
-.notif-text strong{color:var(–navy);}
+.notif-dot{width:8px;height:8px;border-radius:50%;background:#27ae60;flex-shrink:0;animation:ndot 2s infinite;}
+@keyframes ndot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(39,174,96,0.4);}50%{opacity:0.7;box-shadow:0 0 0 6px rgba(39,174,96,0);}}
+.notif-text{font-size:0.76rem;color:#1a1a2e;line-height:1.4;}
+.notif-text strong{color:#1B2B5E;}
 
 /* ===== WHATSAPP ===== */
-.wa-btn{position:fixed;bottom:22px;right:22px;z-index:300;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);text-decoration:none;animation:waFloat 3s ease-in-out infinite;}
+.wa-btn{
+position:fixed;bottom:20px;right:20px;z-index:400;
+width:56px;height:56px;border-radius:50%;
+background:linear-gradient(135deg,#25D366,#128C7E);
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 4px 20px rgba(37,211,102,0.45);
+text-decoration:none;
+animation:waFloat 3s ease-in-out infinite;
+}
 .wa-btn:hover{animation:none;transform:scale(1.1);}
-@keyframes waFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+@keyframes waFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
 .wa-btn svg{width:28px;height:28px;fill:white;}
 
-/* ===== AI CHAT ===== */
-.ai-chat-btn{position:fixed;bottom:90px;right:22px;z-index:300;width:58px;height:58px;border-radius:50%;background:var(–navy);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(27,43,94,0.35);border:none;font-size:1.5rem;transition:transform 0.2s,background 0.2s;}
-.ai-chat-btn:hover{transform:scale(1.08);background:var(–blue);}
-.ai-chat-window{position:fixed;bottom:162px;right:22px;z-index:300;width:310px;background:var(–white);border:1.5px solid var(–border);border-radius:16px;overflow:hidden;box-shadow:0 16px 50px rgba(27,43,94,0.18);display:none;flex-direction:column;max-height:420px;}
+/* ===== AI CHAT BTN ===== */
+.ai-btn-wrap{position:fixed;bottom:86px;right:20px;z-index:400;}
+.ai-btn-tooltip{
+position:absolute;right:68px;top:50%;transform:translateY(-50%);
+background:#1B2B5E;color:#FFFFFF;
+padding:6px 12px;border-radius:8px;
+font-size:0.75rem;white-space:nowrap;font-weight:600;
+opacity:0;pointer-events:none;transition:opacity 0.2s;
+font-family:‘Inter’,sans-serif;
+}
+.ai-btn-tooltip::after{content:’’;position:absolute;left:100%;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:#1B2B5E;}
+.ai-btn-wrap:hover .ai-btn-tooltip{opacity:1;}
+.ai-chat-btn{
+width:50px;height:50px;border-radius:50%;
+background:#1B2B5E;
+display:flex;align-items:center;justify-content:center;
+cursor:pointer;box-shadow:0 4px 18px rgba(27,43,94,0.35);
+border:none;font-size:1.35rem;transition:transform 0.2s,background 0.2s;
+animation:aiBtnPulse 3s ease-in-out infinite;
+}
+@keyframes aiBtnPulse{0%,100%{box-shadow:0 4px 18px rgba(27,43,94,0.35),0 0 0 0 rgba(27,43,94,0.4);}50%{box-shadow:0 4px 18px rgba(27,43,94,0.35),0 0 0 10px rgba(27,43,94,0);}}
+.ai-chat-btn:hover{transform:scale(1.08);background:#2C4EAA;animation:none;}
+
+/* ===== AI CHAT WINDOW ===== */
+.ai-chat-window{
+position:fixed;bottom:148px;right:20px;z-index:400;
+width:305px;background:#FFFFFF;
+border:1.5px solid #DDE3F0;border-radius:16px;
+overflow:hidden;box-shadow:0 16px 50px rgba(27,43,94,0.18);
+display:none;flex-direction:column;max-height:400px;
+}
 .ai-chat-window.open{display:flex;}
-.ai-chat-header{background:var(–navy);padding:14px 18px;display:flex;align-items:center;gap:10px;}
-.ai-chat-avatar{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
-.ai-chat-header-text .name{font-weight:600;font-size:0.9rem;color:#fff;}
-.ai-chat-header-text .status{font-size:0.68rem;color:rgba(255,255,255,0.6);}
-.ai-close{margin-left:auto;background:transparent;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:1.1rem;}
-.ai-chat-messages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;max-height:260px;}
-.ai-msg{max-width:86%;padding:10px 13px;border-radius:10px;font-size:0.84rem;line-height:1.5;}
-.ai-msg.bot{background:var(–offwhite);border:1px solid var(–border);color:var(–text);border-radius:10px 10px 10px 2px;}
-.ai-msg.user{background:var(–navy);color:#fff;align-self:flex-end;border-radius:10px 10px 2px 10px;}
-.ai-chat-options{padding:10px 14px;border-top:1px solid var(–border);display:flex;flex-wrap:wrap;gap:7px;}
-.ai-opt-btn{background:var(–offwhite);border:1.5px solid var(–border);color:var(–navy);padding:6px 13px;border-radius:20px;font-size:0.76rem;cursor:pointer;transition:all 0.2s;white-space:nowrap;font-weight:600;}
-.ai-opt-btn:hover{background:var(–navy);color:#fff;border-color:var(–navy);}
+.ai-chat-header{background:#1B2B5E;padding:13px 16px;display:flex;align-items:center;gap:10px;}
+.ai-avatar{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.ai-head-name{font-weight:600;font-size:0.88rem;color:#FFFFFF;}
+.ai-head-status{font-size:0.65rem;color:rgba(255,255,255,0.6);}
+.ai-close-btn{margin-left:auto;background:transparent;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:1.1rem;line-height:1;}
+.ai-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;max-height:240px;}
+.ai-msg{max-width:86%;padding:9px 13px;border-radius:10px;font-size:0.83rem;line-height:1.5;font-family:‘Inter’,sans-serif;}
+.ai-msg.bot{background:#F4F6FB;border:1px solid #DDE3F0;color:#1a1a2e;border-radius:10px 10px 10px 2px;}
+.ai-msg.user{background:#1B2B5E;color:#FFFFFF;align-self:flex-end;border-radius:10px 10px 2px 10px;}
+.ai-opts{padding:10px 13px;border-top:1px solid #DDE3F0;display:flex;flex-wrap:wrap;gap:7px;}
+.ai-opt{background:#F4F6FB;border:1.5px solid #DDE3F0;color:#1B2B5E;padding:6px 12px;border-radius:20px;font-size:0.75rem;cursor:pointer;transition:all 0.2s;white-space:nowrap;font-weight:600;font-family:‘Inter’,sans-serif;}
+.ai-opt:hover{background:#1B2B5E;color:#FFFFFF;border-color:#1B2B5E;}
 
 /* ===== SCROLL REVEAL ===== */
-.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
 /* ===== RESPONSIVE ===== */
-@media(max-width:768px){
+@media(max-width:680px){
 .stats-grid{grid-template-columns:1fr 1fr;}
 .stat-item:nth-child(2){border-right:none;}
-.stat-item:nth-child(1),.stat-item:nth-child(2){border-bottom:1px solid var(–border);}
+.stat-item:nth-child(1),.stat-item:nth-child(2){border-bottom:1px solid #DDE3F0;}
 .form-row{grid-template-columns:1fr;}
-.footer-inner{grid-template-columns:1fr;gap:32px;}
+.footer-inner{grid-template-columns:1fr;gap:30px;}
 .ba-grid{grid-template-columns:1fr;}
+.guide-grid{grid-template-columns:1fr 1fr;}
+.ai-chat-window{width:calc(100vw - 40px);right:20px;}
+}
+@media(max-width:400px){
+.guide-grid{grid-template-columns:1fr;}
 }
 </style>
 
 </head>
 <body>
 
-<!-- ============ MAIN PAGE ============ -->
+<!-- ============================================================ -->
+
+<!--  MAIN PAGE                                                   -->
+
+<!-- ============================================================ -->
 
 <div id="main-page" class="page active">
+
 <nav>
   <div class="nav-brand">
-    <div class="nav-logo-circle">MRT</div>
-    <div class="nav-brand-text">
-      <div class="name">Massage Rub & Therapist</div>
-      <div class="sub">Luxury Wellness</div>
+    <div class="nav-circle">MRT</div>
+    <div>
+      <div class="nav-name">Massage Rub & Therapist</div>
+      <div class="nav-sub">Luxury Wellness</div>
     </div>
   </div>
-  <div class="nav-right">
-    <button class="nav-book-btn" onclick="showPage('services-page');window.scrollTo(0,0);">BOOK NOW</button>
-  </div>
+  <button class="nav-book" onclick="showPage('services-page');window.scrollTo(0,0);">BOOK NOW</button>
 </nav>
 
 <!-- HERO -->
@@ -322,49 +532,48 @@ footer{background:var(–navy-dark);color:rgba(255,255,255,0.7);padding:60px 24p
 
 <section id="stats">
   <div class="stats-grid">
-    <div class="stat-item reveal"><div class="stat-num" data-target="5000" data-suffix="+">0</div><div class="stat-label">Happy Clients</div></div>
-    <div class="stat-item reveal" style="transition-delay:.1s"><div class="stat-num" data-target="4.9" data-suffix="★" data-decimal="1">0</div><div class="stat-label">Average Rating</div></div>
-    <div class="stat-item reveal" style="transition-delay:.2s"><div class="stat-num" data-target="12" data-suffix="">0</div><div class="stat-label">Services Offered</div></div>
-    <div class="stat-item reveal" style="transition-delay:.3s"><div class="stat-num" data-target="24" data-suffix="/7">0</div><div class="stat-label">Support</div></div>
+    <div class="stat-item reveal"><div class="stat-num" data-target="5000" data-suffix="+">0+</div><div class="stat-label">Happy Clients</div></div>
+    <div class="stat-item reveal" style="transition-delay:.1s"><div class="stat-num" data-target="4.9" data-suffix="★" data-decimal="1">4.9★</div><div class="stat-label">Average Rating</div></div>
+    <div class="stat-item reveal" style="transition-delay:.2s"><div class="stat-num" data-target="12" data-suffix="">12</div><div class="stat-label">Services Offered</div></div>
+    <div class="stat-item reveal" style="transition-delay:.3s"><div class="stat-num" data-target="24" data-suffix="/7">24/7</div><div class="stat-label">Support</div></div>
   </div>
 </section>
 
-<!-- COMPARISON -->
+<!-- SERVICE GUIDE CARDS -->
 
 <section id="comparison">
   <div class="section-header reveal">
-    <p class="eyebrow">Find Your Perfect Match</p>
+    <span class="eyebrow">Find Your Perfect Match</span>
     <h2 class="section-title">Service Guide</h2>
     <div class="blue-line"></div>
   </div>
-  <div class="comp-table reveal">
-    <div class="comp-row hdr"><div class="comp-cell">Service</div><div class="comp-cell">Best For</div><div class="comp-cell">Intensity</div></div>
-    <div class="comp-row"><div class="comp-cell">🌊 Swedish</div><div class="comp-cell">Relaxation & stress</div><div class="comp-cell intensity-gentle">Gentle</div></div>
-    <div class="comp-row"><div class="comp-cell">💪 Deep Tissue</div><div class="comp-cell">Chronic muscle pain</div><div class="comp-cell intensity-intense">Intense</div></div>
-    <div class="comp-row"><div class="comp-cell">🏃 Sports</div><div class="comp-cell">Athletic recovery</div><div class="comp-cell intensity-moderate">Moderate-High</div></div>
-    <div class="comp-row"><div class="comp-cell">🪨 Hot Stone</div><div class="comp-cell">Deep stress relief</div><div class="comp-cell intensity-gentle">Gentle-Moderate</div></div>
-    <div class="comp-row"><div class="comp-cell">🌸 Aromatherapy</div><div class="comp-cell">Mood & wellbeing</div><div class="comp-cell intensity-gentle">Gentle</div></div>
-    <div class="comp-row"><div class="comp-cell">🧠 Neuromuscular</div><div class="comp-cell">Nerve & trigger points</div><div class="comp-cell intensity-intense">Intense</div></div>
-    <div class="comp-row"><div class="comp-cell">🦶 Reflexology</div><div class="comp-cell">Organ function</div><div class="comp-cell intensity-gentle">Moderate</div></div>
-    <div class="comp-row"><div class="comp-cell">🤰 Prenatal</div><div class="comp-cell">Pregnancy comfort</div><div class="comp-cell intensity-gentle">Very Gentle</div></div>
+  <div class="guide-grid reveal">
+    <div class="guide-card"><span class="guide-emoji">🌊</span><div class="guide-name">Swedish Massage</div><div class="guide-best">Relaxation &amp; stress relief — perfect for first-timers.</div><span class="guide-intensity intensity-gentle">Gentle</span></div>
+    <div class="guide-card"><span class="guide-emoji">💪</span><div class="guide-name">Deep Tissue</div><div class="guide-best">Chronic muscle pain and deep tension release.</div><span class="guide-intensity intensity-intense">Intense</span></div>
+    <div class="guide-card"><span class="guide-emoji">🏃</span><div class="guide-name">Sports Massage</div><div class="guide-best">Athletic performance, injury prevention &amp; recovery.</div><span class="guide-intensity intensity-moderate">Moderate-High</span></div>
+    <div class="guide-card"><span class="guide-emoji">🪨</span><div class="guide-name">Hot Stone</div><div class="guide-best">Deep stress relief with warm basalt stones.</div><span class="guide-intensity intensity-gentle">Gentle-Moderate</span></div>
+    <div class="guide-card"><span class="guide-emoji">🌸</span><div class="guide-name">Aromatherapy</div><div class="guide-best">Mood elevation, skin nourishment &amp; deep calm.</div><span class="guide-intensity intensity-gentle">Gentle</span></div>
+    <div class="guide-card"><span class="guide-emoji">🧠</span><div class="guide-name">Neuromuscular</div><div class="guide-best">Trigger points, nerve compression &amp; chronic pain.</div><span class="guide-intensity intensity-intense">Intense</span></div>
+    <div class="guide-card"><span class="guide-emoji">🦶</span><div class="guide-name">Reflexology</div><div class="guide-best">Organ stimulation through feet, hands &amp; ears.</div><span class="guide-intensity intensity-gentle">Moderate</span></div>
+    <div class="guide-card"><span class="guide-emoji">🤰</span><div class="guide-name">Prenatal</div><div class="guide-best">Safe, gentle care for expectant mothers.</div><span class="guide-intensity intensity-gentle">Very Gentle</span></div>
   </div>
 </section>
 
-<!-- BEFORE/AFTER -->
+<!-- BEFORE & AFTER -->
 
-<section id="before-after" style="padding:90px 24px;background:var(--white);">
+<section id="before-after">
   <div class="section-header reveal">
-    <p class="eyebrow">Real Transformations</p>
-    <h2 class="section-title">Before & After</h2>
+    <span class="eyebrow">Real Transformations</span>
+    <h2 class="section-title">Before &amp; After</h2>
     <div class="blue-line"></div>
-    <p style="color:var(--muted);max-width:400px;margin:16px auto 0;font-size:0.88rem;line-height:1.8;">Drag the slider to see the difference our therapists make.</p>
+    <p style="color:#6B7A9F;max-width:380px;margin:14px auto 0;font-size:0.87rem;line-height:1.8;">Drag the slider to see the difference our therapists make.</p>
   </div>
   <div class="ba-grid reveal">
     <div class="ba-card">
       <div class="ba-card-title">Back Pain Relief</div>
       <div class="slider-container">
-        <div class="slider-before" style="background-image:url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&q=80');filter:grayscale(80%) brightness(0.6);"></div>
-        <div class="slider-after" style="background-image:url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80');filter:brightness(0.9);"></div>
+        <div class="slider-before" style="background-image:url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&q=80');filter:grayscale(80%) brightness(0.55);"></div>
+        <div class="slider-after" style="background-image:url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80');"></div>
         <div class="slider-handle"></div>
       </div>
       <div class="slider-labels"><span class="slider-label">Before</span><span class="slider-label">After</span></div>
@@ -373,7 +582,7 @@ footer{background:var(–navy-dark);color:rgba(255,255,255,0.7);padding:60px 24p
       <div class="ba-card-title">Sports Recovery</div>
       <div class="slider-container">
         <div class="slider-before" style="background-image:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80');filter:grayscale(80%) brightness(0.5);"></div>
-        <div class="slider-after" style="background-image:url('https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&q=80');filter:brightness(0.9);"></div>
+        <div class="slider-after" style="background-image:url('https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&q=80');"></div>
         <div class="slider-handle"></div>
       </div>
       <div class="slider-labels"><span class="slider-label">Before</span><span class="slider-label">After</span></div>
@@ -382,7 +591,7 @@ footer{background:var(–navy-dark);color:rgba(255,255,255,0.7);padding:60px 24p
       <div class="ba-card-title">Stress Reduction</div>
       <div class="slider-container">
         <div class="slider-before" style="background-image:url('https://images.unsplash.com/photo-1520637836993-5cda9e7d5c89?w=600&q=80');filter:grayscale(80%) brightness(0.5);"></div>
-        <div class="slider-after" style="background-image:url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&q=80');filter:brightness(0.9);"></div>
+        <div class="slider-after" style="background-image:url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&q=80');"></div>
         <div class="slider-handle"></div>
       </div>
       <div class="slider-labels"><span class="slider-label">Before</span><span class="slider-label">After</span></div>
@@ -390,20 +599,23 @@ footer{background:var(–navy-dark);color:rgba(255,255,255,0.7);padding:60px 24p
   </div>
 </section>
 
-<!-- REVIEWS -->
+<!-- TESTIMONIALS -->
 
 <section id="reviews">
   <div class="section-header reveal">
-    <p class="eyebrow">Client Love</p>
+    <span class="eyebrow">Client Love</span>
     <h2 class="section-title">What People Say</h2>
     <div class="blue-line"></div>
   </div>
-  <div class="reviews-track">
-    <div class="reviews-inner" id="reviewsInner"></div>
-  </div>
-  <div class="reviews-nav">
-    <button class="rev-btn" onclick="slideReviews(-1)">←</button>
-    <button class="rev-btn" onclick="slideReviews(1)">→</button>
+  <div class="reviews-wrap reveal">
+    <div class="reviews-slider">
+      <div class="reviews-inner" id="reviewsInner"></div>
+    </div>
+    <div class="reviews-nav">
+      <button class="rev-btn active-btn" onclick="goToReview(reviewIdx-1)">←</button>
+      <button class="rev-btn" onclick="goToReview(reviewIdx+1)">→</button>
+    </div>
+    <div class="rev-dots" id="revDots"></div>
   </div>
 </section>
 
@@ -412,12 +624,12 @@ footer{background:var(–navy-dark);color:rgba(255,255,255,0.7);padding:60px 24p
 <footer>
   <div class="footer-inner">
     <div>
-      <div class="footer-logo">Massage Rub & Therapist</div>
+      <div class="footer-logo">Massage Rub &amp; Therapist</div>
       <p class="footer-tagline">Your body deserves the best. Expert therapists dedicated to your wellness, relaxation, and total rejuvenation.</p>
       <p style="margin-top:16px;color:rgba(255,255,255,0.7);font-size:0.9rem;">📞 +1 (672) 804-1901</p>
     </div>
     <div>
-      <div class="footer-heading">Services</div>
+      <span class="footer-heading">Services</span>
       <ul class="footer-links">
         <li><a href="#" onclick="showPage('services-page');window.scrollTo(0,0);return false;">Swedish Massage</a></li>
         <li><a href="#" onclick="showPage('services-page');window.scrollTo(0,0);return false;">Deep Tissue</a></li>
@@ -427,7 +639,7 @@ footer{background:var(–navy-dark);color:rgba(255,255,255,0.7);padding:60px 24p
       </ul>
     </div>
     <div>
-      <div class="footer-heading">Contact</div>
+      <span class="footer-heading">Contact</span>
       <ul class="footer-links">
         <li><a href="tel:+16728041901">+1 (672) 804-1901</a></li>
         <li><a href="https://wa.me/16728041901" target="_blank">WhatsApp Us</a></li>
@@ -435,194 +647,225 @@ footer{background:var(–navy-dark);color:rgba(255,255,255,0.7);padding:60px 24p
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">© 2025 Massage Rub & Therapist. All rights reserved. · Your body deserves the best. ♥</div>
+  <div class="footer-bottom">© 2025 Massage Rub &amp; Therapist. All rights reserved. · Your body deserves the best. ♥</div>
 </footer>
-</div><!-- /main-page -->
+</div>
 
-<!-- ============ SERVICES PAGE ============ -->
+<!-- ============================================================ -->
+
+<!--  SERVICES PAGE                                               -->
+
+<!-- ============================================================ -->
 
 <div id="services-page" class="page">
-  <nav class="services-nav">
-    <div class="services-nav-brand">
-      <button class="back-btn" onclick="showPage('main-page');window.scrollTo(0,0);">← Back</button>
-    </div>
+  <nav class="inner-nav">
+    <button class="back-btn" onclick="showPage('main-page');window.scrollTo(0,0);">← Back</button>
     <div class="nav-brand">
-      <div class="nav-logo-circle">MRT</div>
-      <div class="nav-brand-text">
-        <div class="name">Massage Rub & Therapist</div>
-        <div class="sub">Luxury Wellness</div>
-      </div>
+      <div class="nav-circle">MRT</div>
+      <div><div class="nav-name">Massage Rub &amp; Therapist</div></div>
     </div>
-    <div style="width:80px;"></div>
+    <div style="width:70px;"></div>
   </nav>
   <div class="services-content">
-    <h1 class="services-page-title">Our Services</h1>
-    <p class="services-page-sub">Choose a service, select your session length, then book instantly.</p>
+    <h1 class="svc-page-title">Our Services</h1>
+    <p class="svc-page-sub">Choose a service, select your session length, then tap Book Now.</p>
     <div id="servicesGrid"></div>
   </div>
 </div>
 
-<!-- ============ BOOKING PAGE ============ -->
+<!-- ============================================================ -->
+
+<!--  BOOKING PAGE                                                -->
+
+<!-- ============================================================ -->
 
 <div id="booking-page" class="page">
-  <nav class="booking-nav">
+  <nav class="inner-nav">
     <button class="back-btn" onclick="showPage('services-page');window.scrollTo(0,0);">← Back</button>
-    <div class="nav-brand" style="position:absolute;left:50%;transform:translateX(-50%);">
-      <div class="nav-logo-circle">MRT</div>
-      <div class="nav-brand-text"><div class="name">Massage Rub & Therapist</div></div>
+    <div class="nav-brand">
+      <div class="nav-circle">MRT</div>
+      <div><div class="nav-name">Massage Rub &amp; Therapist</div></div>
     </div>
-    <div style="width:80px;"></div>
+    <div style="width:70px;"></div>
   </nav>
   <div class="booking-content">
     <h1 class="booking-title">Book Your Session</h1>
     <p class="booking-sub">Fill in your details to confirm your appointment.</p>
-    <div class="booking-selected-card">
+    <div class="selected-summary">
       <div>
-        <div class="bsc-label">Service</div>
-        <div class="bsc-val" id="bsc-service">—</div>
-        <div style="font-size:0.8rem;color:rgba(255,255,255,0.6);margin-top:2px;" id="bsc-session">—</div>
+        <div class="ss-label">Service</div>
+        <div class="ss-val" id="bsc-service">—</div>
+        <div class="ss-sub" id="bsc-session">—</div>
       </div>
-      <div class="bsc-price" id="bsc-price">$0</div>
+      <div class="ss-price" id="bsc-price">$0</div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>First Name</label><input type="text" id="f-firstname" placeholder="Jane"></div>
-      <div class="form-group"><label>Last Name</label><input type="text" id="f-lastname" placeholder="Doe"></div>
+      <div class="form-group"><label class="form-label">First Name</label><input class="form-input" type="text" id="f-firstname" placeholder="Jane"></div>
+      <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" type="text" id="f-lastname" placeholder="Doe"></div>
     </div>
-    <div class="form-group"><label>Email Address</label><input type="email" id="f-email" placeholder="jane@example.com"></div>
-    <div class="form-group"><label>Phone Number</label><input type="tel" id="f-phone" placeholder="+1 (000) 000-0000"></div>
+    <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="email" id="f-email" placeholder="jane@example.com"></div>
+    <div class="form-group"><label class="form-label">Phone Number</label><input class="form-input" type="tel" id="f-phone" placeholder="+1 (000) 000-0000"></div>
     <div class="form-row">
-      <div class="form-group"><label>State</label><select id="f-state" onchange="populateCities()"><option value="">Select State</option></select></div>
-      <div class="form-group"><label>City</label><select id="f-city"><option value="">Select City</option></select></div>
+      <div class="form-group"><label class="form-label">State</label><select class="form-select" id="f-state" onchange="populateCities()"><option value="">Select State</option></select></div>
+      <div class="form-group"><label class="form-label">City</label><select class="form-select" id="f-city"><option value="">Select City</option></select></div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>Preferred Date</label><input type="date" id="f-date"></div>
-      <div class="form-group"><label>Preferred Time</label><input type="time" id="f-time"></div>
+      <div class="form-group"><label class="form-label">Date</label><input class="form-input" type="date" id="f-date"></div>
+      <div class="form-group"><label class="form-label">Time</label><input class="form-input" type="time" id="f-time"></div>
     </div>
-    <div class="form-group"><label>Service</label><input type="text" id="f-service" readonly></div>
-    <div class="form-group"><label>Session</label><input type="text" id="f-session" readonly></div>
-    <div class="form-group"><label>Amount</label><input type="text" id="f-amount" readonly></div>
+    <div class="form-group"><label class="form-label">Service</label><input class="form-input" type="text" id="f-service" readonly></div>
+    <div class="form-group"><label class="form-label">Session</label><input class="form-input" type="text" id="f-session" readonly></div>
+    <div class="form-group"><label class="form-label">Amount</label><input class="form-input" type="text" id="f-amount" readonly></div>
     <button class="submit-btn" onclick="proceedToPayment()">Proceed to Payment →</button>
   </div>
 </div>
 
-<!-- ============ PAYMENT PAGE ============ -->
+<!-- ============================================================ -->
+
+<!--  PAYMENT PAGE                                                -->
+
+<!-- ============================================================ -->
 
 <div id="payment-page" class="page">
-  <nav class="booking-nav">
+  <nav class="inner-nav">
     <button class="back-btn" onclick="showPage('booking-page');window.scrollTo(0,0);">← Back</button>
-    <div class="nav-brand" style="position:absolute;left:50%;transform:translateX(-50%);">
-      <div class="nav-logo-circle">MRT</div>
-      <div class="nav-brand-text"><div class="name">Massage Rub & Therapist</div></div>
+    <div class="nav-brand">
+      <div class="nav-circle">MRT</div>
+      <div><div class="nav-name">Massage Rub &amp; Therapist</div></div>
     </div>
-    <div style="width:80px;"></div>
+    <div style="width:70px;"></div>
   </nav>
   <div class="payment-content">
     <h1 class="payment-title">Select Payment</h1>
-    <p class="payment-sub">Choose how you'd like to pay for your session</p>
-    <div class="payment-amount-card">
-      <div class="pac-label">Total Amount Due</div>
-      <div class="pac-amount" id="pay-amount-display">$0</div>
+    <p class="payment-sub">Choose how you'd like to pay for your session.</p>
+    <div class="amount-card">
+      <div class="amount-label">Total Amount Due</div>
+      <div class="amount-val" id="pay-amount-display">$0</div>
     </div>
     <div class="pay-methods">
       <div class="pay-method" onclick="showPaypalError()">
-        <div class="pay-method-icon paypal">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
+        <div class="pay-icon pay-icon-paypal">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788l.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
         </div>
-        <div><div class="pay-method-name">PayPal</div><div class="pay-method-sub">Pay securely with your PayPal account</div></div>
+        <div><div class="pay-name">PayPal</div><div class="pay-sub">Pay securely with your PayPal account</div></div>
       </div>
       <div class="pay-method" onclick="showBitcoinModal()">
-        <div class="pay-method-icon btc">₿</div>
-        <div><div class="pay-method-name">Bitcoin</div><div class="pay-method-sub">Pay with cryptocurrency — fast & private</div></div>
+        <div class="pay-icon pay-icon-btc">₿</div>
+        <div><div class="pay-name">Bitcoin</div><div class="pay-sub">Pay with cryptocurrency — fast &amp; private</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ============ SPINNER PAGE ============ -->
+<!-- ============================================================ -->
+
+<!--  SPINNER PAGE                                                -->
+
+<!-- ============================================================ -->
 
 <div id="spinner-page" class="page">
-  <div class="spinner-page">
-    <div class="nav-logo-circle" style="width:60px;height:60px;font-size:1rem;margin-bottom:8px;">MRT</div>
+  <div class="spinner-wrap">
+    <div class="nav-circle" style="width:58px;height:58px;font-size:0.9rem;margin-bottom:8px;">MRT</div>
     <div class="spinner"></div>
     <p class="spinner-text">Processing your booking...</p>
-    <p style="color:var(--muted);font-size:0.8rem;">Please wait — do not close this page</p>
+    <p style="color:#9BA8C0;font-size:0.78rem;">Please wait — do not close this page</p>
   </div>
 </div>
 
-<!-- ============ THANK YOU PAGE ============ -->
+<!-- ============================================================ -->
+
+<!--  THANK YOU PAGE                                              -->
+
+<!-- ============================================================ -->
 
 <div id="thankyou-page" class="page">
-  <div class="thankyou-page">
-    <div class="thankyou-content">
+  <div class="ty-wrap">
+    <div class="ty-box">
       <div class="ty-icon">✅</div>
       <h1 class="ty-title">Booking Received!</h1>
       <div class="ty-line"></div>
-      <p class="ty-text">Thank you for choosing <strong style="color:var(--navy);">Massage Rub & Therapist</strong>.<br><br>We have received your booking and will contact you shortly to finalize your appointment.</p>
-      <p style="color:var(--blue);font-size:0.92rem;margin-bottom:28px;">📞 +1 (672) 804-1901</p>
-      <button class="nav-book-btn" style="padding:14px 32px;font-size:0.85rem;" onclick="showPage('main-page');window.scrollTo(0,0);">← Back to Home</button>
+      <p class="ty-text">Thank you for choosing <strong style="color:#1B2B5E;">Massage Rub &amp; Therapist</strong>.<br><br>We have received your booking and will contact you shortly to finalize your appointment. Please check your email for confirmation details.</p>
+      <p class="ty-phone">📞 +1 (672) 804-1901</p>
+      <button class="ty-btn" onclick="showPage('main-page');window.scrollTo(0,0);">← Back to Home</button>
     </div>
   </div>
 </div>
 
-<!-- ============ MODALS ============ -->
+<!-- ============================================================ -->
+
+<!--  MODALS                                                      -->
+
+<!-- ============================================================ -->
+
+<!-- PayPal Error -->
 
 <div class="modal-overlay" id="paypalModal">
   <div class="modal">
     <div class="modal-icon">⚠️</div>
     <div class="modal-title">PayPal Unavailable</div>
-    <p class="modal-text">Our website's PayPal service is currently down. To continue your payment with PayPal, please contact an official — or use the Bitcoin option below.</p>
-    <button class="modal-close" onclick="closeModal('paypalModal')">Got It</button>
+    <p class="modal-text">Our website's PayPal service is currently down. To continue with PayPal, please contact an official — or use Bitcoin below.</p>
+    <button class="modal-close-btn" onclick="closeModal('paypalModal')">Got It</button>
   </div>
 </div>
+
+<!-- Bitcoin -->
 
 <div class="modal-overlay" id="bitcoinModal">
-  <div class="modal" style="max-width:500px;">
+  <div class="modal" style="max-width:480px;">
     <div class="modal-icon">₿</div>
     <div class="modal-title">Pay with Bitcoin</div>
-    <p class="modal-text">Send the exact amount to the Bitcoin address below. Click "I Have Paid" after sending.</p>
-    <div class="modal-amount" id="btc-amount-display">$0</div>
+    <p class="modal-text">Send the exact amount to the wallet address below. Tap "I Have Paid" after sending.</p>
+    <div class="modal-amount-big" id="btc-amount-display">$0</div>
     <div class="modal-amount-sub">Send BTC equivalent at current market rate</div>
     <div class="qr-wrap">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=bitcoin:bc1qm4l45yuppla9d7a7vv7dz0cxvl55sqacx5mhgj&color=1B2B5E&bgcolor=ffffff" alt="Bitcoin QR">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=bitcoin:bc1qm4l45yuppla9d7a7vv7dz0cxvl55sqacx5mhgj&color=1B2B5E&bgcolor=FFFFFF" alt="Bitcoin QR Code" style="width:100%;height:100%;object-fit:contain;">
     </div>
-    <p style="font-size:0.74rem;color:var(--muted);margin-bottom:6px;">Bitcoin wallet address:</p>
+    <p style="font-size:0.72rem;color:#6B7A9F;margin-bottom:6px;">Bitcoin wallet address:</p>
     <div class="btc-address">bc1qm4l45yuppla9d7a7vv7dz0cxvl55sqacx5mhgj</div>
-    <button class="copy-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('bc1qm4l45yuppla9d7a7vv7dz0cxvl55sqacx5mhgj').then(()=>{this.textContent='✓ Copied!';setTimeout(()=>this.textContent='📋 Copy Address',2000)})">📋 Copy Address</button>
+    <button class="copy-btn" id="copyBtn" onclick="doCopy()">📋 Copy Address</button>
     <button class="paid-btn" onclick="confirmPayment()">✓ I Have Paid</button>
-    <br><br>
-    <button style="background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:0.85rem;" onclick="closeModal('bitcoinModal')">Cancel</button>
+    <br>
+    <button class="cancel-link" onclick="closeModal('bitcoinModal')">Cancel</button>
   </div>
 </div>
 
-<!-- LIVE NOTIF -->
+<!-- ============================================================ -->
+
+<!--  FLOATING UI                                                 -->
+
+<!-- ============================================================ -->
 
 <div class="live-notif" id="liveNotif">
   <div class="notif-dot"></div>
-  <div class="notif-text" id="notifText"><strong>Sarah M.</strong> just booked a Swedish Massage 3 min ago</div>
+  <div class="notif-text" id="notifText"><strong>Sarah M.</strong> just booked a Swedish Massage · 3 min ago</div>
 </div>
 
-<!-- WHATSAPP -->
-
-<a href="https://wa.me/16728041901" class="wa-btn" target="_blank">
+<a href="https://wa.me/16728041901" class="wa-btn" target="_blank" title="Chat on WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- AI CHAT -->
-
-<button class="ai-chat-btn" onclick="toggleAiChat()">🤖</button>
+<div class="ai-btn-wrap">
+  <div class="ai-btn-tooltip">Need Help?</div>
+  <button class="ai-chat-btn" onclick="toggleAiChat()">🤖</button>
+</div>
 
 <div class="ai-chat-window" id="aiChatWindow">
   <div class="ai-chat-header">
-    <div class="ai-chat-avatar">✦</div>
-    <div class="ai-chat-header-text"><div class="name">Wellness Assistant</div><div class="status">● Online — ready to help</div></div>
-    <button class="ai-close" onclick="toggleAiChat()">✕</button>
+    <div class="ai-avatar">✦</div>
+    <div><div class="ai-head-name">Wellness Assistant</div><div class="ai-head-status">● Online — ready to help</div></div>
+    <button class="ai-close-btn" onclick="toggleAiChat()">✕</button>
   </div>
-  <div class="ai-chat-messages" id="aiMessages"></div>
-  <div class="ai-chat-options" id="aiOptions"></div>
+  <div class="ai-msgs" id="aiMessages"></div>
+  <div class="ai-opts" id="aiOptions"></div>
 </div>
 
+<!-- ============================================================ -->
+
+<!--  JAVASCRIPT                                                  -->
+
+<!-- ============================================================ -->
+
 <script>
-// ===== DATA =====
 const services=[
   {name:"Swedish Massage",badge:"Relaxation",desc:"Classic relaxation massage with long flowing strokes to ease tension, boost circulation and calm the nervous system.",img:"https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=700&q=80"},
   {name:"Deep Tissue Massage",badge:"Therapeutic",desc:"Targets deep muscle layers to release chronic tension and stubborn knots. Ideal for persistent pain and stiffness.",img:"https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=700&q=80"},
@@ -633,12 +876,12 @@ const services=[
   {name:"Aromatherapy Massage",badge:"Aromatherapy",desc:"Essential oils enhance your massage, calming the mind, lifting your mood, and deeply nourishing the skin.",img:"https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=700&q=80"},
   {name:"CBD Massage",badge:"CBD Therapy",desc:"Infused with premium CBD oil to reduce inflammation, relieve pain, and promote profound whole-body relaxation.",img:"https://images.unsplash.com/photo-1556228578-567ba4b6e8a2?w=700&q=80"},
   {name:"Hot Stone Massage",badge:"Hot Stone",desc:"Warm basalt stones melt away tension, improve circulation, and create a deeply warming relaxation experience.",img:"https://images.unsplash.com/photo-1591343395082-e120087004b4?w=700&q=80"},
-  {name:"Stretching Session",badge:"Flexibility",desc:"Assisted stretching improves flexibility, posture, and range of motion for lasting physical relief and performance.",img:"https://images.unsplash.com/photo-1518611012118-696072aa579a?w=700&q=80"},
+  {name:"Stretching Session",badge:"Flexibility",desc:"Assisted stretching improves flexibility, posture, and range of motion for lasting physical relief.",img:"https://images.unsplash.com/photo-1518611012118-696072aa579a?w=700&q=80"},
   {name:"Nuru Massage",badge:"Specialty",desc:"A deeply immersive body-to-body massage using special gel for the ultimate relaxation and sensory experience.",img:"https://images.unsplash.com/photo-1552693673-1bf958298935?w=700&q=80"},
-  {name:"Prenatal Massage",badge:"Prenatal",desc:"Specially designed for expectant mothers to ease discomfort, reduce swelling, and promote restful, healing sleep.",img:"https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=700&q=80"}
+  {name:"Prenatal Massage",badge:"Prenatal",desc:"Specially designed for expectant mothers to ease discomfort, reduce swelling, and promote restful healing sleep.",img:"https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=700&q=80"}
 ];
 
-const pricingOptions=[
+const pricing=[
   {label:"30 min",price:100},
   {label:"60 min",price:120},
   {label:"90 min",price:150},
@@ -647,36 +890,28 @@ const pricingOptions=[
 ];
 
 const reviews=[
-  {name:"Sarah M.",loc:"New York, NY",text:"Absolutely incredible experience. The hot stone massage was unlike anything I've ever felt — I walked out feeling like a completely new person!",rating:5},
-  {name:"James T.",loc:"Los Angeles, CA",text:"The deep tissue massage was exactly what my sore muscles needed after weeks of training. Professional, clean, and worth every single penny.",rating:5},
-  {name:"Priya K.",loc:"Houston, TX",text:"Booked a prenatal massage and can't recommend it enough. So gentle and thoughtful. My therapist truly understood what my body needed.",rating:5},
-  {name:"Marcus D.",loc:"Chicago, IL",text:"The aromatherapy session was divine. The scents alone transported me somewhere peaceful. I'll absolutely be rebooking next week!",rating:5},
-  {name:"Aisha L.",loc:"Miami, FL",text:"The CBD massage helped my chronic back pain more than anything else I've tried. Professional, pristine environment, so relaxing.",rating:5},
-  {name:"Robert H.",loc:"Phoenix, AZ",text:"Booked the 120-minute full body massage and it was the best investment in myself I've made all year. Truly premium service.",rating:5}
+  {name:"Sarah M.",loc:"New York, NY",text:"Absolutely incredible experience. The hot stone massage was unlike anything I've ever felt. I walked out a completely new person!",rating:5},
+  {name:"James T.",loc:"Los Angeles, CA",text:"The deep tissue massage was exactly what my sore muscles needed. Professional, clean, and worth every single penny.",rating:5},
+  {name:"Priya K.",loc:"Houston, TX",text:"My prenatal massage was so gentle and thoughtful. My therapist truly understood what my body needed — highly recommend!",rating:5},
+  {name:"Marcus D.",loc:"Chicago, IL",text:"The aromatherapy session was divine. The scents alone transported me somewhere peaceful. Rebooking next week!",rating:5},
+  {name:"Aisha L.",loc:"Miami, FL",text:"CBD massage helped my chronic back pain more than anything else I've tried. Pristine environment, so professional.",rating:5},
+  {name:"Robert H.",loc:"Phoenix, AZ",text:"The 120-minute full body massage was the best investment in myself I've made all year. Truly premium service.",rating:5}
 ];
 
-const usStates={"Alabama":["Birmingham","Montgomery","Huntsville","Mobile"],"Alaska":["Anchorage","Fairbanks","Juneau"],"Arizona":["Phoenix","Tucson","Mesa","Scottsdale","Chandler"],"Arkansas":["Little Rock","Fort Smith","Fayetteville"],"California":["Los Angeles","San Francisco","San Diego","San Jose","Sacramento","Oakland","Fresno"],"Colorado":["Denver","Colorado Springs","Aurora","Boulder"],"Connecticut":["Bridgeport","New Haven","Hartford","Stamford"],"Delaware":["Wilmington","Dover","Newark"],"Florida":["Miami","Orlando","Tampa","Jacksonville","Fort Lauderdale","St. Petersburg"],"Georgia":["Atlanta","Savannah","Augusta","Columbus"],"Hawaii":["Honolulu","Hilo","Kailua"],"Idaho":["Boise","Nampa","Meridian"],"Illinois":["Chicago","Aurora","Rockford","Naperville","Springfield"],"Indiana":["Indianapolis","Fort Wayne","Evansville","South Bend"],"Iowa":["Des Moines","Cedar Rapids","Davenport"],"Kansas":["Wichita","Overland Park","Kansas City","Topeka"],"Kentucky":["Louisville","Lexington","Bowling Green"],"Louisiana":["New Orleans","Baton Rouge","Shreveport","Lafayette"],"Maine":["Portland","Lewiston","Bangor"],"Maryland":["Baltimore","Frederick","Rockville","Annapolis"],"Massachusetts":["Boston","Worcester","Springfield","Cambridge"],"Michigan":["Detroit","Grand Rapids","Warren","Lansing","Ann Arbor"],"Minnesota":["Minneapolis","Saint Paul","Rochester","Duluth"],"Mississippi":["Jackson","Gulfport","Hattiesburg"],"Missouri":["Kansas City","St. Louis","Springfield","Columbia"],"Montana":["Billings","Missoula","Great Falls","Bozeman"],"Nebraska":["Omaha","Lincoln","Bellevue"],"Nevada":["Las Vegas","Henderson","Reno","North Las Vegas"],"New Hampshire":["Manchester","Nashua","Concord"],"New Jersey":["Newark","Jersey City","Paterson","Trenton"],"New Mexico":["Albuquerque","Las Cruces","Santa Fe"],"New York":["New York City","Buffalo","Rochester","Yonkers","Albany"],"North Carolina":["Charlotte","Raleigh","Greensboro","Durham"],"North Dakota":["Fargo","Bismarck","Grand Forks"],"Ohio":["Columbus","Cleveland","Cincinnati","Toledo","Akron"],"Oklahoma":["Oklahoma City","Tulsa","Norman","Broken Arrow"],"Oregon":["Portland","Salem","Eugene","Gresham"],"Pennsylvania":["Philadelphia","Pittsburgh","Allentown","Erie"],"Rhode Island":["Providence","Cranston","Warwick"],"South Carolina":["Columbia","Charleston","Greenville"],"South Dakota":["Sioux Falls","Rapid City","Aberdeen"],"Tennessee":["Nashville","Memphis","Knoxville","Chattanooga"],"Texas":["Houston","San Antonio","Dallas","Austin","Fort Worth","El Paso","Arlington"],"Utah":["Salt Lake City","West Valley City","Provo","West Jordan"],"Vermont":["Burlington","South Burlington","Rutland"],"Virginia":["Virginia Beach","Norfolk","Chesapeake","Richmond"],"Washington":["Seattle","Spokane","Tacoma","Vancouver","Bellevue"],"West Virginia":["Charleston","Huntington","Morgantown"],"Wisconsin":["Milwaukee","Madison","Green Bay","Kenosha"],"Wyoming":["Cheyenne","Casper","Laramie"]};
+const usStates={"Alabama":["Birmingham","Montgomery","Huntsville","Mobile"],"Alaska":["Anchorage","Fairbanks","Juneau"],"Arizona":["Phoenix","Tucson","Mesa","Scottsdale","Chandler","Tempe"],"Arkansas":["Little Rock","Fort Smith","Fayetteville"],"California":["Los Angeles","San Francisco","San Diego","San Jose","Sacramento","Oakland","Fresno","Anaheim"],"Colorado":["Denver","Colorado Springs","Aurora","Boulder","Fort Collins"],"Connecticut":["Bridgeport","New Haven","Hartford","Stamford"],"Delaware":["Wilmington","Dover","Newark"],"Florida":["Miami","Orlando","Tampa","Jacksonville","Fort Lauderdale","Tallahassee","St. Petersburg"],"Georgia":["Atlanta","Savannah","Augusta","Columbus","Athens"],"Hawaii":["Honolulu","Hilo","Kailua"],"Idaho":["Boise","Nampa","Meridian"],"Illinois":["Chicago","Aurora","Rockford","Naperville","Springfield"],"Indiana":["Indianapolis","Fort Wayne","Evansville","South Bend"],"Iowa":["Des Moines","Cedar Rapids","Davenport"],"Kansas":["Wichita","Overland Park","Kansas City","Topeka"],"Kentucky":["Louisville","Lexington","Bowling Green"],"Louisiana":["New Orleans","Baton Rouge","Shreveport","Lafayette"],"Maine":["Portland","Lewiston","Bangor"],"Maryland":["Baltimore","Frederick","Rockville","Annapolis"],"Massachusetts":["Boston","Worcester","Springfield","Cambridge","Lowell"],"Michigan":["Detroit","Grand Rapids","Warren","Lansing","Ann Arbor"],"Minnesota":["Minneapolis","Saint Paul","Rochester","Duluth"],"Mississippi":["Jackson","Gulfport","Hattiesburg"],"Missouri":["Kansas City","St. Louis","Springfield","Columbia"],"Montana":["Billings","Missoula","Great Falls","Bozeman"],"Nebraska":["Omaha","Lincoln","Bellevue"],"Nevada":["Las Vegas","Henderson","Reno","North Las Vegas"],"New Hampshire":["Manchester","Nashua","Concord"],"New Jersey":["Newark","Jersey City","Paterson","Trenton","Edison"],"New Mexico":["Albuquerque","Las Cruces","Santa Fe"],"New York":["New York City","Buffalo","Rochester","Yonkers","Albany","Syracuse"],"North Carolina":["Charlotte","Raleigh","Greensboro","Durham","Winston-Salem"],"North Dakota":["Fargo","Bismarck","Grand Forks"],"Ohio":["Columbus","Cleveland","Cincinnati","Toledo","Akron"],"Oklahoma":["Oklahoma City","Tulsa","Norman","Broken Arrow"],"Oregon":["Portland","Salem","Eugene","Gresham"],"Pennsylvania":["Philadelphia","Pittsburgh","Allentown","Erie","Scranton"],"Rhode Island":["Providence","Cranston","Warwick"],"South Carolina":["Columbia","Charleston","Greenville","Myrtle Beach"],"South Dakota":["Sioux Falls","Rapid City","Aberdeen"],"Tennessee":["Nashville","Memphis","Knoxville","Chattanooga","Clarksville"],"Texas":["Houston","San Antonio","Dallas","Austin","Fort Worth","El Paso","Arlington","Plano"],"Utah":["Salt Lake City","West Valley City","Provo","West Jordan","Orem"],"Vermont":["Burlington","South Burlington","Rutland"],"Virginia":["Virginia Beach","Norfolk","Chesapeake","Richmond","Alexandria"],"Washington":["Seattle","Spokane","Tacoma","Vancouver","Bellevue","Kirkland"],"West Virginia":["Charleston","Huntington","Morgantown"],"Wisconsin":["Milwaukee","Madison","Green Bay","Kenosha"],"Wyoming":["Cheyenne","Casper","Laramie"]};
 
-// ===== STATE =====
-let selectedSvcIdx=null, selectedPriceIdx=null, reviewsIndex=0;
+let selectedSvcIdx=null,selectedPriceIdx=null,reviewIdx=0;
 
-// ===== INIT =====
-function init(){
-  renderServices();
-  renderReviews();
-  populateStates();
-  startScrollReveal();
-  startLiveNotifications();
-  autoSlideReviews();
-  initBeforeAfterSliders();
-  initCounters();
-  initAiChat();
+// ===== PAGE ROUTER =====
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 
-// ===== SERVICES =====
+// ===== RENDER SERVICES =====
 function renderServices(){
-  const grid=document.getElementById('servicesGrid');
-  grid.innerHTML=services.map((s,i)=>`
+  const g=document.getElementById('servicesGrid');
+  g.innerHTML=services.map((s,i)=>`
     <div class="svc-card" id="sc-${i}">
       <div class="svc-img-wrap">
         <img class="svc-img" src="${s.img}" alt="${s.name}" loading="lazy">
@@ -686,15 +921,15 @@ function renderServices(){
         <div class="svc-name">${s.name}</div>
         <div class="svc-desc">${s.desc}</div>
         <div class="svc-pills" id="pills-${i}">
-          ${pricingOptions.map((p,pi)=>`
+          ${pricing.map((p,pi)=>`
             <div class="svc-pill" id="pill-${i}-${pi}" onclick="selectPill(${i},${pi})">
-              <span>${p.label}</span><span class="pill-price">$${p.price}</span>
+              ${p.label} <span class="pill-price">$${p.price}</span>
             </div>
           `).join('')}
         </div>
         <div class="svc-footer">
           <div>
-            <div class="svc-from">From</div>
+            <div class="svc-from-label">From</div>
             <div class="svc-price-big" id="price-display-${i}">$100</div>
           </div>
           <button class="svc-book-btn" onclick="goToBooking(${i})">BOOK NOW</button>
@@ -704,212 +939,202 @@ function renderServices(){
   `).join('');
 }
 
-function selectPill(svcIdx, priceIdx){
-  document.querySelectorAll(`#pills-${svcIdx} .svc-pill`).forEach(p=>p.classList.remove('selected'));
-  document.getElementById(`pill-${svcIdx}-${priceIdx}`).classList.add('selected');
-  document.getElementById(`price-display-${svcIdx}`).textContent=`$${pricingOptions[priceIdx].price}`;
-  selectedSvcIdx=svcIdx; selectedPriceIdx=priceIdx;
+function selectPill(si,pi){
+  document.querySelectorAll(`#pills-${si} .svc-pill`).forEach(p=>p.classList.remove('selected'));
+  document.getElementById(`pill-${si}-${pi}`).classList.add('selected');
+  document.getElementById(`price-display-${si}`).textContent='$'+pricing[pi].price;
+  selectedSvcIdx=si;selectedPriceIdx=pi;
 }
 
-function goToBooking(svcIdx){
-  const priceIdx = (selectedSvcIdx===svcIdx && selectedPriceIdx!==null) ? selectedPriceIdx : 0;
-  const s=services[svcIdx];
-  const p=pricingOptions[priceIdx];
+function goToBooking(si){
+  const pi=(selectedSvcIdx===si&&selectedPriceIdx!==null)?selectedPriceIdx:0;
+  const s=services[si],p=pricing[pi];
   document.getElementById('bsc-service').textContent=s.name;
   document.getElementById('bsc-session').textContent=p.label+' Session';
   document.getElementById('bsc-price').textContent='$'+p.price;
   document.getElementById('f-service').value=s.name;
   document.getElementById('f-session').value=p.label+' Massage';
   document.getElementById('f-amount').value='$'+p.price;
-  showPage('booking-page'); window.scrollTo(0,0);
+  showPage('booking-page');window.scrollTo(0,0);
 }
 
-// ===== REVIEWS =====
+// ===== RENDER REVIEWS =====
 function renderReviews(){
   const inner=document.getElementById('reviewsInner');
   inner.innerHTML=reviews.map(r=>`
     <div class="review-card">
-      <div class="stars">${'★'.repeat(r.rating)}</div>
-      <p class="review-text">"${r.text}"</p>
-      <div class="reviewer">
-        <div class="reviewer-avatar">${r.name[0]}</div>
-        <div><div class="reviewer-name">${r.name}</div><div class="reviewer-loc">📍 ${r.loc}</div></div>
+      <div class="review-stars">${'★'.repeat(r.rating)}</div>
+      <div class="review-text">"${r.text}"</div>
+      <div class="reviewer-row">
+        <div class="reviewer-av">${r.name[0]}</div>
+        <div>
+          <div class="reviewer-name">${r.name}</div>
+          <div class="reviewer-loc">📍 ${r.loc}</div>
+        </div>
       </div>
     </div>
   `).join('');
+  // dots
+  const dots=document.getElementById('revDots');
+  dots.innerHTML=reviews.map((_,i)=>`<div class="rev-dot${i===0?' active':''}" onclick="goToReview(${i})"></div>`).join('');
 }
 
-function slideReviews(dir){
-  const inner=document.getElementById('reviewsInner');
-  const max=Math.max(0,reviews.length-3);
-  reviewsIndex=Math.max(0,Math.min(max,reviewsIndex+dir));
-  inner.style.transform=`translateX(-${reviewsIndex*340}px)`;
-}
-
-function autoSlideReviews(){
-  setInterval(()=>{
-    reviewsIndex=(reviewsIndex>=reviews.length-3)?0:reviewsIndex+1;
-    const inner=document.getElementById('reviewsInner');
-    if(inner)inner.style.transform=`translateX(-${reviewsIndex*340}px)`;
-  },5000);
-}
-
-// ===== STATES/CITIES =====
-function populateStates(){
-  const sel=document.getElementById('f-state');
-  Object.keys(usStates).sort().forEach(st=>{
-    const o=document.createElement('option');o.value=st;o.textContent=st;sel.appendChild(o);
+function goToReview(i){
+  const max=reviews.length-1;
+  reviewIdx=Math.max(0,Math.min(max,i));
+  document.getElementById('reviewsInner').style.transform=`translateX(-${reviewIdx*100}%)`;
+  document.querySelectorAll('.rev-dot').forEach((d,di)=>{
+    d.classList.toggle('active',di===reviewIdx);
   });
 }
+
+function autoReviews(){setInterval(()=>goToReview((reviewIdx+1)%reviews.length),5000);}
+
+// ===== FORM =====
+function populateStates(){
+  const s=document.getElementById('f-state');
+  Object.keys(usStates).sort().forEach(st=>{const o=document.createElement('option');o.value=st;o.textContent=st;s.appendChild(o);});
+}
 function populateCities(){
-  const state=document.getElementById('f-state').value;
+  const st=document.getElementById('f-state').value;
   const ce=document.getElementById('f-city');
   ce.innerHTML='<option value="">Select City</option>';
-  if(state&&usStates[state])usStates[state].forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;ce.appendChild(o);});
+  if(st&&usStates[st])usStates[st].forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;ce.appendChild(o);});
 }
 
-// ===== BOOKING FLOW =====
 function proceedToPayment(){
-  const fn=document.getElementById('f-firstname').value;
-  const em=document.getElementById('f-email').value;
-  const ph=document.getElementById('f-phone').value;
-  const st=document.getElementById('f-state').value;
-  const ci=document.getElementById('f-city').value;
-  const dt=document.getElementById('f-date').value;
-  const tm=document.getElementById('f-time').value;
-  if(!fn||!em||!ph||!st||!ci||!dt||!tm){alert('Please fill in all required fields.');return;}
+  const fields=['f-firstname','f-email','f-phone','f-date','f-time'];
+  const selects=['f-state','f-city'];
+  const allFilled=fields.every(f=>document.getElementById(f).value.trim())&&selects.every(f=>document.getElementById(f).value);
+  if(!allFilled){alert('Please fill in all required fields.');return;}
   const amt=document.getElementById('f-amount').value;
   document.getElementById('pay-amount-display').textContent=amt;
   document.getElementById('btc-amount-display').textContent=amt;
   showPage('payment-page');window.scrollTo(0,0);
 }
 
+// ===== PAYMENT =====
 function showPaypalError(){document.getElementById('paypalModal').classList.add('show');}
 function showBitcoinModal(){document.getElementById('bitcoinModal').classList.add('show');}
 function closeModal(id){document.getElementById(id).classList.remove('show');}
+function doCopy(){
+  if(navigator.clipboard){navigator.clipboard.writeText('bc1qm4l45yuppla9d7a7vv7dz0cxvl55sqacx5mhgj').then(()=>{const b=document.getElementById('copyBtn');b.textContent='✓ Copied!';setTimeout(()=>b.textContent='📋 Copy Address',2000);});}
+}
 function confirmPayment(){
   closeModal('bitcoinModal');
   showPage('spinner-page');window.scrollTo(0,0);
   setTimeout(()=>{showPage('thankyou-page');window.scrollTo(0,0);},10000);
 }
 
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
 // ===== SCROLL REVEAL =====
-function startScrollReveal(){
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
-  },{threshold:0.08});
+function initReveal(){
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.08});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 }
 
 // ===== COUNTERS =====
 function initCounters(){
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting){animateCounter(e.target);obs.unobserve(e.target);}});
-  },{threshold:0.5});
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){animCount(e.target);obs.unobserve(e.target);}});},{threshold:0.5});
   document.querySelectorAll('.stat-num').forEach(el=>obs.observe(el));
 }
-function animateCounter(el){
-  const target=parseFloat(el.dataset.target);
-  const suffix=el.dataset.suffix||'';
-  const decimal=parseInt(el.dataset.decimal||0);
-  const start=performance.now();
-  function update(now){
-    const p=Math.min((now-start)/1800,1);
-    const ease=1-Math.pow(1-p,3);
-    el.textContent=(decimal?(target*ease).toFixed(decimal):Math.floor(target*ease))+suffix;
-    if(p<1)requestAnimationFrame(update);
-  }
-  requestAnimationFrame(update);
+function animCount(el){
+  const target=parseFloat(el.dataset.target),suffix=el.dataset.suffix||'',dec=parseInt(el.dataset.decimal||0),t0=performance.now();
+  function upd(now){const p=Math.min((now-t0)/1800,1),ease=1-Math.pow(1-p,3);el.textContent=(dec?(target*ease).toFixed(dec):Math.floor(target*ease))+suffix;if(p<1)requestAnimationFrame(upd);}
+  requestAnimationFrame(upd);
 }
 
 // ===== BEFORE/AFTER =====
-function initBeforeAfterSliders(){
-  document.querySelectorAll('.slider-container').forEach(container=>{
-    const after=container.querySelector('.slider-after');
-    const handle=container.querySelector('.slider-handle');
-    let dragging=false;
-    function setPos(x){
-      const r=container.getBoundingClientRect();
-      let pct=Math.max(0,Math.min(100,((x-r.left)/r.width)*100));
-      after.style.clipPath=`inset(0 ${100-pct}% 0 0)`;
-      handle.style.left=pct+'%';
-    }
-    setPos(container.getBoundingClientRect().left+container.getBoundingClientRect().width*0.5);
-    container.addEventListener('mousedown',e=>{dragging=true;setPos(e.clientX);});
-    container.addEventListener('touchstart',e=>{dragging=true;setPos(e.touches[0].clientX);},{passive:true});
-    document.addEventListener('mousemove',e=>{if(dragging)setPos(e.clientX);});
-    document.addEventListener('touchmove',e=>{if(dragging)setPos(e.touches[0].clientX);},{passive:true});
-    document.addEventListener('mouseup',()=>dragging=false);
-    document.addEventListener('touchend',()=>dragging=false);
+function initSliders(){
+  document.querySelectorAll('.slider-container').forEach(c=>{
+    const after=c.querySelector('.slider-after'),handle=c.querySelector('.slider-handle');
+    let drag=false;
+    function set(x){const r=c.getBoundingClientRect(),pct=Math.max(0,Math.min(100,((x-r.left)/r.width)*100));after.style.clipPath=`inset(0 ${100-pct}% 0 0)`;handle.style.left=pct+'%';}
+    set(c.getBoundingClientRect().left+c.getBoundingClientRect().width*.5);
+    c.addEventListener('mousedown',e=>{drag=true;set(e.clientX);});
+    c.addEventListener('touchstart',e=>{drag=true;set(e.touches[0].clientX);},{passive:true});
+    document.addEventListener('mousemove',e=>{if(drag)set(e.clientX);});
+    document.addEventListener('touchmove',e=>{if(drag)set(e.touches[0].clientX);},{passive:true});
+    document.addEventListener('mouseup',()=>drag=false);
+    document.addEventListener('touchend',()=>drag=false);
+  });
+}
+
+// ===== 3D GUIDE CARD TILT =====
+function initTilt(){
+  if(window.innerWidth<=768)return;
+  document.querySelectorAll('.guide-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const dx=(e.clientX-r.left-r.width/2)/r.width;
+      const dy=(e.clientY-r.top-r.height/2)/r.height;
+      card.style.transform=`perspective(700px) rotateX(${-dy*12}deg) rotateY(${dx*12}deg) translateY(-6px) scale(1.02)`;
+      card.style.boxShadow=`${-dx*12}px ${dy*6}px 40px rgba(27,43,94,0.18)`;
+    });
+    card.addEventListener('mouseleave',()=>{
+      card.style.transform='';card.style.boxShadow='';
+    });
   });
 }
 
 // ===== LIVE NOTIFICATIONS (40s) =====
-const notifMessages=[
-  ["Sarah M.","Swedish Massage"],["James T.","Deep Tissue Massage"],
-  ["Priya K.","Prenatal Massage"],["Marcus D.","Hot Stone Massage"],
-  ["Aisha L.","CBD Massage"],["Robert H.","Full Body Massage"],
-  ["Lisa P.","Aromatherapy Massage"],["David K.","Sports Massage"],
-  ["Nina W.","Reflexology Massage"],["Carlos M.","Stretching Session"]
-];
-function startLiveNotifications(){
-  let idx=0;
+const notifs=[["Sarah M.","Swedish Massage"],["James T.","Deep Tissue Massage"],["Priya K.","Prenatal Massage"],["Marcus D.","Hot Stone Massage"],["Aisha L.","CBD Massage"],["Robert H.","Full Body Massage"],["Lisa P.","Aromatherapy Massage"],["David K.","Sports Massage"],["Nina W.","Reflexology Massage"],["Carlos M.","Stretching Session"]];
+let nIdx=0;
+function startNotifs(){
   function show(){
-    const[name,service]=notifMessages[idx%notifMessages.length];
+    const[name,svc]=notifs[nIdx%notifs.length];
     const mins=Math.floor(Math.random()*25)+1;
-    document.getElementById('notifText').innerHTML=`<strong>${name}</strong> just booked a ${service} — ${mins} min ago`;
-    const notif=document.getElementById('liveNotif');
-    notif.classList.add('show');
-    setTimeout(()=>{notif.classList.remove('show');idx++;setTimeout(show,40000);},6000);
+    document.getElementById('notifText').innerHTML=`<strong>${name}</strong> just booked a ${svc} · ${mins} min ago`;
+    const el=document.getElementById('liveNotif');
+    el.classList.add('show');
+    setTimeout(()=>{el.classList.remove('show');nIdx++;setTimeout(show,40000);},6000);
   }
   setTimeout(show,4000);
 }
 
 // ===== AI CHAT =====
 const aiFlow={
-  start:{msg:"Hi! 👋 Are you looking for relaxation or targeting a specific concern?",opts:[{t:"Relaxation & Stress",next:"relaxation"},{t:"Muscle Pain Relief",next:"pain"},{t:"Sports Recovery",next:"sports"},{t:"Prenatal / Special",next:"special"}]},
-  relaxation:{msg:"For deep relaxation I recommend Swedish or Hot Stone Massage. Which sounds more appealing?",opts:[{t:"Swedish Massage 🌊",action:"book",si:0},{t:"Hot Stone 🪨",action:"book",si:8},{t:"Aromatherapy 🌸",action:"book",si:6}]},
-  pain:{msg:"For muscle pain, Deep Tissue or Neuromuscular Therapy work wonders. How severe is the pain?",opts:[{t:"Mild to moderate",action:"book",si:0},{t:"Chronic / severe",action:"book",si:1},{t:"Nerve-related",action:"book",si:5}]},
-  sports:{msg:"Our Sports Massage and Stretching Sessions are perfect for recovery and performance.",opts:[{t:"Sports Massage 🏃",action:"book",si:3},{t:"Stretching Session 🤸",action:"book",si:9},{t:"Full Body ✨",action:"book",si:2}]},
-  special:{msg:"We have specialized options for all needs. What describes you best?",opts:[{t:"Pregnant / Prenatal 🤰",action:"book",si:11},{t:"Foot & Reflexology 🦶",action:"book",si:4},{t:"CBD Therapy 🌿",action:"book",si:7}]}
+  start:{msg:"Hi! 👋 Are you looking for relaxation or targeting a specific concern?",opts:[{t:"Relaxation & Stress",next:"relax"},{t:"Muscle Pain",next:"pain"},{t:"Sports Recovery",next:"sports"},{t:"Prenatal / Special",next:"special"}]},
+  relax:{msg:"For relaxation I recommend Swedish or Hot Stone. Which sounds more appealing?",opts:[{t:"Swedish 🌊",a:"book",si:0},{t:"Hot Stone 🪨",a:"book",si:8},{t:"Aromatherapy 🌸",a:"book",si:6}]},
+  pain:{msg:"For muscle pain, Deep Tissue or Neuromuscular Therapy work best. How severe?",opts:[{t:"Mild-moderate",a:"book",si:0},{t:"Chronic / severe",a:"book",si:1},{t:"Nerve-related",a:"book",si:5}]},
+  sports:{msg:"Sports Massage and Stretching Sessions are perfect for recovery and performance.",opts:[{t:"Sports Massage 🏃",a:"book",si:3},{t:"Stretching 🤸",a:"book",si:9},{t:"Full Body ✨",a:"book",si:2}]},
+  special:{msg:"We have specialized options for you. What describes you best?",opts:[{t:"Prenatal 🤰",a:"book",si:11},{t:"Reflexology 🦶",a:"book",si:4},{t:"CBD Therapy 🌿",a:"book",si:7}]}
 };
-function initAiChat(){
-  const msgs=document.getElementById('aiMessages');
-  const opts=document.getElementById('aiOptions');
-  const flow=aiFlow.start;
-  msgs.innerHTML=`<div class="ai-msg bot">${flow.msg}</div>`;
-  renderAiOpts(flow.opts,opts);
+function initAi(){
+  const msgs=document.getElementById('aiMessages'),opts=document.getElementById('aiOptions');
+  msgs.innerHTML=`<div class="ai-msg bot">${aiFlow.start.msg}</div>`;
+  renderOpts(aiFlow.start.opts,opts);
 }
-function renderAiOpts(opts,optEl){
-  optEl.innerHTML=opts.map((o,i)=>`<button class="ai-opt-btn" onclick="aiSelect(${i})">${o.t}</button>`).join('');
-  optEl._opts=opts;
-}
-function aiSelect(i){
-  const optEl=document.getElementById('aiOptions');
-  const msgEl=document.getElementById('aiMessages');
-  const opt=optEl._opts[i];
-  msgEl.innerHTML+=`<div class="ai-msg user">${opt.t}</div>`;
-  if(opt.action==='book'){
-    msgEl.innerHTML+=`<div class="ai-msg bot">Great choice! Tap below to view and book <strong>${services[opt.si].name}</strong> 🌟</div>`;
-    optEl.innerHTML=`<button class="ai-opt-btn" onclick="toggleAiChat();showPage('services-page');window.scrollTo(0,0);">📋 View Services & Book</button><button class="ai-opt-btn" onclick="initAiChat()">← Start Over</button>`;
+function renderOpts(opts,el){el.innerHTML=opts.map((o,i)=>`<button class="ai-opt" onclick="aiSel(${i})">${o.t}</button>`).join('');el._opts=opts;}
+function aiSel(i){
+  const oe=document.getElementById('aiOptions'),me=document.getElementById('aiMessages');
+  const opt=oe._opts[i];
+  me.innerHTML+=`<div class="ai-msg user">${opt.t}</div>`;
+  if(opt.a==='book'){
+    me.innerHTML+=`<div class="ai-msg bot">Great choice! Tap below to book <strong>${services[opt.si].name}</strong> 🌟</div>`;
+    oe.innerHTML=`<button class="ai-opt" onclick="toggleAiChat();showPage('services-page');window.scrollTo(0,0);">📋 View & Book</button><button class="ai-opt" onclick="initAi()">← Restart</button>`;
   }else{
     const next=aiFlow[opt.next];
-    msgEl.innerHTML+=`<div class="ai-msg bot">${next.msg}</div>`;
-    renderAiOpts(next.opts,optEl);
+    me.innerHTML+=`<div class="ai-msg bot">${next.msg}</div>`;
+    renderOpts(next.opts,oe);
   }
-  msgEl.scrollTop=msgEl.scrollHeight;
+  me.scrollTop=me.scrollHeight;
 }
-function toggleAiChat(){
-  const w=document.getElementById('aiChatWindow');
-  w.classList.toggle('open');
-}
+function toggleAiChat(){document.getElementById('aiChatWindow').classList.toggle('open');}
 
-init();
+// ===== BOOT =====
+function boot(){
+  renderServices();
+  renderReviews();
+  populateStates();
+  initReveal();
+  initCounters();
+  initSliders();
+  startNotifs();
+  autoReviews();
+  initAi();
+  setTimeout(initTilt,300);
+}
+boot();
 </script>
 
 </body>
