@@ -736,24 +736,50 @@ display:none;flex-direction:column;max-height:400px;
     <div style="width:70px;"></div>
   </nav>
   <div class="payment-content">
-    <h1 class="payment-title">Select Payment</h1>
-    <p class="payment-sub">Choose how you'd like to pay for your session.</p>
-    <div class="amount-card">
-      <div class="amount-label">Total Amount Due</div>
-      <div class="amount-val" id="pay-amount-display">$0</div>
+    <h1 class="payment-title">Secure Your Booking</h1>
+    <p class="payment-sub">A 50% deposit is required to confirm your appointment. The remaining balance is paid on the day of your session.</p>
+
+```
+<!-- Deposit breakdown card -->
+<div class="amount-card">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+    <div style="text-align:left;">
+      <div class="amount-label">Total Service Fee</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:rgba(255,255,255,0.55);text-decoration:line-through;" id="pay-total-display">$0</div>
     </div>
-    <div class="pay-methods">
-      <div class="pay-method" onclick="showPaypalError()">
-        <div class="pay-icon pay-icon-paypal">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788l.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
-        </div>
-        <div><div class="pay-name">PayPal</div><div class="pay-sub">Pay securely with your PayPal account</div></div>
-      </div>
-      <div class="pay-method" onclick="showBitcoinModal()">
-        <div class="pay-icon pay-icon-btc">₿</div>
-        <div><div class="pay-name">Bitcoin</div><div class="pay-sub">Pay with cryptocurrency — fast &amp; private</div></div>
-      </div>
+    <div style="text-align:right;">
+      <div class="amount-label">Balance Due on Day</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:rgba(255,255,255,0.55);" id="pay-balance-display">$0</div>
     </div>
+  </div>
+  <div style="height:1px;background:rgba(255,255,255,0.15);margin-bottom:14px;"></div>
+  <div class="amount-label" style="margin-bottom:6px;">50% Deposit Due Now</div>
+  <div class="amount-val" id="pay-amount-display">$0</div>
+</div>
+
+<!-- Policy notice -->
+<div style="background:#EBF0FA;border:1.5px solid #DDE3F0;border-radius:12px;padding:14px 18px;margin-bottom:24px;display:flex;gap:12px;align-items:flex-start;">
+  <span style="font-size:1.3rem;flex-shrink:0;">🔒</span>
+  <div>
+    <div style="font-weight:700;font-size:0.85rem;color:#1B2B5E;margin-bottom:4px;">Booking Deposit Policy</div>
+    <div style="font-size:0.8rem;color:#6B7A9F;line-height:1.6;">A 50% deposit is required to secure your booking slot. This deposit is applied toward your total service fee. The remaining 50% is collected at your appointment. Deposits are non-refundable for cancellations within 24 hours.</div>
+  </div>
+</div>
+
+<div class="pay-methods">
+  <div class="pay-method" onclick="showPaypalError()">
+    <div class="pay-icon pay-icon-paypal">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788l.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
+    </div>
+    <div><div class="pay-name">PayPal</div><div class="pay-sub">Pay 50% deposit securely with PayPal</div></div>
+  </div>
+  <div class="pay-method" onclick="showBitcoinModal()">
+    <div class="pay-icon pay-icon-btc">₿</div>
+    <div><div class="pay-name">Bitcoin</div><div class="pay-sub">Pay 50% deposit with cryptocurrency</div></div>
+  </div>
+</div>
+```
+
   </div>
 </div>
 
@@ -784,10 +810,44 @@ display:none;flex-direction:column;max-height:400px;
       <div class="ty-icon">✅</div>
       <h1 class="ty-title">Booking Received!</h1>
       <div class="ty-line"></div>
-      <p class="ty-text">Thank you for choosing <strong style="color:#1B2B5E;">Massage Rub &amp; Therapist</strong>.<br><br>We have received your booking and will contact you shortly to finalize your appointment. Please check your email for confirmation details.</p>
-      <p class="ty-phone">📞 +1 (672) 804-1901</p>
-      <button class="ty-btn" onclick="showPage('main-page');window.scrollTo(0,0);">← Back to Home</button>
+      <p class="ty-text">Thank you for choosing <strong style="color:#1B2B5E;">Massage Rub &amp; Therapist</strong>.<br>We have received your deposit and will contact you shortly to finalize your appointment.</p>
+
+```
+  <!-- Booking Code Card -->
+  <div style="background:#1B2B5E;border-radius:16px;padding:24px;margin:24px 0;text-align:center;">
+    <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;">Your Booking Reference Code</div>
+    <div id="booking-code" style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#FFFFFF;letter-spacing:6px;margin-bottom:16px;">—</div>
+    <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-bottom:16px;">Save this code — you'll need it to verify your booking</div>
+    <button id="copy-code-btn" onclick="copyBookingCode()" style="background:#FFFFFF;color:#1B2B5E;border:none;padding:11px 28px;border-radius:8px;font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;">📋 Copy Code</button>
+  </div>
+
+  <!-- Deposit summary -->
+  <div style="background:#F4F6FB;border:1.5px solid #DDE3F0;border-radius:12px;padding:16px 20px;margin-bottom:20px;text-align:left;">
+    <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#6B7A9F;margin-bottom:10px;">Payment Summary</div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+      <span style="font-size:0.88rem;color:#6B7A9F;">Service</span>
+      <span style="font-size:0.88rem;font-weight:600;color:#1B2B5E;" id="ty-service">—</span>
     </div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+      <span style="font-size:0.88rem;color:#6B7A9F;">Total Fee</span>
+      <span style="font-size:0.88rem;font-weight:600;color:#1B2B5E;" id="ty-total">—</span>
+    </div>
+    <div style="height:1px;background:#DDE3F0;margin:10px 0;"></div>
+    <div style="display:flex;justify-content:space-between;">
+      <span style="font-size:0.88rem;color:#6B7A9F;">Deposit Paid (50%)</span>
+      <span style="font-size:0.95rem;font-weight:700;color:#27ae60;" id="ty-deposit">—</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:6px;">
+      <span style="font-size:0.88rem;color:#6B7A9F;">Balance Due on Day</span>
+      <span style="font-size:0.95rem;font-weight:700;color:#1B2B5E;" id="ty-balance">—</span>
+    </div>
+  </div>
+
+  <p class="ty-phone">📞 +1 (672) 804-1901</p>
+  <button class="ty-btn" onclick="showPage('main-page');window.scrollTo(0,0);">← Back to Home</button>
+</div>
+```
+
   </div>
 </div>
 
@@ -816,7 +876,7 @@ display:none;flex-direction:column;max-height:400px;
     <div class="modal-title">Pay with Bitcoin</div>
     <p class="modal-text">Send the exact amount to the wallet address below. Tap "I Have Paid" after sending.</p>
     <div class="modal-amount-big" id="btc-amount-display">$0</div>
-    <div class="modal-amount-sub">Send BTC equivalent at current market rate</div>
+    <div class="modal-amount-sub">50% Deposit · Send BTC equivalent at current market rate</div>
     <div class="qr-wrap">
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=bitcoin:bc1qm4l45yuppla9d7a7vv7dz0cxvl55sqacx5mhgj&color=1B2B5E&bgcolor=FFFFFF" alt="Bitcoin QR Code" style="width:100%;height:100%;object-fit:contain;">
     </div>
@@ -1007,9 +1067,25 @@ function proceedToPayment(){
   const selects=['f-state','f-city'];
   const allFilled=fields.every(f=>document.getElementById(f).value.trim())&&selects.every(f=>document.getElementById(f).value);
   if(!allFilled){alert('Please fill in all required fields.');return;}
-  const amt=document.getElementById('f-amount').value;
-  document.getElementById('pay-amount-display').textContent=amt;
-  document.getElementById('btc-amount-display').textContent=amt;
+
+  // Parse full amount and calculate 50% deposit
+  const fullAmt=document.getElementById('f-amount').value; // e.g. "$120"
+  const fullNum=parseInt(fullAmt.replace('$',''));
+  const deposit=Math.round(fullNum*0.5);
+  const balance=fullNum-deposit;
+
+  // Store for thank you page
+  window._bookingTotal=fullNum;
+  window._bookingDeposit=deposit;
+  window._bookingBalance=balance;
+  window._bookingService=document.getElementById('f-service').value;
+
+  // Update payment page displays
+  document.getElementById('pay-total-display').textContent='$'+fullNum;
+  document.getElementById('pay-amount-display').textContent='$'+deposit;
+  document.getElementById('pay-balance-display').textContent='$'+balance;
+  document.getElementById('btc-amount-display').textContent='$'+deposit+' (50% Deposit)';
+
   showPage('payment-page');window.scrollTo(0,0);
 }
 
@@ -1020,10 +1096,43 @@ function closeModal(id){document.getElementById(id).classList.remove('show');}
 function doCopy(){
   if(navigator.clipboard){navigator.clipboard.writeText('bc1qm4l45yuppla9d7a7vv7dz0cxvl55sqacx5mhgj').then(()=>{const b=document.getElementById('copyBtn');b.textContent='✓ Copied!';setTimeout(()=>b.textContent='📋 Copy Address',2000);});}
 }
+
+function generateBookingCode(){
+  const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const seg=()=>Array.from({length:4},()=>chars[Math.floor(Math.random()*chars.length)]).join('');
+  return 'MRT-'+seg()+'-'+seg();
+}
+
+function copyBookingCode(){
+  const code=document.getElementById('booking-code').textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(code).then(()=>{
+      const btn=document.getElementById('copy-code-btn');
+      btn.textContent='✓ Code Copied!';
+      btn.style.background='#27ae60';btn.style.color='#fff';
+      setTimeout(()=>{btn.textContent='📋 Copy Code';btn.style.background='#FFFFFF';btn.style.color='#1B2B5E';},2500);
+    });
+  }
+}
+
 function confirmPayment(){
   closeModal('bitcoinModal');
   showPage('spinner-page');window.scrollTo(0,0);
-  setTimeout(()=>{showPage('thankyou-page');window.scrollTo(0,0);},10000);
+  setTimeout(()=>{
+    // Generate booking code
+    const code=generateBookingCode();
+    document.getElementById('booking-code').textContent=code;
+    // Fill summary
+    const total=window._bookingTotal||0;
+    const deposit=window._bookingDeposit||0;
+    const balance=window._bookingBalance||0;
+    const svc=window._bookingService||'—';
+    document.getElementById('ty-service').textContent=svc;
+    document.getElementById('ty-total').textContent='$'+total;
+    document.getElementById('ty-deposit').textContent='$'+deposit+' ✓ Paid';
+    document.getElementById('ty-balance').textContent='$'+balance;
+    showPage('thankyou-page');window.scrollTo(0,0);
+  },10000);
 }
 
 // ===== SCROLL REVEAL =====
