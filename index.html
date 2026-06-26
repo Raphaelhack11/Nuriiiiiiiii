@@ -1,20 +1,37 @@
 <!DOCTYPE html>
-
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Massage Rub & Therapist | Luxury Wellness</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
+  <head>
+    <base href="https://massagerubtherapist.vercel.app/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Massage Rub & Therapist | Luxury Wellness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
 /* ===== RESET ===== */
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:#F4F6FB;color:#1a1a2e;font-family:'Inter',sans-serif;overflow-x:hidden;}
 
-/* ===== PAGE SYSTEM ===== */
-.page{display:none;min-height:100vh;}
-.page.active{display:block;}
+/* ===== PAGE SYSTEM WITH TRANSITIONS ===== */
+.page{
+  display:none;
+  min-height:100vh;
+  opacity:0;
+  transform:translateY(20px) scale(0.98);
+  transition:opacity 0.5s cubic-bezier(0.22, 0.68, 0, 1.2), 
+              transform 0.5s cubic-bezier(0.22, 0.68, 0, 1.2);
+  pointer-events:none;
+}
+.page.active{
+  display:block;
+  opacity:1;
+  transform:translateY(0) scale(1);
+  pointer-events:auto;
+}
+.page-exit{
+  opacity:0;
+  transform:translateY(-20px) scale(0.98);
+}
 
 /* ===== NAV ===== */
 nav{
@@ -33,7 +50,7 @@ color:#FFFFFF;font-weight:800;font-size:0.72rem;
 display:flex;align-items:center;justify-content:center;
 letter-spacing:0.5px;flex-shrink:0;
 }
-.nav-name{font-weight:700;font-size:1rem;color:#1B2B5E;line-height:1.2;font-family:‘Inter’,sans-serif;}
+.nav-name{font-weight:700;font-size:1rem;color:#1B2B5E;line-height:1.2;font-family:'Inter',sans-serif;}
 .nav-sub{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#6B7A9F;}
 .nav-book{
 background:#1B2B5E;
@@ -41,9 +58,30 @@ color:#FFFFFF;
 border:none;padding:12px 22px;border-radius:8px;
 font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;
 cursor:pointer;transition:background 0.2s,transform 0.2s;
-font-family:‘Inter’,sans-serif;
+font-family:'Inter',sans-serif;
 }
 .nav-book:hover{background:#2C4EAA;transform:translateY(-1px);}
+
+/* ===== CUSTOM CURSOR ===== */
+.custom-cursor{
+  position:fixed;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:rgba(27,43,94,0.08);
+  border:1.5px solid rgba(27,43,94,0.2);
+  pointer-events:none;
+  z-index:9999;
+  transition:width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
+  transform:translate(-50%, -50%);
+  mix-blend-mode:multiply;
+}
+.custom-cursor.hover{
+  width:48px;
+  height:48px;
+  background:rgba(27,43,94,0.15);
+  border-color:rgba(27,43,94,0.4);
+}
 
 /* ===== HERO ===== */
 .hero{
@@ -64,10 +102,10 @@ border:1px solid rgba(255,255,255,0.25);
 color:#FFFFFF;
 padding:7px 20px;border-radius:24px;
 font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;
-margin-bottom:24px;font-family:‘Inter’,sans-serif;
+margin-bottom:24px;font-family:'Inter',sans-serif;
 }
 .hero-title{
-font-family:‘Playfair Display’,serif;
+font-family:'Playfair Display',serif;
 font-size:clamp(3rem,9vw,6.5rem);
 font-weight:900;color:#FFFFFF;line-height:0.95;
 margin-bottom:14px;
@@ -77,7 +115,7 @@ opacity:0;animation:fadeUp 0.9s ease 0.3s forwards;
 font-size:clamp(1rem,2.5vw,1.4rem);
 color:rgba(255,255,255,0.78);
 margin-bottom:14px;font-style:italic;
-font-family:‘Playfair Display’,serif;
+font-family:'Playfair Display',serif;
 opacity:0;animation:fadeUp 0.9s ease 0.5s forwards;
 }
 .hero-desc{
@@ -96,7 +134,7 @@ opacity:0;animation:fadeUp 0.9s ease 0.9s forwards;
 background:#FFFFFF;color:#1B2B5E;
 border:none;padding:15px 36px;border-radius:8px;
 font-weight:700;font-size:0.84rem;letter-spacing:1px;text-transform:uppercase;
-cursor:pointer;transition:all 0.2s;font-family:‘Inter’,sans-serif;
+cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;
 }
 .btn-white:hover{background:#E8EDF8;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,255,255,0.18);}
 .btn-ghost{
@@ -104,7 +142,7 @@ background:transparent;color:#FFFFFF;
 border:2px solid rgba(255,255,255,0.5);
 padding:15px 36px;border-radius:8px;
 font-weight:600;font-size:0.84rem;letter-spacing:1px;text-transform:uppercase;
-cursor:pointer;transition:all 0.2s;font-family:‘Inter’,sans-serif;
+cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;
 }
 .btn-ghost:hover{border-color:#FFFFFF;background:rgba(255,255,255,0.1);}
 
@@ -113,13 +151,13 @@ cursor:pointer;transition:all 0.2s;font-family:‘Inter’,sans-serif;
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);max-width:860px;margin:0 auto;}
 .stat-item{text-align:center;padding:20px 10px;border-right:1px solid #DDE3F0;}
 .stat-item:last-child{border-right:none;}
-.stat-num{font-family:‘Playfair Display’,serif;font-size:2.5rem;font-weight:900;color:#1B2B5E;line-height:1;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:#1B2B5E;line-height:1;}
 .stat-label{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:#6B7A9F;margin-top:6px;}
 
 /* ===== SECTION HEADER ===== */
 .section-header{text-align:center;margin-bottom:52px;}
 .eyebrow{font-size:0.68rem;letter-spacing:4px;text-transform:uppercase;color:#2C4EAA;margin-bottom:10px;font-weight:600;display:block;}
-.section-title{font-family:‘Playfair Display’,serif;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;color:#1B2B5E;line-height:1.15;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;color:#1B2B5E;line-height:1.15;}
 .blue-line{width:48px;height:3px;background:#1B2B5E;margin:14px auto 0;border-radius:2px;}
 
 /* ===== SERVICE GUIDE CARDS ===== */
@@ -141,7 +179,7 @@ box-shadow:0 18px 48px rgba(27,43,94,0.15);
 border-color:#2C4EAA;
 }
 .guide-emoji{font-size:2.2rem;margin-bottom:12px;display:block;}
-.guide-name{font-family:‘Playfair Display’,serif;font-size:1.15rem;font-weight:700;color:#1B2B5E;margin-bottom:6px;}
+.guide-name{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#1B2B5E;margin-bottom:6px;}
 .guide-best{font-size:0.83rem;color:#6B7A9F;margin-bottom:12px;line-height:1.5;}
 .guide-intensity{
 display:inline-block;padding:4px 14px;border-radius:20px;
@@ -151,17 +189,95 @@ font-size:0.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
 .intensity-moderate{background:#FFF3E0;color:#e65100;}
 .intensity-intense{background:#FFEBEE;color:#c62828;}
 
+/* ===== THERAPIST PROFILES ===== */
+#therapists{padding:88px 20px;background:#FFFFFF;}
+.therapist-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:28px;
+  max-width:1020px;
+  margin:0 auto;
+}
+.therapist-card{
+  background:#FFFFFF;
+  border:1.5px solid #DDE3F0;
+  border-radius:16px;
+  overflow:hidden;
+  transition:all 0.3s cubic-bezier(0.22, 0.68, 0, 1.2);
+  box-shadow:0 4px 20px rgba(27,43,94,0.07);
+}
+.therapist-card:hover{
+  transform:translateY(-8px) scale(1.01);
+  box-shadow:0 20px 48px rgba(27,43,94,0.15);
+  border-color:#1B2B5E;
+}
+.therapist-img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  background:#DDE3F0;
+}
+.therapist-info{padding:20px;}
+.therapist-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;
+  font-weight:700;
+  color:#1B2B5E;
+  margin-bottom:4px;
+}
+.therapist-title{
+  font-size:0.82rem;
+  color:#2C4EAA;
+  font-weight:600;
+  margin-bottom:8px;
+}
+.therapist-specialty{
+  font-size:0.78rem;
+  color:#6B7A9F;
+  margin-bottom:6px;
+}
+.therapist-exp{
+  font-size:0.7rem;
+  color:#6B7A9F;
+  letter-spacing:1px;
+}
+.therapist-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:10px;
+}
+.therapist-tag{
+  background:#EBF0FA;
+  padding:3px 12px;
+  border-radius:12px;
+  font-size:0.65rem;
+  font-weight:600;
+  color:#1B2B5E;
+}
+.therapist-badge{
+  display:inline-block;
+  background:#1B2B5E;
+  color:#FFFFFF;
+  font-size:0.6rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  padding:3px 10px;
+  border-radius:10px;
+  margin-top:6px;
+}
+
 /* ===== BEFORE/AFTER ===== */
-#before-after{padding:88px 20px;background:#FFFFFF;}
+#before-after{padding:88px 20px;background:#F4F6FB;}
 .ba-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px;max-width:960px;margin:0 auto;}
 .ba-card{border-radius:14px;overflow:hidden;border:1.5px solid #DDE3F0;box-shadow:0 4px 18px rgba(27,43,94,0.08);}
-.ba-card-title{text-align:center;padding:14px;background:#1B2B5E;font-family:‘Playfair Display’,serif;font-size:1rem;color:#FFFFFF;}
+.ba-card-title{text-align:center;padding:14px;background:#1B2B5E;font-family:'Playfair Display',serif;font-size:1rem;color:#FFFFFF;}
 .slider-container{position:relative;height:190px;overflow:hidden;cursor:col-resize;user-select:none;}
 .slider-before,.slider-after{position:absolute;inset:0;background-size:cover;background-position:center;}
 .slider-after{clip-path:inset(0 50% 0 0);}
 .slider-handle{position:absolute;top:0;bottom:0;width:3px;background:#FFFFFF;left:50%;transform:translateX(-50%);z-index:3;pointer-events:none;}
-.slider-handle::before{content:’’;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:#1B2B5E;border:3px solid #FFFFFF;}
-.slider-handle::after{content:‘◀ ▶’;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:0.5rem;color:#FFFFFF;font-weight:900;z-index:4;}
+.slider-handle::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:#1B2B5E;border:3px solid #FFFFFF;}
+.slider-handle::after{content:'◀ ▶';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:0.5rem;color:#FFFFFF;font-weight:900;z-index:4;}
 .slider-labels{display:flex;justify-content:space-between;padding:8px 14px;background:#F4F6FB;}
 .slider-label{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:#6B7A9F;}
 
@@ -181,7 +297,7 @@ box-shadow:0 4px 18px rgba(27,43,94,0.08);
 .review-text{
 color:#1a1a2e;font-size:1rem;line-height:1.7;
 font-style:italic;margin-bottom:18px;
-font-family:‘Playfair Display’,serif;
+font-family:'Playfair Display',serif;
 }
 .reviewer-row{display:flex;align-items:center;gap:12px;}
 .reviewer-av{
@@ -212,7 +328,7 @@ box-shadow:0 2px 8px rgba(27,43,94,0.1);
 /* ===== FOOTER ===== */
 footer{background:#0F1A3E;padding:60px 20px 32px;}
 .footer-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;}
-.footer-logo{font-family:‘Playfair Display’,serif;font-size:1.3rem;color:#FFFFFF;margin-bottom:12px;}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.3rem;color:#FFFFFF;margin-bottom:12px;}
 .footer-tagline{font-size:0.87rem;line-height:1.8;color:rgba(255,255,255,0.5);}
 .footer-heading{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px;display:block;}
 .footer-links{list-style:none;}
@@ -234,12 +350,12 @@ box-shadow:0 2px 16px rgba(27,43,94,0.1);
 background:transparent;border:1.5px solid #DDE3F0;
 color:#1B2B5E;padding:9px 16px;border-radius:8px;
 font-size:0.82rem;font-weight:600;cursor:pointer;
-transition:all 0.2s;font-family:‘Inter’,sans-serif;
+transition:all 0.2s;font-family:'Inter',sans-serif;
 display:flex;align-items:center;gap:5px;
 }
 .back-btn:hover{background:#F4F6FB;border-color:#1B2B5E;}
 .services-content{padding:96px 20px 60px;max-width:760px;margin:0 auto;}
-.svc-page-title{font-family:‘Playfair Display’,serif;font-size:1.9rem;color:#1B2B5E;margin-bottom:6px;}
+.svc-page-title{font-family:'Playfair Display',serif;font-size:1.9rem;color:#1B2B5E;margin-bottom:6px;}
 .svc-page-sub{color:#6B7A9F;font-size:0.9rem;margin-bottom:32px;}
 
 /* ===== SERVICE CARD ===== */
@@ -259,7 +375,7 @@ background:#1B2B5E;color:#FFFFFF;
 padding:5px 14px;border-radius:20px;font-size:0.74rem;font-weight:600;
 }
 .svc-body{padding:22px;}
-.svc-name{font-family:‘Playfair Display’,serif;font-size:1.45rem;color:#1B2B5E;margin-bottom:8px;}
+.svc-name{font-family:'Playfair Display',serif;font-size:1.45rem;color:#1B2B5E;margin-bottom:8px;}
 .svc-desc{color:#6B7A9F;font-size:0.88rem;line-height:1.7;margin-bottom:18px;}
 .svc-pills{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:18px;}
 .svc-pill{
@@ -269,7 +385,7 @@ font-size:0.82rem;font-weight:600;
 color:#1B2B5E;
 cursor:pointer;transition:all 0.2s;
 display:flex;gap:5px;align-items:center;
-font-family:‘Inter’,sans-serif;
+font-family:'Inter',sans-serif;
 }
 .svc-pill:hover{background:#1B2B5E;color:#FFFFFF;border-color:#1B2B5E;}
 .svc-pill.selected{background:#1B2B5E;color:#FFFFFF;border-color:#1B2B5E;}
@@ -277,19 +393,19 @@ font-family:‘Inter’,sans-serif;
 .svc-pill.selected .pill-price{color:rgba(255,255,255,0.8);}
 .svc-footer{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid #DDE3F0;}
 .svc-from-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#6B7A9F;margin-bottom:2px;}
-.svc-price-big{font-family:‘Playfair Display’,serif;font-size:2rem;font-weight:900;color:#1B2B5E;}
+.svc-price-big{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#1B2B5E;}
 .svc-book-btn{
 background:#1B2B5E;color:#FFFFFF;border:none;
 padding:13px 26px;border-radius:8px;
 font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;
-cursor:pointer;transition:all 0.2s;font-family:‘Inter’,sans-serif;
+cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;
 }
 .svc-book-btn:hover{background:#2C4EAA;transform:translateY(-1px);}
 
 /* ===== BOOKING PAGE ===== */
 #booking-page{background:#F4F6FB;}
 .booking-content{padding:96px 20px 60px;max-width:640px;margin:0 auto;}
-.booking-title{font-family:‘Playfair Display’,serif;font-size:1.9rem;color:#1B2B5E;margin-bottom:6px;}
+.booking-title{font-family:'Playfair Display',serif;font-size:1.9rem;color:#1B2B5E;margin-bottom:6px;}
 .booking-sub{color:#6B7A9F;font-size:0.9rem;margin-bottom:28px;}
 .selected-summary{
 background:#1B2B5E;
@@ -298,9 +414,9 @@ padding:18px 22px;margin-bottom:28px;
 display:flex;justify-content:space-between;align-items:center;
 }
 .ss-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:4px;}
-.ss-val{font-family:‘Playfair Display’,serif;font-size:1.05rem;font-weight:700;color:#FFFFFF;}
+.ss-val{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#FFFFFF;}
 .ss-sub{font-size:0.8rem;color:rgba(255,255,255,0.6);margin-top:2px;}
-.ss-price{font-family:‘Playfair Display’,serif;font-size:2.2rem;font-weight:900;color:#FFFFFF;}
+.ss-price{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:#FFFFFF;}
 .form-group{margin-bottom:16px;}
 .form-label{display:block;font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:#1B2B5E;font-weight:600;margin-bottom:7px;}
 .form-input,.form-select{
@@ -309,11 +425,11 @@ background:#FFFFFF;
 border:1.5px solid #DDE3F0;
 color:#1a1a2e;
 padding:13px 16px;border-radius:10px;
-font-size:0.92rem;font-family:‘Inter’,sans-serif;
+font-size:0.92rem;font-family:'Inter',sans-serif;
 outline:none;transition:border-color 0.2s;
 appearance:none;-webkit-appearance:none;
 }
-.form-input:focus,.form-select:focus{border-color:#1B2B5E;}
+.form-input:focus,.form-select:focus{border-color:#1B2B5E;box-shadow:0 0 0 3px rgba(27,43,94,0.1);}
 .form-input[readonly]{color:#2C4EAA;background:#EBF0FA;cursor:default;}
 .form-input::placeholder{color:#9BA8C0;}
 .form-select option{background:#FFFFFF;color:#1a1a2e;}
@@ -323,61 +439,311 @@ width:100%;background:#1B2B5E;color:#FFFFFF;
 border:none;padding:16px;border-radius:10px;
 font-weight:700;font-size:0.9rem;letter-spacing:1px;text-transform:uppercase;
 cursor:pointer;transition:all 0.2s;margin-top:10px;
-font-family:‘Inter’,sans-serif;
+font-family:'Inter',sans-serif;
 }
 .submit-btn:hover{background:#2C4EAA;transform:translateY(-1px);}
 
-/* ===== PAYMENT PAGE ===== */
+/* ===== PAYMENT PAGE (REDESIGNED) ===== */
 #payment-page{background:#F4F6FB;}
 .payment-content{padding:96px 20px 60px;max-width:520px;margin:0 auto;}
-.payment-title{font-family:‘Playfair Display’,serif;font-size:1.9rem;color:#1B2B5E;margin-bottom:6px;}
-.payment-sub{color:#6B7A9F;margin-bottom:28px;font-size:0.9rem;}
+.payment-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.7rem;
+  color:#1B2B5E;
+  margin-bottom:4px;
+  text-align:center;
+}
+.payment-sub{
+  color:#6B7A9F;
+  text-align:center;
+  font-size:0.85rem;
+  margin-bottom:24px;
+  line-height:1.6;
+}
+
+/* Amount Card - Redesigned */
 .amount-card{
-background:#1B2B5E;color:#FFFFFF;
-border-radius:16px;padding:24px;margin-bottom:28px;text-align:center;
+  background:#1B2B5E;
+  color:#FFFFFF;
+  border-radius:16px;
+  padding:24px 28px;
+  margin-bottom:20px;
 }
-.amount-label{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;}
-.amount-val{font-family:‘Playfair Display’,serif;font-size:3.8rem;font-weight:900;color:#FFFFFF;}
-.pay-methods{display:flex;flex-direction:column;gap:14px;}
+.amount-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:8px 0;
+}
+.amount-row:not(:last-child){border-bottom:1px solid rgba(255,255,255,0.1);}
+.amount-label-sm{
+  font-size:0.7rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.55);
+}
+.amount-value{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  font-weight:700;
+  color:#FFFFFF;
+}
+.amount-value.strikethrough{
+  text-decoration:line-through;
+  color:rgba(255,255,255,0.4);
+  font-size:1.2rem;
+}
+.amount-value.deposit{
+  font-size:2.2rem;
+  color:#FFFFFF;
+}
+.amount-value.balance{
+  color:rgba(255,255,255,0.7);
+  font-size:1.2rem;
+}
+
+/* Policy Box - Redesigned */
+.policy-box{
+  background:#EBF0FA;
+  border:1.5px solid #DDE3F0;
+  border-radius:12px;
+  padding:14px 18px;
+  margin-bottom:20px;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+}
+.policy-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px;}
+.policy-title{
+  font-weight:700;
+  font-size:0.82rem;
+  color:#1B2B5E;
+  margin-bottom:2px;
+}
+.policy-text{
+  font-size:0.78rem;
+  color:#6B7A9F;
+  line-height:1.5;
+}
+
+/* Payment Methods - Redesigned */
+.pay-methods{display:flex;flex-direction:column;gap:12px;}
 .pay-method{
-background:#FFFFFF;border:1.5px solid #DDE3F0;
-border-radius:14px;padding:18px 22px;
-display:flex;align-items:center;gap:16px;
-cursor:pointer;transition:all 0.2s;
+  background:#FFFFFF;
+  border:1.5px solid #DDE3F0;
+  border-radius:14px;
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  cursor:pointer;
+  transition:all 0.2s;
 }
-.pay-method:hover{border-color:#1B2B5E;box-shadow:0 6px 20px rgba(27,43,94,0.12);transform:translateX(4px);}
-.pay-icon{width:52px;height:52px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.pay-method:hover{
+  border-color:#1B2B5E;
+  box-shadow:0 6px 20px rgba(27,43,94,0.12);
+  transform:translateX(4px);
+}
+.pay-icon{
+  width:48px;
+  height:48px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.3rem;
+  flex-shrink:0;
+}
 .pay-icon-paypal{background:#003087;color:#FFFFFF;}
-.pay-icon-btc{background:#F7931A;color:#FFFFFF;font-size:1.8rem;font-weight:700;}
-.pay-name{font-weight:700;font-size:1rem;color:#1B2B5E;}
-.pay-sub{font-size:0.78rem;color:#6B7A9F;margin-top:2px;}
+.pay-icon-btc{background:#F7931A;color:#FFFFFF;font-size:1.6rem;font-weight:700;}
+.pay-info{flex:1;}
+.pay-name{font-weight:700;font-size:0.95rem;color:#1B2B5E;}
+.pay-sub{font-size:0.75rem;color:#6B7A9F;margin-top:1px;}
 
-/* ===== MODALS ===== */
-.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(11,19,50,0.72);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;}
-.modal-overlay.show{display:flex;}
-.modal{background:#FFFFFF;border-radius:20px;padding:38px;max-width:460px;width:100%;text-align:center;box-shadow:0 24px 80px rgba(11,19,50,0.3);}
-.modal-icon{font-size:2.8rem;margin-bottom:14px;}
-.modal-title{font-family:‘Playfair Display’,serif;font-size:1.5rem;color:#1B2B5E;margin-bottom:12px;}
-.modal-text{color:#6B7A9F;font-size:0.9rem;line-height:1.8;margin-bottom:26px;}
-.modal-close-btn{background:#1B2B5E;color:#FFFFFF;border:none;padding:13px 36px;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.85rem;font-family:‘Inter’,sans-serif;}
-.modal-close-btn:hover{background:#2C4EAA;}
-.btc-address{background:#F4F6FB;border:1.5px solid #DDE3F0;border-radius:10px;padding:13px;font-size:0.68rem;word-break:break-all;color:#1B2B5E;margin:14px 0;font-family:monospace;font-weight:700;}
-.qr-wrap{width:156px;height:156px;margin:0 auto 14px;border-radius:12px;overflow:hidden;border:2px solid #DDE3F0;}
-.qr-wrap img{width:100%;height:100%;object-fit:contain;}
-.modal-amount-big{font-family:‘Playfair Display’,serif;font-size:2.4rem;color:#1B2B5E;font-weight:900;margin-bottom:4px;}
-.modal-amount-sub{font-size:0.74rem;color:#6B7A9F;margin-bottom:18px;}
-.copy-btn{background:transparent;border:1.5px solid #DDE3F0;color:#1B2B5E;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:0.8rem;margin-bottom:14px;transition:all 0.2s;font-weight:600;font-family:‘Inter’,sans-serif;}
-.copy-btn:hover{background:#F4F6FB;}
-.paid-btn{width:100%;background:#27ae60;color:#FFFFFF;border:none;padding:14px;border-radius:10px;font-weight:700;font-size:0.9rem;cursor:pointer;transition:background 0.2s;font-family:‘Inter’,sans-serif;}
-.paid-btn:hover{background:#219a52;}
-.cancel-link{background:transparent;border:none;color:#9BA8C0;cursor:pointer;font-size:0.84rem;margin-top:12px;font-family:‘Inter’,sans-serif;}
+/* Security Badge */
+.security-badge{
+  text-align:center;
+  margin-top:20px;
+  font-size:0.72rem;
+  color:#6B7A9F;
+  letter-spacing:2px;
+}
+.security-badge span{margin:0 6px;}
 
-/* ===== SPINNER ===== */
-#spinner-page{background:#F4F6FB;}
-.spinner-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;}
-.spinner{width:62px;height:62px;border:4px solid #DDE3F0;border-top-color:#1B2B5E;border-radius:50%;animation:spin 1s linear infinite;}
+/* ===== BITCOIN PAYMENT PAGE (Redesigned) ===== */
+#bitcoin-page{background:#F4F6FB;}
+.bitcoin-content{padding:96px 20px 60px;max-width:480px;margin:0 auto;}
+.btc-header{text-align:center;margin-bottom:20px;}
+.btc-icon-large{
+  font-size:3rem;
+  display:block;
+  margin-bottom:8px;
+}
+.btc-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  color:#1B2B5E;
+}
+.btc-sub{
+  color:#6B7A9F;
+  font-size:0.85rem;
+  line-height:1.6;
+  text-align:center;
+}
+.btc-amount-box{
+  background:#1B2B5E;
+  border-radius:16px;
+  padding:20px;
+  text-align:center;
+  margin:16px 0;
+}
+.btc-amount-box .label{
+  font-size:0.65rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.5);
+}
+.btc-amount-box .amount{
+  font-family:'Playfair Display',serif;
+  font-size:2.8rem;
+  font-weight:900;
+  color:#FFFFFF;
+}
+.btc-amount-box .sub{
+  font-size:0.75rem;
+  color:rgba(255,255,255,0.5);
+  margin-top:4px;
+}
+
+.btc-qr-wrap{
+  width:160px;
+  height:160px;
+  margin:16px auto;
+  border-radius:12px;
+  overflow:hidden;
+  border:2px solid #DDE3F0;
+  background:#FFFFFF;
+  padding:8px;
+}
+.btc-qr-wrap img{width:100%;height:100%;object-fit:contain;}
+
+.btc-address-box{
+  background:#F4F6FB;
+  border:1.5px solid #DDE3F0;
+  border-radius:10px;
+  padding:12px 16px;
+  font-size:0.7rem;
+  font-family:monospace;
+  color:#1B2B5E;
+  word-break:break-all;
+  text-align:center;
+  margin:8px 0 12px;
+  font-weight:600;
+}
+
+.btc-buttons{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:16px;
+}
+.btc-btn-copy{
+  background:transparent;
+  border:1.5px solid #DDE3F0;
+  color:#1B2B5E;
+  padding:12px;
+  border-radius:10px;
+  font-weight:600;
+  font-size:0.85rem;
+  cursor:pointer;
+  transition:all 0.2s;
+  font-family:'Inter',sans-serif;
+}
+.btc-btn-copy:hover{background:#F4F6FB;border-color:#1B2B5E;}
+.btc-btn-paid{
+  background:#27ae60;
+  color:#FFFFFF;
+  border:none;
+  padding:14px;
+  border-radius:10px;
+  font-weight:700;
+  font-size:0.9rem;
+  cursor:pointer;
+  transition:background 0.2s;
+  font-family:'Inter',sans-serif;
+}
+.btc-btn-paid:hover{background:#219a52;}
+.btc-btn-cancel{
+  background:transparent;
+  border:none;
+  color:#9BA8C0;
+  cursor:pointer;
+  font-size:0.85rem;
+  padding:10px;
+  font-family:'Inter',sans-serif;
+}
+.btc-btn-cancel:hover{color:#6B7A9F;}
+
+/* ===== PROCESSING PAGE (Redesigned) ===== */
+#processing-page{background:#F4F6FB;}
+.processing-wrap{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:40px 20px;
+  text-align:center;
+}
+.processing-icon{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  background:#1B2B5E;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2rem;
+  color:#FFFFFF;
+  margin-bottom:20px;
+}
+.processing-spinner{
+  width:56px;
+  height:56px;
+  border:4px solid #DDE3F0;
+  border-top-color:#1B2B5E;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin-bottom:20px;
+}
 @keyframes spin{to{transform:rotate(360deg);}}
-.spinner-text{color:#6B7A9F;font-size:0.85rem;letter-spacing:3px;text-transform:uppercase;}
+.processing-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;
+  color:#1B2B5E;
+  margin-bottom:8px;
+}
+.processing-text{
+  color:#6B7A9F;
+  font-size:0.9rem;
+  line-height:1.6;
+  max-width:340px;
+}
+.processing-progress{
+  width:200px;
+  height:4px;
+  background:#DDE3F0;
+  border-radius:2px;
+  margin-top:20px;
+  overflow:hidden;
+}
+.processing-progress-bar{
+  height:100%;
+  background:#1B2B5E;
+  border-radius:2px;
+  animation:progressAnim 10s ease-in-out forwards;
+}
+@keyframes progressAnim{0%{width:0%;}20%{width:15%;}40%{width:35%;}60%{width:55%;}80%{width:75%;}100%{width:100%;}}
 
 /* ===== THANK YOU ===== */
 #thankyou-page{background:#F4F6FB;}
@@ -385,12 +751,59 @@ cursor:pointer;transition:all 0.2s;
 .ty-box{max-width:520px;}
 .ty-icon{font-size:5rem;margin-bottom:18px;animation:popIn 0.6s cubic-bezier(.22,.68,0,1.5);}
 @keyframes popIn{from{transform:scale(0);}to{transform:scale(1);}}
-.ty-title{font-family:‘Playfair Display’,serif;font-size:2.4rem;color:#1B2B5E;margin-bottom:12px;}
+.ty-title{font-family:'Playfair Display',serif;font-size:2.4rem;color:#1B2B5E;margin-bottom:12px;}
 .ty-line{width:56px;height:3px;background:#1B2B5E;margin:16px auto;border-radius:2px;}
 .ty-text{color:#6B7A9F;line-height:1.9;font-size:0.95rem;margin-bottom:24px;}
 .ty-phone{color:#2C4EAA;font-size:0.92rem;margin-bottom:28px;font-weight:600;}
-.ty-btn{background:#1B2B5E;color:#FFFFFF;border:none;padding:14px 32px;border-radius:10px;font-weight:700;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:‘Inter’,sans-serif;}
+.ty-btn{background:#1B2B5E;color:#FFFFFF;border:none;padding:14px 32px;border-radius:10px;font-weight:700;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;}
 .ty-btn:hover{background:#2C4EAA;}
+
+/* ===== MODAL OVERLAY (FIXED) ===== */
+.modal-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:500;
+  background:rgba(11,19,50,0.72);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.modal-overlay.show{
+  display:flex !important;
+}
+.modal{
+  background:#FFFFFF;
+  border-radius:20px;
+  padding:38px;
+  max-width:460px;
+  width:100%;
+  text-align:center;
+  box-shadow:0 24px 80px rgba(11,19,50,0.3);
+  animation:modalIn 0.3s cubic-bezier(0.22, 0.68, 0, 1.2);
+}
+@keyframes modalIn{
+  from{opacity:0;transform:scale(0.9) translateY(20px);}
+  to{opacity:1;transform:scale(1) translateY(0);}
+}
+.modal-icon{font-size:2.8rem;margin-bottom:14px;}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.5rem;color:#1B2B5E;margin-bottom:12px;}
+.modal-text{color:#6B7A9F;font-size:0.9rem;line-height:1.8;margin-bottom:26px;}
+.modal-close-btn{
+  background:#1B2B5E;
+  color:#FFFFFF;
+  border:none;
+  padding:13px 36px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+  font-size:0.85rem;
+  font-family:'Inter',sans-serif;
+  transition:background 0.2s;
+}
+.modal-close-btn:hover{background:#2C4EAA;}
 
 /* ===== LIVE NOTIFICATION ===== */
 .live-notif{
@@ -429,9 +842,9 @@ background:#1B2B5E;color:#FFFFFF;
 padding:6px 12px;border-radius:8px;
 font-size:0.75rem;white-space:nowrap;font-weight:600;
 opacity:0;pointer-events:none;transition:opacity 0.2s;
-font-family:‘Inter’,sans-serif;
+font-family:'Inter',sans-serif;
 }
-.ai-btn-tooltip::after{content:’’;position:absolute;left:100%;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:#1B2B5E;}
+.ai-btn-tooltip::after{content:'';position:absolute;left:100%;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:#1B2B5E;}
 .ai-btn-wrap:hover .ai-btn-tooltip{opacity:1;}
 .ai-chat-btn{
 width:50px;height:50px;border-radius:50%;
@@ -459,11 +872,11 @@ display:none;flex-direction:column;max-height:400px;
 .ai-head-status{font-size:0.65rem;color:rgba(255,255,255,0.6);}
 .ai-close-btn{margin-left:auto;background:transparent;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:1.1rem;line-height:1;}
 .ai-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;max-height:240px;}
-.ai-msg{max-width:86%;padding:9px 13px;border-radius:10px;font-size:0.83rem;line-height:1.5;font-family:‘Inter’,sans-serif;}
+.ai-msg{max-width:86%;padding:9px 13px;border-radius:10px;font-size:0.83rem;line-height:1.5;font-family:'Inter',sans-serif;}
 .ai-msg.bot{background:#F4F6FB;border:1px solid #DDE3F0;color:#1a1a2e;border-radius:10px 10px 10px 2px;}
 .ai-msg.user{background:#1B2B5E;color:#FFFFFF;align-self:flex-end;border-radius:10px 10px 2px 10px;}
 .ai-opts{padding:10px 13px;border-top:1px solid #DDE3F0;display:flex;flex-wrap:wrap;gap:7px;}
-.ai-opt{background:#F4F6FB;border:1.5px solid #DDE3F0;color:#1B2B5E;padding:6px 12px;border-radius:20px;font-size:0.75rem;cursor:pointer;transition:all 0.2s;white-space:nowrap;font-weight:600;font-family:‘Inter’,sans-serif;}
+.ai-opt{background:#F4F6FB;border:1.5px solid #DDE3F0;color:#1B2B5E;padding:6px 12px;border-radius:20px;font-size:0.75rem;cursor:pointer;transition:all 0.2s;white-space:nowrap;font-weight:600;font-family:'Inter',sans-serif;}
 .ai-opt:hover{background:#1B2B5E;color:#FFFFFF;border-color:#1B2B5E;}
 
 /* ===== SCROLL REVEAL ===== */
@@ -480,189 +893,252 @@ display:none;flex-direction:column;max-height:400px;
 .ba-grid{grid-template-columns:1fr;}
 .guide-grid{grid-template-columns:1fr 1fr;}
 .ai-chat-window{width:calc(100vw - 40px);right:20px;}
+.therapist-grid{grid-template-columns:1fr 1fr;}
+.payment-content{padding:80px 16px 40px;}
+.btc-amount-box .amount{font-size:2.2rem;}
+.modal{padding:28px 20px;}
 }
 @media(max-width:400px){
 .guide-grid{grid-template-columns:1fr;}
+.therapist-grid{grid-template-columns:1fr;}
+.custom-cursor{display:none;}
 }
 </style>
-
 </head>
 <body>
+<!-- ===== CUSTOM CURSOR ===== -->
+<div class="custom-cursor" id="customCursor"></div>
 
 <!-- ============================================================ -->
-
 <!--  MAIN PAGE                                                   -->
-
 <!-- ============================================================ -->
-
 <div id="main-page" class="page active">
-
-<nav>
-  <div class="nav-brand">
-    <div class="nav-circle">MRT</div>
-    <div>
-      <div class="nav-name">Massage Rub & Therapist</div>
-      <div class="nav-sub">Luxury Wellness</div>
-    </div>
-  </div>
-  <button class="nav-book" onclick="showPage('services-page');window.scrollTo(0,0);">BOOK NOW</button>
-</nav>
-
-<!-- HERO -->
-
-<section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1600&q=80">
-    <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-getting-a-back-massage-4819-large.mp4" type="video/mp4">
-    <source src="https://cdn.coverr.co/videos/coverr-a-woman-getting-a-back-massage-3306/1080p.mp4" type="video/mp4">
-  </video>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-badge">✦ Premium Massage Therapy</div>
-    <h1 class="hero-title">Relax.<br>Recharge.<br>Rejuvenate.</h1>
-    <p class="hero-sub">Your Wellness. Our Passion.</p>
-    <p class="hero-desc">Expert therapists dedicated to restoring your body and mind. Choose from 12 signature massage services tailored to your unique needs.</p>
-    <div class="hero-btns">
-      <button class="btn-white" onclick="showPage('services-page');window.scrollTo(0,0);">Book Your Session</button>
-      <button class="btn-ghost" onclick="document.getElementById('reviews').scrollIntoView({behavior:'smooth'})">See Reviews</button>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-
-<section id="stats">
-  <div class="stats-grid">
-    <div class="stat-item reveal"><div class="stat-num" data-target="5000" data-suffix="+">0+</div><div class="stat-label">Happy Clients</div></div>
-    <div class="stat-item reveal" style="transition-delay:.1s"><div class="stat-num" data-target="4.9" data-suffix="★" data-decimal="1">4.9★</div><div class="stat-label">Average Rating</div></div>
-    <div class="stat-item reveal" style="transition-delay:.2s"><div class="stat-num" data-target="12" data-suffix="">12</div><div class="stat-label">Services Offered</div></div>
-    <div class="stat-item reveal" style="transition-delay:.3s"><div class="stat-num" data-target="24" data-suffix="/7">24/7</div><div class="stat-label">Support</div></div>
-  </div>
-</section>
-
-<!-- SERVICE GUIDE CARDS -->
-
-<section id="comparison">
-  <div class="section-header reveal">
-    <span class="eyebrow">Find Your Perfect Match</span>
-    <h2 class="section-title">Service Guide</h2>
-    <div class="blue-line"></div>
-  </div>
-  <div class="guide-grid reveal">
-    <div class="guide-card"><span class="guide-emoji">🌊</span><div class="guide-name">Swedish Massage</div><div class="guide-best">Relaxation &amp; stress relief — perfect for first-timers.</div><span class="guide-intensity intensity-gentle">Gentle</span></div>
-    <div class="guide-card"><span class="guide-emoji">💪</span><div class="guide-name">Deep Tissue</div><div class="guide-best">Chronic muscle pain and deep tension release.</div><span class="guide-intensity intensity-intense">Intense</span></div>
-    <div class="guide-card"><span class="guide-emoji">🏃</span><div class="guide-name">Sports Massage</div><div class="guide-best">Athletic performance, injury prevention &amp; recovery.</div><span class="guide-intensity intensity-moderate">Moderate-High</span></div>
-    <div class="guide-card"><span class="guide-emoji">🪨</span><div class="guide-name">Hot Stone</div><div class="guide-best">Deep stress relief with warm basalt stones.</div><span class="guide-intensity intensity-gentle">Gentle-Moderate</span></div>
-    <div class="guide-card"><span class="guide-emoji">🌸</span><div class="guide-name">Aromatherapy</div><div class="guide-best">Mood elevation, skin nourishment &amp; deep calm.</div><span class="guide-intensity intensity-gentle">Gentle</span></div>
-    <div class="guide-card"><span class="guide-emoji">🧠</span><div class="guide-name">Neuromuscular</div><div class="guide-best">Trigger points, nerve compression &amp; chronic pain.</div><span class="guide-intensity intensity-intense">Intense</span></div>
-    <div class="guide-card"><span class="guide-emoji">🦶</span><div class="guide-name">Reflexology</div><div class="guide-best">Organ stimulation through feet, hands &amp; ears.</div><span class="guide-intensity intensity-gentle">Moderate</span></div>
-    <div class="guide-card"><span class="guide-emoji">🤰</span><div class="guide-name">Prenatal</div><div class="guide-best">Safe, gentle care for expectant mothers.</div><span class="guide-intensity intensity-gentle">Very Gentle</span></div>
-  </div>
-</section>
-
-<!-- BEFORE & AFTER -->
-
-<section id="before-after">
-  <div class="section-header reveal">
-    <span class="eyebrow">Real Transformations</span>
-    <h2 class="section-title">Before &amp; After</h2>
-    <div class="blue-line"></div>
-    <p style="color:#6B7A9F;max-width:380px;margin:14px auto 0;font-size:0.87rem;line-height:1.8;">Drag the slider to see the difference our therapists make.</p>
-  </div>
-  <div class="ba-grid reveal">
-    <div class="ba-card">
-      <div class="ba-card-title">Back Pain Relief</div>
-      <div class="slider-container">
-        <div class="slider-before" style="background-image:url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&q=80');filter:grayscale(80%) brightness(0.55);"></div>
-        <div class="slider-after" style="background-image:url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80');"></div>
-        <div class="slider-handle"></div>
+  <nav>
+    <div class="nav-brand">
+      <div class="nav-circle">MRT</div>
+      <div>
+        <div class="nav-name">Massage Rub & Therapist</div>
+        <div class="nav-sub">Luxury Wellness</div>
       </div>
-      <div class="slider-labels"><span class="slider-label">Before</span><span class="slider-label">After</span></div>
     </div>
-    <div class="ba-card">
-      <div class="ba-card-title">Sports Recovery</div>
-      <div class="slider-container">
-        <div class="slider-before" style="background-image:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80');filter:grayscale(80%) brightness(0.5);"></div>
-        <div class="slider-after" style="background-image:url('https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&q=80');"></div>
-        <div class="slider-handle"></div>
+    <button class="nav-book" onclick="showPage('services-page')">BOOK NOW</button>
+  </nav>
+  <!-- HERO -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1600&q=80">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-getting-a-back-massage-4819-large.mp4" type="video/mp4">
+      <source src="https://cdn.coverr.co/videos/coverr-a-woman-getting-a-back-massage-3306/1080p.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">✦ Premium Massage Therapy</div>
+      <h1 class="hero-title">Relax.<br>Recharge.<br>Rejuvenate.</h1>
+      <p class="hero-sub">Your Wellness. Our Passion.</p>
+      <p class="hero-desc">Expert therapists dedicated to restoring your body and mind. Choose from 12 signature massage services tailored to your unique needs.</p>
+      <div class="hero-btns">
+        <button class="btn-white" onclick="showPage('services-page')">Book Your Session</button>
+        <button class="btn-ghost" onclick="document.getElementById('reviews').scrollIntoView({behavior:'smooth'})">See Reviews</button>
       </div>
-      <div class="slider-labels"><span class="slider-label">Before</span><span class="slider-label">After</span></div>
     </div>
-    <div class="ba-card">
-      <div class="ba-card-title">Stress Reduction</div>
-      <div class="slider-container">
-        <div class="slider-before" style="background-image:url('https://images.unsplash.com/photo-1520637836993-5cda9e7d5c89?w=600&q=80');filter:grayscale(80%) brightness(0.5);"></div>
-        <div class="slider-after" style="background-image:url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&q=80');"></div>
-        <div class="slider-handle"></div>
+  </section>
+  <!-- STATS -->
+  <section id="stats">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num" data-target="5000" data-suffix="+">0+</div>
+        <div class="stat-label">Happy Clients</div>
       </div>
-      <div class="slider-labels"><span class="slider-label">Before</span><span class="slider-label">After</span></div>
+      <div class="stat-item reveal" style="transition-delay:.1s">
+        <div class="stat-num" data-target="4.9" data-suffix="★" data-decimal="1">4.9★</div>
+        <div class="stat-label">Average Rating</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:.2s">
+        <div class="stat-num" data-target="12" data-suffix="">12</div>
+        <div class="stat-label">Services Offered</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:.3s">
+        <div class="stat-num" data-target="24" data-suffix="/7">24/7</div>
+        <div class="stat-label">Support</div>
+      </div>
     </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-
-<section id="reviews">
-  <div class="section-header reveal">
-    <span class="eyebrow">Client Love</span>
-    <h2 class="section-title">What People Say</h2>
-    <div class="blue-line"></div>
-  </div>
-  <div class="reviews-wrap reveal">
-    <div class="reviews-slider">
-      <div class="reviews-inner" id="reviewsInner"></div>
+  </section>
+  <!-- SERVICE GUIDE CARDS -->
+  <section id="comparison">
+    <div class="section-header reveal">
+      <span class="eyebrow">Find Your Perfect Match</span>
+      <h2 class="section-title">Service Guide</h2>
+      <div class="blue-line"></div>
     </div>
-    <div class="reviews-nav">
-      <button class="rev-btn active-btn" onclick="goToReview(reviewIdx-1)">←</button>
-      <button class="rev-btn" onclick="goToReview(reviewIdx+1)">→</button>
+    <div class="guide-grid reveal">
+      <div class="guide-card">
+        <span class="guide-emoji">🌊</span>
+        <div class="guide-name">Swedish Massage</div>
+        <div class="guide-best">Relaxation &amp; stress relief — perfect for first-timers.</div>
+        <span class="guide-intensity intensity-gentle">Gentle</span>
+      </div>
+      <div class="guide-card">
+        <span class="guide-emoji">💪</span>
+        <div class="guide-name">Deep Tissue</div>
+        <div class="guide-best">Chronic muscle pain and deep tension release.</div>
+        <span class="guide-intensity intensity-intense">Intense</span>
+      </div>
+      <div class="guide-card">
+        <span class="guide-emoji">🏃</span>
+        <div class="guide-name">Sports Massage</div>
+        <div class="guide-best">Athletic performance, injury prevention &amp; recovery.</div>
+        <span class="guide-intensity intensity-moderate">Moderate-High</span>
+      </div>
+      <div class="guide-card">
+        <span class="guide-emoji">🪨</span>
+        <div class="guide-name">Hot Stone</div>
+        <div class="guide-best">Deep stress relief with warm basalt stones.</div>
+        <span class="guide-intensity intensity-gentle">Gentle-Moderate</span>
+      </div>
+      <div class="guide-card">
+        <span class="guide-emoji">🌸</span>
+        <div class="guide-name">Aromatherapy</div>
+        <div class="guide-best">Mood elevation, skin nourishment &amp; deep calm.</div>
+        <span class="guide-intensity intensity-gentle">Gentle</span>
+      </div>
+      <div class="guide-card">
+        <span class="guide-emoji">🧠</span>
+        <div class="guide-name">Neuromuscular</div>
+        <div class="guide-best">Trigger points, nerve compression &amp; chronic pain.</div>
+        <span class="guide-intensity intensity-intense">Intense</span>
+      </div>
+      <div class="guide-card">
+        <span class="guide-emoji">🦶</span>
+        <div class="guide-name">Reflexology</div>
+        <div class="guide-best">Organ stimulation through feet, hands &amp; ears.</div>
+        <span class="guide-intensity intensity-gentle">Moderate</span>
+      </div>
+      <div class="guide-card">
+        <span class="guide-emoji">🤰</span>
+        <div class="guide-name">Prenatal</div>
+        <div class="guide-best">Safe, gentle care for expectant mothers.</div>
+        <span class="guide-intensity intensity-gentle">Very Gentle</span>
+      </div>
     </div>
-    <div class="rev-dots" id="revDots"></div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-logo">Massage Rub &amp; Therapist</div>
-      <p class="footer-tagline">Your body deserves the best. Expert therapists dedicated to your wellness, relaxation, and total rejuvenation.</p>
-      <p style="margin-top:16px;color:rgba(255,255,255,0.7);font-size:0.9rem;">📞 +1 (672) 804-1901</p>
+  </section>
+  
+  <!-- ===== THERAPIST PROFILES ===== -->
+  <section id="therapists">
+    <div class="section-header reveal">
+      <span class="eyebrow">Meet The Team</span>
+      <h2 class="section-title">Our Expert Therapists</h2>
+      <div class="blue-line"></div>
+      <p style="color:#6B7A9F;max-width:420px;margin:14px auto 0;font-size:0.87rem;line-height:1.8;">Each of our therapists is certified, experienced, and dedicated to your wellness journey.</p>
     </div>
-    <div>
-      <span class="footer-heading">Services</span>
-      <ul class="footer-links">
-        <li><a href="#" onclick="showPage('services-page');window.scrollTo(0,0);return false;">Swedish Massage</a></li>
-        <li><a href="#" onclick="showPage('services-page');window.scrollTo(0,0);return false;">Deep Tissue</a></li>
-        <li><a href="#" onclick="showPage('services-page');window.scrollTo(0,0);return false;">Hot Stone</a></li>
-        <li><a href="#" onclick="showPage('services-page');window.scrollTo(0,0);return false;">Aromatherapy</a></li>
-        <li><a href="#" onclick="showPage('services-page');window.scrollTo(0,0);return false;">Prenatal</a></li>
-      </ul>
+    <div class="therapist-grid reveal" id="therapistGrid"></div>
+  </section>
+  
+  <!-- BEFORE & AFTER -->
+  <section id="before-after">
+    <div class="section-header reveal">
+      <span class="eyebrow">Real Transformations</span>
+      <h2 class="section-title">Before &amp; After</h2>
+      <div class="blue-line"></div>
+      <p style="color:#6B7A9F;max-width:380px;margin:14px auto 0;font-size:0.87rem;line-height:1.8;">Drag the slider to see the difference our therapists make.</p>
     </div>
-    <div>
-      <span class="footer-heading">Contact</span>
-      <ul class="footer-links">
-        <li><a href="tel:+16728041901">+1 (672) 804-1901</a></li>
-        <li><a href="https://wa.me/16728041901" target="_blank">WhatsApp Us</a></li>
-        <li><a href="#" onclick="showPage('services-page');window.scrollTo(0,0);return false;">Book Online</a></li>
-      </ul>
+    <div class="ba-grid reveal">
+      <div class="ba-card">
+        <div class="ba-card-title">Back Pain Relief</div>
+        <div class="slider-container">
+          <div class="slider-before" style="background-image:url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&q=80');filter:grayscale(80%) brightness(0.55);"></div>
+          <div class="slider-after" style="background-image:url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80');"></div>
+          <div class="slider-handle"></div>
+        </div>
+        <div class="slider-labels">
+          <span class="slider-label">Before</span>
+          <span class="slider-label">After</span>
+        </div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-card-title">Sports Recovery</div>
+        <div class="slider-container">
+          <div class="slider-before" style="background-image:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80');filter:grayscale(80%) brightness(0.5);"></div>
+          <div class="slider-after" style="background-image:url('https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&q=80');"></div>
+          <div class="slider-handle"></div>
+        </div>
+        <div class="slider-labels">
+          <span class="slider-label">Before</span>
+          <span class="slider-label">After</span>
+        </div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-card-title">Stress Reduction</div>
+        <div class="slider-container">
+          <div class="slider-before" style="background-image:url('https://images.unsplash.com/photo-1520637836993-5cda9e7d5c89?w=600&q=80');filter:grayscale(80%) brightness(0.5);"></div>
+          <div class="slider-after" style="background-image:url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&q=80');"></div>
+          <div class="slider-handle"></div>
+        </div>
+        <div class="slider-labels">
+          <span class="slider-label">Before</span>
+          <span class="slider-label">After</span>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="footer-bottom">© 2025 Massage Rub &amp; Therapist. All rights reserved. · Your body deserves the best. ♥</div>
-</footer>
+  </section>
+  <!-- TESTIMONIALS -->
+  <section id="reviews">
+    <div class="section-header reveal">
+      <span class="eyebrow">Client Love</span>
+      <h2 class="section-title">What People Say</h2>
+      <div class="blue-line"></div>
+    </div>
+    <div class="reviews-wrap reveal">
+      <div class="reviews-slider">
+        <div class="reviews-inner" id="reviewsInner"></div>
+      </div>
+      <div class="reviews-nav">
+        <button class="rev-btn active-btn" onclick="goToReview(reviewIdx-1)">←</button>
+        <button class="rev-btn" onclick="goToReview(reviewIdx+1)">→</button>
+      </div>
+      <div class="rev-dots" id="revDots"></div>
+    </div>
+  </section>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Massage Rub &amp; Therapist</div>
+        <p class="footer-tagline">Your body deserves the best. Expert therapists dedicated to your wellness, relaxation, and total rejuvenation.</p>
+        <p style="margin-top:16px;color:rgba(255,255,255,0.7);font-size:0.9rem;">📞 +1 (672) 804-1901</p>
+      </div>
+      <div>
+        <span class="footer-heading">Services</span>
+        <ul class="footer-links">
+          <li><a href="#" onclick="showPage('services-page');return false;">Swedish Massage</a></li>
+          <li><a href="#" onclick="showPage('services-page');return false;">Deep Tissue</a></li>
+          <li><a href="#" onclick="showPage('services-page');return false;">Hot Stone</a></li>
+          <li><a href="#" onclick="showPage('services-page');return false;">Aromatherapy</a></li>
+          <li><a href="#" onclick="showPage('services-page');return false;">Prenatal</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-heading">Contact</span>
+        <ul class="footer-links">
+          <li><a href="tel:+16728041901">+1 (672) 804-1901</a></li>
+          <li><a href="https://wa.me/16728041901" target="_blank">WhatsApp Us</a></li>
+          <li><a href="#" onclick="showPage('services-page');return false;">Book Online</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 Massage Rub &amp; Therapist. All rights reserved. · Your body deserves the best. ♥</div>
+  </footer>
 </div>
 
 <!-- ============================================================ -->
-
 <!--  SERVICES PAGE                                               -->
-
 <!-- ============================================================ -->
-
 <div id="services-page" class="page">
   <nav class="inner-nav">
-    <button class="back-btn" onclick="showPage('main-page');window.scrollTo(0,0);">← Back</button>
+    <button class="back-btn" onclick="showPage('main-page')">← Back</button>
     <div class="nav-brand">
       <div class="nav-circle">MRT</div>
-      <div><div class="nav-name">Massage Rub &amp; Therapist</div></div>
+      <div>
+        <div class="nav-name">Massage Rub &amp; Therapist</div>
+      </div>
     </div>
     <div style="width:70px;"></div>
   </nav>
@@ -674,17 +1150,16 @@ display:none;flex-direction:column;max-height:400px;
 </div>
 
 <!-- ============================================================ -->
-
 <!--  BOOKING PAGE                                                -->
-
 <!-- ============================================================ -->
-
 <div id="booking-page" class="page">
   <nav class="inner-nav">
-    <button class="back-btn" onclick="showPage('services-page');window.scrollTo(0,0);">← Back</button>
+    <button class="back-btn" onclick="showPage('services-page')">← Back</button>
     <div class="nav-brand">
       <div class="nav-circle">MRT</div>
-      <div><div class="nav-name">Massage Rub &amp; Therapist</div></div>
+      <div>
+        <div class="nav-name">Massage Rub &amp; Therapist</div>
+      </div>
     </div>
     <div style="width:70px;"></div>
   </nav>
@@ -700,110 +1175,206 @@ display:none;flex-direction:column;max-height:400px;
       <div class="ss-price" id="bsc-price">$0</div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label class="form-label">First Name</label><input class="form-input" type="text" id="f-firstname" placeholder="Jane"></div>
-      <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" type="text" id="f-lastname" placeholder="Doe"></div>
+      <div class="form-group">
+        <label class="form-label">First Name</label>
+        <input class="form-input" type="text" id="f-firstname" placeholder="Jane">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Last Name</label>
+        <input class="form-input" type="text" id="f-lastname" placeholder="Doe">
+      </div>
     </div>
-    <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="email" id="f-email" placeholder="jane@example.com"></div>
-    <div class="form-group"><label class="form-label">Phone Number</label><input class="form-input" type="tel" id="f-phone" placeholder="+1 (000) 000-0000"></div>
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input class="form-input" type="email" id="f-email" placeholder="jane@example.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone Number</label>
+      <input class="form-input" type="tel" id="f-phone" placeholder="+1 (000) 000-0000">
+    </div>
     <div class="form-row">
-      <div class="form-group"><label class="form-label">State</label><select class="form-select" id="f-state" onchange="populateCities()"><option value="">Select State</option></select></div>
-      <div class="form-group"><label class="form-label">City</label><select class="form-select" id="f-city"><option value="">Select City</option></select></div>
+      <div class="form-group">
+        <label class="form-label">State</label>
+        <select class="form-select" id="f-state" onchange="populateCities()">
+          <option value="">Select State</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">City</label>
+        <select class="form-select" id="f-city">
+          <option value="">Select City</option>
+        </select>
+      </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label class="form-label">Date</label><input class="form-input" type="date" id="f-date"></div>
-      <div class="form-group"><label class="form-label">Time</label><input class="form-input" type="time" id="f-time"></div>
+      <div class="form-group">
+        <label class="form-label">Date</label>
+        <input class="form-input" type="date" id="f-date">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Time</label>
+        <input class="form-input" type="time" id="f-time">
+      </div>
     </div>
-    <div class="form-group"><label class="form-label">Service</label><input class="form-input" type="text" id="f-service" readonly></div>
-    <div class="form-group"><label class="form-label">Session</label><input class="form-input" type="text" id="f-session" readonly></div>
-    <div class="form-group"><label class="form-label">Amount</label><input class="form-input" type="text" id="f-amount" readonly></div>
+    <div class="form-group">
+      <label class="form-label">Service</label>
+      <input class="form-input" type="text" id="f-service" readonly>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Session</label>
+      <input class="form-input" type="text" id="f-session" readonly>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Amount</label>
+      <input class="form-input" type="text" id="f-amount" readonly>
+    </div>
     <button class="submit-btn" onclick="proceedToPayment()">Proceed to Payment →</button>
   </div>
 </div>
 
 <!-- ============================================================ -->
-
-<!--  PAYMENT PAGE                                                -->
-
+<!--  PAYMENT PAGE (REDESIGNED)                                   -->
 <!-- ============================================================ -->
-
 <div id="payment-page" class="page">
   <nav class="inner-nav">
-    <button class="back-btn" onclick="showPage('booking-page');window.scrollTo(0,0);">← Back</button>
+    <button class="back-btn" onclick="showPage('booking-page')">← Back</button>
     <div class="nav-brand">
       <div class="nav-circle">MRT</div>
-      <div><div class="nav-name">Massage Rub &amp; Therapist</div></div>
+      <div>
+        <div class="nav-name">Massage Rub &amp; Therapist</div>
+      </div>
     </div>
     <div style="width:70px;"></div>
   </nav>
   <div class="payment-content">
-    <h1 class="payment-title">Secure Your Booking</h1>
+    <h1 class="payment-title">Secure Payment</h1>
     <p class="payment-sub">A 50% deposit is required to confirm your appointment. The remaining balance is paid on the day of your session.</p>
-
-```
-<!-- Deposit breakdown card -->
-<div class="amount-card">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
-    <div style="text-align:left;">
-      <div class="amount-label">Total Service Fee</div>
-      <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:rgba(255,255,255,0.55);text-decoration:line-through;" id="pay-total-display">$0</div>
+    
+    <!-- Amount Card -->
+    <div class="amount-card">
+      <div class="amount-row">
+        <span class="amount-label-sm">Total Service Fee</span>
+        <span class="amount-value strikethrough" id="pay-total-display">$100.00</span>
+      </div>
+      <div class="amount-row">
+        <span class="amount-label-sm">Balance Due on Day</span>
+        <span class="amount-value balance" id="pay-balance-display">$50.00</span>
+      </div>
+      <div class="amount-row" style="border-bottom:none;padding-top:12px;">
+        <span class="amount-label-sm" style="font-size:0.75rem;">50% Deposit Due Now</span>
+        <span class="amount-value deposit" id="pay-amount-display">$50.00</span>
+      </div>
     </div>
-    <div style="text-align:right;">
-      <div class="amount-label">Balance Due on Day</div>
-      <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:rgba(255,255,255,0.55);" id="pay-balance-display">$0</div>
+    
+    <!-- Policy Box -->
+    <div class="policy-box">
+      <span class="policy-icon">🔒</span>
+      <div>
+        <div class="policy-title">Booking Deposit Policy</div>
+        <div class="policy-text">A 50% deposit is required to secure your booking slot. This deposit is applied toward your total service fee. The remaining 50% is collected at your appointment. Deposits are non-refundable for cancellations within 24 hours.</div>
+      </div>
     </div>
-  </div>
-  <div style="height:1px;background:rgba(255,255,255,0.15);margin-bottom:14px;"></div>
-  <div class="amount-label" style="margin-bottom:6px;">50% Deposit Due Now</div>
-  <div class="amount-val" id="pay-amount-display">$0</div>
-</div>
-
-<!-- Policy notice -->
-<div style="background:#EBF0FA;border:1.5px solid #DDE3F0;border-radius:12px;padding:14px 18px;margin-bottom:24px;display:flex;gap:12px;align-items:flex-start;">
-  <span style="font-size:1.3rem;flex-shrink:0;">🔒</span>
-  <div>
-    <div style="font-weight:700;font-size:0.85rem;color:#1B2B5E;margin-bottom:4px;">Booking Deposit Policy</div>
-    <div style="font-size:0.8rem;color:#6B7A9F;line-height:1.6;">A 50% deposit is required to secure your booking slot. This deposit is applied toward your total service fee. The remaining 50% is collected at your appointment. Deposits are non-refundable for cancellations within 24 hours.</div>
-  </div>
-</div>
-
-<div class="pay-methods">
-  <div class="pay-method" onclick="showPaypalError()">
-    <div class="pay-icon pay-icon-paypal">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788l.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
+    
+    <!-- Payment Methods -->
+    <div style="font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:#6B7A9F;margin-bottom:12px;font-weight:600;">Choose Your Payment Method</div>
+    <div class="pay-methods">
+      <!-- PayPal - now with inline onclick that works -->
+      <div class="pay-method" onclick="showPaypalError(event)">
+        <div class="pay-icon pay-icon-paypal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788l.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/>
+          </svg>
+        </div>
+        <div class="pay-info">
+          <div class="pay-name">PayPal</div>
+          <div class="pay-sub">Pay 50% deposit securely with PayPal</div>
+        </div>
+      </div>
+      <div class="pay-method" onclick="showBitcoinPage()">
+        <div class="pay-icon pay-icon-btc">₿</div>
+        <div class="pay-info">
+          <div class="pay-name">Bitcoin</div>
+          <div class="pay-sub">Pay 50% deposit with Bitcoin</div>
+        </div>
+      </div>
     </div>
-    <div><div class="pay-name">PayPal</div><div class="pay-sub">Pay 50% deposit securely with PayPal</div></div>
-  </div>
-  <div class="pay-method" onclick="showBitcoinModal()">
-    <div class="pay-icon pay-icon-btc">₿</div>
-    <div><div class="pay-name">Bitcoin</div><div class="pay-sub">Pay 50% deposit with cryptocurrency</div></div>
-  </div>
-</div>
-```
-
+    
+    <!-- Security Badge -->
+    <div class="security-badge">
+      <span>🔒</span> Secure · <span>🔐</span> Encrypted · <span>✓</span> Trusted
+    </div>
   </div>
 </div>
 
 <!-- ============================================================ -->
-
-<!--  SPINNER PAGE                                                -->
-
+<!--  BITCOIN PAYMENT PAGE (REDESIGNED)                           -->
 <!-- ============================================================ -->
-
-<div id="spinner-page" class="page">
-  <div class="spinner-wrap">
-    <div class="nav-circle" style="width:58px;height:58px;font-size:0.9rem;margin-bottom:8px;">MRT</div>
-    <div class="spinner"></div>
-    <p class="spinner-text">Processing your booking...</p>
-    <p style="color:#9BA8C0;font-size:0.78rem;">Please wait — do not close this page</p>
+<div id="bitcoin-page" class="page">
+  <nav class="inner-nav">
+    <button class="back-btn" onclick="showPage('payment-page')">← Back</button>
+    <div class="nav-brand">
+      <div class="nav-circle">MRT</div>
+      <div>
+        <div class="nav-name">Massage Rub &amp; Therapist</div>
+      </div>
+    </div>
+    <div style="width:70px;"></div>
+  </nav>
+  <div class="bitcoin-content">
+    <div class="btc-header">
+      <span class="btc-icon-large">₿</span>
+      <h1 class="btc-title">Pay with Bitcoin</h1>
+      <p class="btc-sub">Send the exact amount to the wallet address below. Tap "I Have Paid" after sending.</p>
+    </div>
+    
+    <div class="btc-amount-box">
+      <div class="label">Total Amount (50% Deposit)</div>
+      <div class="amount" id="btc-amount-display">$50.00</div>
+      <div class="sub">50% Deposit · Send BTC equivalent at current market rate</div>
+    </div>
+    
+    <div class="btc-qr-wrap">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=bitcoin:bc1qm4l45yuppla9d7a7vv7dz0cxvl55sqacx5mhgj&color=1B2B5E&bgcolor=FFFFFF" alt="Bitcoin QR Code">
+    </div>
+    
+    <p style="font-size:0.7rem;color:#6B7A9F;text-align:center;margin-bottom:4px;">Bitcoin Wallet Address</p>
+    <div class="btc-address-box" id="btcAddress">bc1qm4l45yuppla9d7a7vv7dz0cxvl55sqacx5mhgj</div>
+    
+    <div class="btc-buttons">
+      <button class="btc-btn-copy" onclick="doCopyBtc()">📋 Copy Address</button>
+      <button class="btc-btn-paid" onclick="confirmBitcoinPayment()">✓ I Have Paid</button>
+      <button class="btc-btn-cancel" onclick="showPage('payment-page')">Cancel Payment</button>
+    </div>
   </div>
 </div>
 
 <!-- ============================================================ -->
+<!--  PROCESSING PAGE (REDESIGNED)                                -->
+<!-- ============================================================ -->
+<div id="processing-page" class="page">
+  <nav class="inner-nav" style="background:transparent;border-bottom:none;box-shadow:none;position:relative;">
+    <div class="nav-brand">
+      <div class="nav-circle">MRT</div>
+      <div>
+        <div class="nav-name">Massage Rub &amp; Therapist</div>
+      </div>
+    </div>
+    <div style="width:70px;"></div>
+  </nav>
+  <div class="processing-wrap">
+    <div class="processing-icon">⏳</div>
+    <div class="processing-spinner"></div>
+    <h2 class="processing-title">Processing Your Booking</h2>
+    <p class="processing-text">Please wait while we securely prepare your booking...</p>
+    <div class="processing-progress">
+      <div class="processing-progress-bar"></div>
+    </div>
+  </div>
+</div>
 
+<!-- ============================================================ -->
 <!--  THANK YOU PAGE                                              -->
-
 <!-- ============================================================ -->
-
 <div id="thankyou-page" class="page">
   <div class="ty-wrap">
     <div class="ty-box">
@@ -811,54 +1382,41 @@ display:none;flex-direction:column;max-height:400px;
       <h1 class="ty-title">Booking Received!</h1>
       <div class="ty-line"></div>
       <p class="ty-text">Thank you for choosing <strong style="color:#1B2B5E;">Massage Rub &amp; Therapist</strong>.<br>We have received your deposit and will contact you shortly to finalize your appointment.</p>
-
-```
-  <!-- Booking Code Card -->
-  <div style="background:#1B2B5E;border-radius:16px;padding:24px;margin:24px 0;text-align:center;">
-    <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;">Your Booking Reference Code</div>
-    <div id="booking-code" style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#FFFFFF;letter-spacing:6px;margin-bottom:16px;">—</div>
-    <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-bottom:16px;">Save this code — you'll need it to verify your booking</div>
-    <button id="copy-code-btn" onclick="copyBookingCode()" style="background:#FFFFFF;color:#1B2B5E;border:none;padding:11px 28px;border-radius:8px;font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;">📋 Copy Code</button>
-  </div>
-
-  <!-- Deposit summary -->
-  <div style="background:#F4F6FB;border:1.5px solid #DDE3F0;border-radius:12px;padding:16px 20px;margin-bottom:20px;text-align:left;">
-    <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#6B7A9F;margin-bottom:10px;">Payment Summary</div>
-    <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
-      <span style="font-size:0.88rem;color:#6B7A9F;">Service</span>
-      <span style="font-size:0.88rem;font-weight:600;color:#1B2B5E;" id="ty-service">—</span>
+      <div style="background:#1B2B5E;border-radius:16px;padding:24px;margin:24px 0;text-align:center;">
+        <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;">Your Booking Reference Code</div>
+        <div id="booking-code" style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#FFFFFF;letter-spacing:6px;margin-bottom:16px;">—</div>
+        <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-bottom:16px;">Save this code — you'll need it to verify your booking</div>
+        <button id="copy-code-btn" onclick="copyBookingCode()" style="background:#FFFFFF;color:#1B2B5E;border:none;padding:11px 28px;border-radius:8px;font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;">📋 Copy Code</button>
+      </div>
+      <div style="background:#F4F6FB;border:1.5px solid #DDE3F0;border-radius:12px;padding:16px 20px;margin-bottom:20px;text-align:left;">
+        <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#6B7A9F;margin-bottom:10px;">Payment Summary</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <span style="font-size:0.88rem;color:#6B7A9F;">Service</span>
+          <span style="font-size:0.88rem;font-weight:600;color:#1B2B5E;" id="ty-service">—</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <span style="font-size:0.88rem;color:#6B7A9F;">Total Fee</span>
+          <span style="font-size:0.88rem;font-weight:600;color:#1B2B5E;" id="ty-total">—</span>
+        </div>
+        <div style="height:1px;background:#DDE3F0;margin:10px 0;"></div>
+        <div style="display:flex;justify-content:space-between;">
+          <span style="font-size:0.88rem;color:#6B7A9F;">Deposit Paid (50%)</span>
+          <span style="font-size:0.95rem;font-weight:700;color:#27ae60;" id="ty-deposit">—</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:6px;">
+          <span style="font-size:0.88rem;color:#6B7A9F;">Balance Due on Day</span>
+          <span style="font-size:0.95rem;font-weight:700;color:#1B2B5E;" id="ty-balance">—</span>
+        </div>
+      </div>
+      <p class="ty-phone">📞 +1 (672) 804-1901</p>
+      <button class="ty-btn" onclick="showPage('main-page')">← Back to Home</button>
     </div>
-    <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
-      <span style="font-size:0.88rem;color:#6B7A9F;">Total Fee</span>
-      <span style="font-size:0.88rem;font-weight:600;color:#1B2B5E;" id="ty-total">—</span>
-    </div>
-    <div style="height:1px;background:#DDE3F0;margin:10px 0;"></div>
-    <div style="display:flex;justify-content:space-between;">
-      <span style="font-size:0.88rem;color:#6B7A9F;">Deposit Paid (50%)</span>
-      <span style="font-size:0.95rem;font-weight:700;color:#27ae60;" id="ty-deposit">—</span>
-    </div>
-    <div style="display:flex;justify-content:space-between;margin-top:6px;">
-      <span style="font-size:0.88rem;color:#6B7A9F;">Balance Due on Day</span>
-      <span style="font-size:0.95rem;font-weight:700;color:#1B2B5E;" id="ty-balance">—</span>
-    </div>
-  </div>
-
-  <p class="ty-phone">📞 +1 (672) 804-1901</p>
-  <button class="ty-btn" onclick="showPage('main-page');window.scrollTo(0,0);">← Back to Home</button>
-</div>
-```
-
   </div>
 </div>
 
 <!-- ============================================================ -->
-
-<!--  MODALS                                                      -->
-
+<!--  MODAL OVERLAY (FIXED)                                       -->
 <!-- ============================================================ -->
-
-<!-- PayPal Error -->
-
 <div class="modal-overlay" id="paypalModal">
   <div class="modal">
     <div class="modal-icon">⚠️</div>
@@ -868,51 +1426,31 @@ display:none;flex-direction:column;max-height:400px;
   </div>
 </div>
 
-<!-- Bitcoin -->
-
-<div class="modal-overlay" id="bitcoinModal">
-  <div class="modal" style="max-width:480px;">
-    <div class="modal-icon">₿</div>
-    <div class="modal-title">Pay with Bitcoin</div>
-    <p class="modal-text">Send the exact amount to the wallet address below. Tap "I Have Paid" after sending.</p>
-    <div class="modal-amount-big" id="btc-amount-display">$0</div>
-    <div class="modal-amount-sub">50% Deposit · Send BTC equivalent at current market rate</div>
-    <div class="qr-wrap">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=bitcoin:bc1qm4l45yuppla9d7a7vv7dz0cxvl55sqacx5mhgj&color=1B2B5E&bgcolor=FFFFFF" alt="Bitcoin QR Code" style="width:100%;height:100%;object-fit:contain;">
-    </div>
-    <p style="font-size:0.72rem;color:#6B7A9F;margin-bottom:6px;">Bitcoin wallet address:</p>
-    <div class="btc-address">bc1qm4l45yuppla9d7a7vv7dz0cxvl55sqacx5mhgj</div>
-    <button class="copy-btn" id="copyBtn" onclick="doCopy()">📋 Copy Address</button>
-    <button class="paid-btn" onclick="confirmPayment()">✓ I Have Paid</button>
-    <br>
-    <button class="cancel-link" onclick="closeModal('bitcoinModal')">Cancel</button>
-  </div>
-</div>
-
 <!-- ============================================================ -->
-
 <!--  FLOATING UI                                                 -->
-
 <!-- ============================================================ -->
-
 <div class="live-notif" id="liveNotif">
   <div class="notif-dot"></div>
-  <div class="notif-text" id="notifText"><strong>Sarah M.</strong> just booked a Swedish Massage · 3 min ago</div>
+  <div class="notif-text" id="notifText">
+    <strong>Sarah M.</strong> just booked a Swedish Massage · 3 min ago
+  </div>
 </div>
-
 <a href="https://wa.me/16728041901" class="wa-btn" target="_blank" title="Chat on WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <svg viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
 </a>
-
 <div class="ai-btn-wrap">
   <div class="ai-btn-tooltip">Need Help?</div>
   <button class="ai-chat-btn" onclick="toggleAiChat()">🤖</button>
 </div>
-
 <div class="ai-chat-window" id="aiChatWindow">
   <div class="ai-chat-header">
     <div class="ai-avatar">✦</div>
-    <div><div class="ai-head-name">Wellness Assistant</div><div class="ai-head-status">● Online — ready to help</div></div>
+    <div>
+      <div class="ai-head-name">Wellness Assistant</div>
+      <div class="ai-head-status">● Online — ready to help</div>
+    </div>
     <button class="ai-close-btn" onclick="toggleAiChat()">✕</button>
   </div>
   <div class="ai-msgs" id="aiMessages"></div>
@@ -920,11 +1458,8 @@ display:none;flex-direction:column;max-height:400px;
 </div>
 
 <!-- ============================================================ -->
-
 <!--  JAVASCRIPT                                                  -->
-
 <!-- ============================================================ -->
-
 <script>
 const services=[
   {name:"Swedish Massage",badge:"Relaxation",desc:"Classic relaxation massage with long flowing strokes to ease tension, boost circulation and calm the nervous system.",img:"https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=700&q=80"},
@@ -956,6 +1491,45 @@ const reviews=[
   {name:"Marcus D.",loc:"Chicago, IL",text:"The aromatherapy session was divine. The scents alone transported me somewhere peaceful. Rebooking next week!",rating:5},
   {name:"Aisha L.",loc:"Miami, FL",text:"CBD massage helped my chronic back pain more than anything else I've tried. Pristine environment, so professional.",rating:5},
   {name:"Robert H.",loc:"Phoenix, AZ",text:"The 120-minute full body massage was the best investment in myself I've made all year. Truly premium service.",rating:5}
+];
+
+const therapists = [
+  {
+    name: "Dr. Elena Vasquez",
+    title: "Lead Therapist",
+    specialty: "Deep Tissue & Neuromuscular",
+    experience: "15 years experience",
+    img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&q=80",
+    tags: ["Chronic Pain", "Sports Recovery"],
+    badge: "★★★★★ 4.9"
+  },
+  {
+    name: "Marcus Chen",
+    title: "Senior Massage Therapist",
+    specialty: "Sports Massage & Stretching",
+    experience: "12 years experience",
+    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
+    tags: ["Athletes", "Performance"],
+    badge: "★★★★★ 4.8"
+  },
+  {
+    name: "Priya Sharma",
+    title: "Wellness Specialist",
+    specialty: "Prenatal & Aromatherapy",
+    experience: "10 years experience",
+    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
+    tags: ["Pregnancy", "Stress Relief"],
+    badge: "★★★★★ 5.0"
+  },
+  {
+    name: "David Okafor",
+    title: "Holistic Therapist",
+    specialty: "Reflexology & Hot Stone",
+    experience: "8 years experience",
+    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+    tags: ["Energy Work", "Deep Relaxation"],
+    badge: "★★★★★ 4.7"
+  }
 ];
 
 const usStates={
@@ -1013,10 +1587,71 @@ const usStates={
 
 let selectedSvcIdx=null,selectedPriceIdx=null,reviewIdx=0;
 
-// ===== PAGE ROUTER =====
+// ===== CUSTOM CURSOR =====
+function initCustomCursor(){
+  const cursor=document.getElementById('customCursor');
+  if(!cursor) return;
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('button, .svc-pill, .pay-method, .guide-card, .nav-book, .back-btn, .ai-chat-btn, a, .svc-book-btn, .submit-btn, .therapist-card, .rev-btn, .btc-btn-copy, .btc-btn-paid, .btc-btn-cancel')
+    .forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+}
+
+// ===== PAGE ROUTER WITH TRANSITIONS =====
+let isTransitioning = false;
+
 function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  if(isTransitioning) return;
+  isTransitioning = true;
+  
+  const currentPage = document.querySelector('.page.active');
+  const targetPage = document.getElementById(id);
+  
+  if(currentPage === targetPage) {
+    isTransitioning = false;
+    return;
+  }
+  
+  if(currentPage) {
+    currentPage.classList.remove('active');
+    currentPage.classList.add('page-exit');
+    setTimeout(() => {
+      currentPage.classList.remove('page-exit');
+    }, 500);
+  }
+  
+  setTimeout(() => {
+    targetPage.classList.add('active');
+    window.scrollTo(0,0);
+    setTimeout(() => {
+      isTransitioning = false;
+    }, 500);
+  }, 50);
+}
+
+// ===== RENDER THERAPISTS =====
+function renderTherapists(){
+  const grid = document.getElementById('therapistGrid');
+  grid.innerHTML = therapists.map(t => `
+    <div class="therapist-card reveal">
+      <img class="therapist-img" src="${t.img}" alt="${t.name}" loading="lazy">
+      <div class="therapist-info">
+        <div class="therapist-name">${t.name}</div>
+        <div class="therapist-title">${t.title}</div>
+        <div class="therapist-specialty">${t.specialty}</div>
+        <div class="therapist-exp">${t.experience}</div>
+        <div class="therapist-tags">
+          ${t.tags.map(tag => `<span class="therapist-tag">${tag}</span>`).join('')}
+        </div>
+        <span class="therapist-badge">${t.badge}</span>
+      </div>
+    </div>
+  `).join('');
 }
 
 // ===== RENDER SERVICES =====
@@ -1066,7 +1701,7 @@ function goToBooking(si){
   document.getElementById('f-service').value=s.name;
   document.getElementById('f-session').value=p.label+' Massage';
   document.getElementById('f-amount').value='$'+p.price;
-  showPage('booking-page');window.scrollTo(0,0);
+  showPage('booking-page');
 }
 
 // ===== RENDER REVIEWS =====
@@ -1085,7 +1720,6 @@ function renderReviews(){
       </div>
     </div>
   `).join('');
-  // dots
   const dots=document.getElementById('revDots');
   dots.innerHTML=reviews.map((_,i)=>`<div class="rev-dot${i===0?' active':''}" onclick="goToReview(${i})"></div>`).join('');
 }
@@ -1119,33 +1753,63 @@ function proceedToPayment(){
   const allFilled=fields.every(f=>document.getElementById(f).value.trim())&&selects.every(f=>document.getElementById(f).value);
   if(!allFilled){alert('Please fill in all required fields.');return;}
 
-  // Parse full amount and calculate 50% deposit
-  const fullAmt=document.getElementById('f-amount').value; // e.g. "$120"
+  const fullAmt=document.getElementById('f-amount').value;
   const fullNum=parseInt(fullAmt.replace('$',''));
   const deposit=Math.round(fullNum*0.5);
   const balance=fullNum-deposit;
 
-  // Store for thank you page
   window._bookingTotal=fullNum;
   window._bookingDeposit=deposit;
   window._bookingBalance=balance;
   window._bookingService=document.getElementById('f-service').value;
 
-  // Update payment page displays
-  document.getElementById('pay-total-display').textContent='$'+fullNum;
-  document.getElementById('pay-amount-display').textContent='$'+deposit;
-  document.getElementById('pay-balance-display').textContent='$'+balance;
-  document.getElementById('btc-amount-display').textContent='$'+deposit+' (50% Deposit)';
+  document.getElementById('pay-total-display').textContent='$'+fullNum+'.00';
+  document.getElementById('pay-amount-display').textContent='$'+deposit+'.00';
+  document.getElementById('pay-balance-display').textContent='$'+balance+'.00';
+  document.getElementById('btc-amount-display').textContent='$'+deposit+'.00';
 
-  showPage('payment-page');window.scrollTo(0,0);
+  showPage('payment-page');
 }
 
-// ===== PAYMENT =====
-function showPaypalError(){document.getElementById('paypalModal').classList.add('show');}
-function showBitcoinModal(){document.getElementById('bitcoinModal').classList.add('show');}
-function closeModal(id){document.getElementById(id).classList.remove('show');}
-function doCopy(){
-  if(navigator.clipboard){navigator.clipboard.writeText('bc1qm4l45yuppla9d7a7vv7dz0cxvl55sqacx5mhgj').then(()=>{const b=document.getElementById('copyBtn');b.textContent='✓ Copied!';setTimeout(()=>b.textContent='📋 Copy Address',2000);});}
+// ===== PAYMENT - FIXED MODAL FUNCTIONS =====
+function showPaypalError(e){
+  // Prevent event bubbling
+  if(e) e.stopPropagation();
+  
+  // Show the modal
+  const modal = document.getElementById('paypalModal');
+  modal.classList.add('show');
+  
+  // Ensure the modal is visible
+  modal.style.display = 'flex';
+}
+
+function closeModal(id){
+  const modal = document.getElementById(id);
+  modal.classList.remove('show');
+  modal.style.display = 'none';
+}
+
+function showBitcoinPage(){
+  showPage('bitcoin-page');
+}
+
+function doCopyBtc(){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText('bc1qm4l45yuppla9d7a7vv7dz0cxvl55sqacx5mhgj').then(()=>{
+      const btn=document.querySelector('.btc-btn-copy');
+      btn.textContent='✓ Copied!';
+      btn.style.background='#27ae60';
+      btn.style.color='#FFFFFF';
+      btn.style.borderColor='#27ae60';
+      setTimeout(()=>{
+        btn.textContent='📋 Copy Address';
+        btn.style.background='transparent';
+        btn.style.color='#1B2B5E';
+        btn.style.borderColor='#DDE3F0';
+      },2000);
+    });
+  }
 }
 
 function generateBookingCode(){
@@ -1166,23 +1830,20 @@ function copyBookingCode(){
   }
 }
 
-function confirmPayment(){
-  closeModal('bitcoinModal');
-  showPage('spinner-page');window.scrollTo(0,0);
+function confirmBitcoinPayment(){
+  showPage('processing-page');
   setTimeout(()=>{
-    // Generate booking code
     const code=generateBookingCode();
     document.getElementById('booking-code').textContent=code;
-    // Fill summary
     const total=window._bookingTotal||0;
     const deposit=window._bookingDeposit||0;
     const balance=window._bookingBalance||0;
     const svc=window._bookingService||'—';
     document.getElementById('ty-service').textContent=svc;
-    document.getElementById('ty-total').textContent='$'+total;
-    document.getElementById('ty-deposit').textContent='$'+deposit+' ✓ Paid';
-    document.getElementById('ty-balance').textContent='$'+balance;
-    showPage('thankyou-page');window.scrollTo(0,0);
+    document.getElementById('ty-total').textContent='$'+total+'.00';
+    document.getElementById('ty-deposit').textContent='$'+deposit+'.00 ✓ Paid';
+    document.getElementById('ty-balance').textContent='$'+balance+'.00';
+    showPage('thankyou-page');
   },10000);
 }
 
@@ -1236,7 +1897,7 @@ function initTilt(){
   });
 }
 
-// ===== LIVE NOTIFICATIONS (40s) =====
+// ===== LIVE NOTIFICATIONS =====
 const notifs=[["Sarah M.","Swedish Massage"],["James T.","Deep Tissue Massage"],["Priya K.","Prenatal Massage"],["Marcus D.","Hot Stone Massage"],["Aisha L.","CBD Massage"],["Robert H.","Full Body Massage"],["Lisa P.","Aromatherapy Massage"],["David K.","Sports Massage"],["Nina W.","Reflexology Massage"],["Carlos M.","Stretching Session"]];
 let nIdx=0;
 function startNotifs(){
@@ -1271,7 +1932,7 @@ function aiSel(i){
   me.innerHTML+=`<div class="ai-msg user">${opt.t}</div>`;
   if(opt.a==='book'){
     me.innerHTML+=`<div class="ai-msg bot">Great choice! Tap below to book <strong>${services[opt.si].name}</strong> 🌟</div>`;
-    oe.innerHTML=`<button class="ai-opt" onclick="toggleAiChat();showPage('services-page');window.scrollTo(0,0);">📋 View & Book</button><button class="ai-opt" onclick="initAi()">← Restart</button>`;
+    oe.innerHTML=`<button class="ai-opt" onclick="toggleAiChat();showPage('services-page');">📋 View & Book</button><button class="ai-opt" onclick="initAi()">← Restart</button>`;
   }else{
     const next=aiFlow[opt.next];
     me.innerHTML+=`<div class="ai-msg bot">${next.msg}</div>`;
@@ -1283,6 +1944,7 @@ function toggleAiChat(){document.getElementById('aiChatWindow').classList.toggle
 
 // ===== BOOT =====
 function boot(){
+  renderTherapists();
   renderServices();
   renderReviews();
   populateStates();
@@ -1292,10 +1954,10 @@ function boot(){
   startNotifs();
   autoReviews();
   initAi();
+  initCustomCursor();
   setTimeout(initTilt,300);
 }
 boot();
 </script>
-
 </body>
 </html>
